@@ -2,7 +2,7 @@ import { Button } from '@mui/base/Button';
 
 export const HomeButton = () => {
     return (
-        <Button href='/Home'>ホーム</Button>
+        <Button href='/'>ホーム</Button>
     )
 }
 

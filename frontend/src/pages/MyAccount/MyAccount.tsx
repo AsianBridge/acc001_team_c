@@ -1,12 +1,10 @@
-import { HomeButton, MyAccountButton, MyBingoButton } from "../../components/Button";
+import { FooterMenu } from "../../features/ButtonAggregation";
 
 const MyAccount = () => {
     return (
         <>
-            <h1>Hello MyAccount</h1>
-            <HomeButton />
-            <MyBingoButton />
-            <MyAccountButton />
+            <h3>Hello MyAccount</h3>
+            <FooterMenu />
         </>
     );
 }
