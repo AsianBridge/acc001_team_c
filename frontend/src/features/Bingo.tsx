@@ -1,4 +1,3 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
 import { ShowModal } from "../components/ShowModal";
 
