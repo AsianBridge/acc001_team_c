@@ -1,22 +1,22 @@
 import { useUserState } from "../store/userStore";
 
 export const UserProfile = () => {
-    const { userName } = useUserState();
+    const { userID } = useUserState();
     return (
-        <h3>{userName}</h3>
+        <h3>{userID}</h3>
     );
 }
 
-export const SetUserId = ({ NewName }: { NewName?: string }) => {
+export const SetUserId = ({ NewID }: { NewID?: string }) => {
     const { setUserName } = useUserState();
 
     const handleClick = () => {
-        if (typeof NewName === 'string') { // NewName が文字列かどうかを確認
-            setUserName(NewName);
+        if (typeof NewID === 'string') {
+            setUserName(NewID);
         }
     };
 
     return (
-        <button onClick={handleClick}> 名前を更新 </button>
+        <button onClick={handleClick}> IDを更新 </button>
     );
 }

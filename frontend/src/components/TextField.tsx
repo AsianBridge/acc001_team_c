@@ -13,7 +13,7 @@ export const UserIdField = () => {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
             />
-            <SetUserId NewName={inputText} />
+            <SetUserId NewID={inputText} />
         </>
     )
 }
