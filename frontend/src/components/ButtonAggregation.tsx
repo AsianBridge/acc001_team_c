@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { HomeButton, MyAccountButton, MyBingoButton } from "../components/Button"
+import { HomeButton, MyAccountButton, MyBingoButton } from "./Button"
 
 export const FooterMenu = () => {
     return (

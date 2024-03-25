@@ -1,4 +1,4 @@
-import { FooterMenu } from "../../features/ButtonAggregation";
+import { FooterMenu } from "../../components/ButtonAggregation";
 
 export default function MyBingo() {
     return (

@@ -1,4 +1,3 @@
-import { FooterMenu } from "../../features/ButtonAggregation";
 import { UserProfile } from "../../components/UserInformation";
 
 const MyAccount = () => {
@@ -6,7 +5,6 @@ const MyAccount = () => {
         <>
             <UserProfile />
             <h3>Hello MyAccount</h3>
-            <FooterMenu />
         </>
     );
 }
