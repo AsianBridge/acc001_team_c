@@ -5,6 +5,7 @@ export default function MyBingo() {
         <>
             <h3>Hello MyBingo</h3>
             <FooterMenu />
+            {/* <Bingo /> */}
         </>
     );
 }
