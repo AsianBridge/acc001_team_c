@@ -1,19 +1,24 @@
 import { Button } from '@mui/base/Button';
+import { AccountImage, HomeImage } from './ShowImage';
 
 export const HomeButton = () => {
     return (
-        <Button href='/Home'>ホーム</Button>
+        <Button href='/'>
+            <HomeImage />
+        </Button>
     )
 }
 
 export const MyAccountButton = () => {
     return (
-        <Button href='/MyAccount'>アカウント情報</Button>
+        <Button href='/MyAccount'>
+            <AccountImage />
+        </Button>
     )
 }
 
 export const MyBingoButton = () => {
     return (
-        <Button href='/MyBingo'>ビンゴー！</Button>
+        <Button href='/MyBingo'>ビンゴ</Button>
     )
 }

@@ -8,8 +8,8 @@ import SignUp from './pages/SignUp/SignUp';
 export const Router = () => {
     return (
         <Routes>
-            <Route path="/Home" element={<Home />} />
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/Login" element={<Login />} />
             <Route path="/MyAccount" element={<MyAccount />} />
             <Route path="/MyBingo" element={<MyBingo />} />
             <Route path="/SignUp" element={<SignUp />} />
