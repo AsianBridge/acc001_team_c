@@ -4,7 +4,7 @@ type Props = {
   height: string;
 };
 
-const Images = (props: Props ) => {
+const Images = (props: Props) => {
   const { src, ...other } = props;
   return <img src={src} {...other}></img>;
 };
