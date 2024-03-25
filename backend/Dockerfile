@@ -36,3 +36,5 @@ RUN apk update && apk add alpine-sdk && apk add jq
 
 RUN go install github.com/cosmtrek/air@latest 
 RUN go install github.com/sqldef/sqldef/cmd/mysqldef@latest
+
+CMD ["air"]

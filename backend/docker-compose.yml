@@ -25,6 +25,7 @@ services:
     tty: true
     ports:
       - 8081:80
+    command: sh -c 'go mod tidy && air'
   doc:
     image: swaggerapi/swagger-ui:latest
     container_name: doc
