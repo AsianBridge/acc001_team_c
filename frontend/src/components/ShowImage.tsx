@@ -1,4 +1,10 @@
-const Images = (props: any) => {
+type Props = {
+  src: string;
+  width: string;
+  height: string;
+};
+
+const Images = (props: Props ) => {
   const { src, ...other } = props;
   return <img src={src} {...other}></img>;
 };
