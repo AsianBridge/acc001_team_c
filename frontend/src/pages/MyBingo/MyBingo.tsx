@@ -1,9 +1,11 @@
 import { BingoOfMyBingo } from "../../features/Bingo";
 
-export default function MyBingo() {
+const MyBingo = () => {
   return (
     <>
       <BingoOfMyBingo />
     </>
   );
 }
+
+export default MyBingo;

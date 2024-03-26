@@ -1,7 +1,7 @@
 import { ImageList, ImageListItem } from "@mui/material";
 import { BingoOfHome } from "../../features/Bingo";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <ImageList sx={{ width: "100vw", height: "90vh" }} cols={1}>
@@ -18,3 +18,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;
