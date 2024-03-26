@@ -2,8 +2,9 @@ import { Box, Button, Modal } from "@mui/material";
 import React from "react";
 import { ShowImage } from "../components/ShowImage";
 import { StoreEvaluation } from "./StoreEvaluation";
+import { BingoSquareModalProps } from "../types";
 
-export const BingoSquareShowModal = ({ src, storeName }: { src: string | undefined, storeName: string }) => {
+export const BingoSquareShowModal = ({ src, storeName, taste, atmosphere, costPerformance }: BingoSquareModalProps) => {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -38,7 +39,7 @@ export const BingoSquareShowModal = ({ src, storeName }: { src: string | undefin
                         :
                         <>
                             <ShowImage src={src} width="200vw" height="200vh"></ShowImage>
-                            <StoreEvaluation taste={3} atmosphere={4} costPerformance={2} />
+                            <StoreEvaluation taste={taste} atmosphere={atmosphere} costPerformance={costPerformance} />
                             <h1>{storeName}</h1>
                         </>
                     }
