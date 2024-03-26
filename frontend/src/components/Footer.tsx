@@ -6,10 +6,10 @@ const Footer = () => {
     <AppBar
       component="footer"
       position="fixed"
-      sx={{ backgroundColor: "white", height: "7vh" , marginTop:"93vh"}}
+      sx={{ backgroundColor: "white", height: "7vh", marginTop: "93vh" }}
     >
       <Container maxWidth="md">
-        <Box sx={{marginTop:"1vh"}}>
+        <Box sx={{ marginTop: "1vh" }}>
           <FooterMenu />
         </Box>
       </Container>

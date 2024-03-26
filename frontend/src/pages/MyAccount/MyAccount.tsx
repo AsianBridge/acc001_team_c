@@ -10,23 +10,82 @@ const UserId = "User_01";
 const MyAccount = () => {
   return (
     <Box height="90vh" width="100vw">
-      <Stack direction="row" spacing={2} height="30vh" marginLeft="4vw" marginTop="2vh">
-        <Avatar sx={{width:90, height:90}}>BK</Avatar>
-        <Stack spacing={1} style={{fontWeight:"bold"}}>
-          <ShowUserId/>
-          <p style={{color:"black"}}>{UserId}</p>
-          <p style={{color:"black"}}>📍Kanazawa</p>
-          <p style={{color:"black"}}>🔰BeInGo Beginner</p>
+      <Stack
+        direction="row"
+        spacing={2}
+        height="30vh"
+        marginLeft="4vw"
+        marginTop="2vh"
+      >
+        <Avatar sx={{ width: 90, height: 90 }}>BK</Avatar>
+        <Stack spacing={1} style={{ fontWeight: "bold" }}>
+          <ShowUserId />
+          <p style={{ color: "black" }}>{UserId}</p>
+          <p style={{ color: "black" }}>📍Kanazawa</p>
+          <p style={{ color: "black" }}>🔰BeInGo Beginner</p>
         </Stack>
         <Stack direction="row">
-          <p style={{position: "absolute", top:"26vh", left:"38vw", color:"black", fontSize:"0.6rem", fontWeight:"bold"}}>Create BINGO</p>
-          <p style={{position: "absolute", top:"26vh", left:"69vw", color:"black", fontSize:"0.6rem", fontWeight:"bold"}}>Finished BINGO</p>
-          <p style={{position: "absolute", top:"27vh", left:"44vw", color:"black", fontSize:"2.0rem"}}>0</p>
-          <p style={{position: "absolute", top:"27vh", left:"76vw", color:"black", fontSize:"2.0rem"}}>0</p>
+          <p
+            style={{
+              position: "absolute",
+              top: "26vh",
+              left: "38vw",
+              color: "black",
+              fontSize: "0.6rem",
+              fontWeight: "bold",
+            }}
+          >
+            Create BINGO
+          </p>
+          <p
+            style={{
+              position: "absolute",
+              top: "26vh",
+              left: "69vw",
+              color: "black",
+              fontSize: "0.6rem",
+              fontWeight: "bold",
+            }}
+          >
+            Finished BINGO
+          </p>
+          <p
+            style={{
+              position: "absolute",
+              top: "27vh",
+              left: "44vw",
+              color: "black",
+              fontSize: "2.0rem",
+            }}
+          >
+            0
+          </p>
+          <p
+            style={{
+              position: "absolute",
+              top: "27vh",
+              left: "76vw",
+              color: "black",
+              fontSize: "2.0rem",
+            }}
+          >
+            0
+          </p>
         </Stack>
-        <Button style={{ position: "absolute", top:"10vh", left:"74vw", color:"black", fontWeight:"bold",fontSize:"1.4rem"}}>編集</Button>
+        <Button
+          style={{
+            position: "absolute",
+            top: "10vh",
+            left: "74vw",
+            color: "black",
+            fontWeight: "bold",
+            fontSize: "1.4rem",
+          }}
+        >
+          編集
+        </Button>
       </Stack>
-      <BingoTab/>
+      <BingoTab />
     </Box>
   );
 };
@@ -49,9 +108,15 @@ const BingoTab = () => {
             <Tab label="投稿したBINGO" value="3" />
           </TabList>
         </Box>
-        <TabPanel value="1" style={{color:"black", textAlign:"center"}}>保存したBINGOはありません</TabPanel>
-        <TabPanel value="2" style={{color:"black", textAlign:"center"}}>作成したBINGOはありません</TabPanel>
-        <TabPanel value="3" style={{color:"black", textAlign:"center"}}>投稿したBINGOはありません</TabPanel>
+        <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
+          保存したBINGOはありません
+        </TabPanel>
+        <TabPanel value="2" style={{ color: "black", textAlign: "center" }}>
+          作成したBINGOはありません
+        </TabPanel>
+        <TabPanel value="3" style={{ color: "black", textAlign: "center" }}>
+          投稿したBINGOはありません
+        </TabPanel>
       </TabContext>
     </Box>
   );

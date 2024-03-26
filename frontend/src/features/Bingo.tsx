@@ -124,10 +124,10 @@ export const BingoOfHome = () => {
 
   return (
     <>
-      <Box sx={{color:"black",fontSize:"2rem"}}>
+      <Box sx={{ color: "black", fontSize: "2rem" }}>
         <p>ID名:{UserId}</p>
       </Box>
-      <Box sx={{ backgroundColor: "black"}}>
+      <Box sx={{ backgroundColor: "black" }}>
         <Bingo storeInformation={storeInformation} />
       </Box>
     </>
@@ -203,7 +203,7 @@ export const BingoOfMyBingo = () => {
 
   return (
     <>
-      <Box sx={{ backgroundColor: "black"}}>
+      <Box sx={{ backgroundColor: "black" }}>
         <Bingo storeInformation={storeInformation} />
       </Box>
     </>

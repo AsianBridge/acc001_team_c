@@ -3,8 +3,8 @@ import { Router } from "./router";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Amplify } from "aws-amplify";
-import config from "./amplifyconfiguration.json"
-import {  withAuthenticator } from "@aws-amplify/ui-react";
+import config from "./amplifyconfiguration.json";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(config);
 
@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Router />
-      
+
       <Footer />
     </BrowserRouter>
   );
