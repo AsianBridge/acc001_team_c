@@ -3,7 +3,6 @@ import { useUserState } from "../store/userStore";
 export const ShowUserId = () => {
   const { userID } = useUserState();
   return <h3>{userID}</h3>;
-
 };
 
 export const SetUserId = ({ NewID }: { NewID?: string }) => {
