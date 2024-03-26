@@ -2,7 +2,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import PasswordIcon from '@mui/icons-material/Password';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../App.css';
 
 export default function Login() {
     const [userId, setUserId] = useState('');
