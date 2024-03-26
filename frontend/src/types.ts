@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type UserInformation = {
   UserID: string;
   CreateBingoNum: number;
@@ -14,6 +16,13 @@ export type StoreEvaluationProps = {
   atmosphere?: number;
   costPerformance?: number;
 };
+
+export type SetStoreEvaluationProps = StoreEvaluationProps &
+{
+  setTaste: Dispatch<SetStateAction<number>>
+  setAtmosphere: Dispatch<SetStateAction<number>>
+  setCostPerformance: Dispatch<SetStateAction<number>>
+}
 
 export type BingoSquareModalProps = {
   src?: string;
