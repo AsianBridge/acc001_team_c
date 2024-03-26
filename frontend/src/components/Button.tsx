@@ -1,5 +1,5 @@
 import { Button } from "@mui/base/Button";
-import { AccountImage, HomeImage } from "./ShowImage";
+import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
 
 export const HomeButton = () => {
   return (
@@ -18,5 +18,7 @@ export const MyAccountButton = () => {
 };
 
 export const MyBingoButton = () => {
-  return <Button href="/MyBingo">ビンゴ</Button>;
+  return <Button href="/MyBingo">
+    <FooterBingoImage />
+  </Button>;
 };
