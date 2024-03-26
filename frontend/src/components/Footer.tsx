@@ -6,7 +6,7 @@ const Footer = () => {
     <AppBar
       component="footer"
       position="static"
-      sx={{ backgroundColor: "#9BC1E2" }}
+      sx={{ backgroundColor: "#1C1B1B", height: "6vh" }}
     >
       <Container maxWidth="md">
         <Box sx={{ textAlign: "center" }}>
