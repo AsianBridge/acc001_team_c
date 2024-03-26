@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { SetUserId } from "../components/UserInformation";
+import { CaptionProps } from "../types";
 
 export const UserIdField = () => {
   const [inputText, setInputText] = useState("");
@@ -14,6 +15,24 @@ export const UserIdField = () => {
         onChange={(e) => setInputText(e.target.value)}
       />
       <SetUserId NewID={inputText} />
+    </>
+  );
+};
+
+export const CaptionField = ({
+  caption,
+  setCaption
+}: CaptionProps
+) => {
+  return (
+    <>
+      <TextField
+        id="standard-basic"
+        label="キャプション"
+        variant="standard"
+        value={caption}
+        onChange={(e) => setCaption(e.target.value)}
+      />
     </>
   );
 };

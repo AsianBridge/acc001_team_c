@@ -40,3 +40,8 @@ export type BingoState = {
   setBingoID: (newBingoID?: string) => void;
   setStoreID: (newStoreID?: string) => void;
 };
+
+export type CaptionProps = {
+  caption:string
+  setCaption:Dispatch<SetStateAction<string>>;
+}
