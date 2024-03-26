@@ -4,7 +4,7 @@ type Props = {
   height: string;
 };
 
-export const ShowImage = (props: Props ) => {
+export const ShowImage = (props: Props) => {
   const { src, ...other } = props;
   return <img src={src} {...other}></img>;
 };
