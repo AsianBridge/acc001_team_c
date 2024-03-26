@@ -1,9 +1,9 @@
-import { UserProfile } from "../../components/UserInformation";
+import { ShowUserID } from "../../components/UserInformation";
 
 const MyAccount = () => {
   return (
     <>
-      <UserProfile />
+      <ShowUserID />
       <h3>Hello MyAccount</h3>
     </>
   );
