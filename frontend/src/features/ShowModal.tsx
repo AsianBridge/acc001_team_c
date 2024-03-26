@@ -3,6 +3,7 @@ import React from "react";
 import { ShowImage } from "../components/ShowImage";
 import { StoreEvaluation } from "./StoreEvaluation";
 import { BingoSquareModalProps } from "../types";
+import { ImageUploader } from "../components/Button";
 
 export const BingoSquareShowModal = ({ src, storeName, taste, atmosphere, costPerformance }: BingoSquareModalProps) => {
 
@@ -20,6 +21,7 @@ export const BingoSquareShowModal = ({ src, storeName, taste, atmosphere, costPe
                 {src === undefined ?
                     <Box>
                         <h3>{storeName}へ行こう</h3>
+                        <ImageUploader/>
                     </Box>
                     :
                     <ShowImage src={src} width="120vw" height="120vh" />
