@@ -1,10 +1,20 @@
-import { BingoOfHome } from "../../features/Bingo";
+import { ImageList, ImageListItem } from "@mui/material";
+import { BingoOfHome } from "../../features/Bingo"
 
 export default function Home() {
   return (
     <>
-      <BingoOfHome />
-      <h3>Hello Home</h3>
+      <ImageList sx={{ width: "100vw", height: "90vh" }} cols={1}>
+        <ImageListItem>
+          <BingoOfHome />
+        </ImageListItem>
+        <ImageListItem>
+          <BingoOfHome />
+        </ImageListItem>
+        <ImageListItem>
+          <BingoOfHome />
+        </ImageListItem>
+      </ImageList>
     </>
   );
 }
