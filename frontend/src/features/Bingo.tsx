@@ -1,8 +1,6 @@
-// import { useState } from "react";
 import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Box, Grid } from "@mui/material";
-// import { BingoSquareInformation } from "../types";
 
 const Bingo = ({
   scene,
@@ -11,14 +9,6 @@ const Bingo = ({
   scene: string;
   storeInformation: BingoSquareModalProps[];
 }) => {
-  // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
-
-  // const squareUpdate = (value: number, storeName: string, src: string) => {
-  //     const nextSquareInformationState = bingoSquareInformationState.slice();
-  //     nextSquareInformationState[value] = { storeName, src };
-
-  //     setBingoSquareInformationState(nextSquareInformationState);
-  // }
 
   return (
     <Grid container spacing={1}>
