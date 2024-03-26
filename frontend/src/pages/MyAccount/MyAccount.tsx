@@ -3,6 +3,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { useState } from "react";
+import { ShowUserId } from "../../components/UserInformation";
 
 const MyAccount = () => {
   return (
@@ -10,7 +11,7 @@ const MyAccount = () => {
       <Stack direction="row" spacing={2}>
         <Avatar>BK</Avatar>
         <Stack spacing={1}>
-          <p>User_01</p>
+          <ShowUserId/>
           <p>📍Kanazawa</p>
           <p>🔰BeInGo Beginner</p>
         </Stack>
