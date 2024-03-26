@@ -1,7 +1,5 @@
 import { Button } from '@mui/base/Button';
 import { AccountImage, HomeImage } from './ShowImage';
-import { styled } from '@mui/material';
-import { forwardRef, InputHTMLAttributes } from 'react';
 
 export const HomeButton = () => {
     return (
