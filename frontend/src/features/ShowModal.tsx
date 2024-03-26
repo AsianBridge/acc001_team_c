@@ -1,7 +1,7 @@
 import { Box, Button, Modal } from "@mui/material";
 import React from "react";
 import { ShowImage } from "../components/ShowImage";
-import { StoreEvaluation } from "./StoreEvaluation";
+import { ShowStoreEvaluation } from "./StoreEvaluation";
 import { BingoSquareModalProps } from "../types";
 import { ImageUploader } from "../components/Button";
 
@@ -19,7 +19,7 @@ export const BingoSquareShowModal = ({
   const boxStyle = {
     bgcolor: "background.paper",
   };
-
+  
     return (
         <>
         <Box>
