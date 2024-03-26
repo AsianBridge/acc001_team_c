@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material"
 import { useState } from "react"
-import { SetUserId } from "./UserInformation";
+import { SetUserId } from "../components/UserInformation";
 
 export const UserIdField = () => {
     const [inputText, setInputText] = useState("");

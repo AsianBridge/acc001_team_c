@@ -1,21 +1,21 @@
-import { Button } from '@mui/base/Button';
-import { AccountImage, HomeImage } from './ShowImage';
+import { Button } from "@mui/base/Button";
+import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
 
 export const HomeButton = () => {
-    return (
-        <Button href='/'>
-            <HomeImage />
-        </Button>
-    )
-}
+  return (
+    <Button href="/">
+      <HomeImage />
+    </Button>
+  );
+};
 
 export const MyAccountButton = () => {
-    return (
-        <Button href='/MyAccount'>
-            <AccountImage />
-        </Button>
-    )
-}
+  return (
+    <Button href="/MyAccount">
+      <AccountImage />
+    </Button>
+  );
+};
 
 export const MyBingoButton = () => {
     return (
@@ -74,4 +74,8 @@ export const ImageComponent = () => {
       </div>
     </div>
   );
+};
+  return <Button href="/MyBingo">
+    <FooterBingoImage />
+  </Button>;
 };
