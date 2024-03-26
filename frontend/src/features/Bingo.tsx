@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BingoSquareShowModal } from "../components/ShowModal";
+import { BingoSquareShowModal } from "./ShowModal";
 import { Grid } from "@mui/material";
 import { BingoSquareInformation } from "../types";
 
