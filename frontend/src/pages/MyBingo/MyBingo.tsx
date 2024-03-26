@@ -1,4 +1,4 @@
-import {BingoOfMyBingo} from "../../features/Bingo";
+import { BingoOfMyBingo } from "../../features/Bingo";
 
 export default function MyBingo() {
   return (
