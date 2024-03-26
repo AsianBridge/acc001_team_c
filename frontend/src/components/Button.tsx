@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Button } from "@mui/base/Button";
 import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
 
@@ -18,12 +19,12 @@ export const MyAccountButton = () => {
 };
 
 export const MyBingoButton = () => {
-    return (
-        <Button href='/MyBingo'>ビンゴ</Button>
-    )
+  return (
+    <Button href='/MyBingo'>
+      <FooterBingoImage />
+    </Button>
+  )
 }
-
-import React, {useState } from "react";
 
 export const ImageComponent = () => {
   const [base64Images, setBase64Images] = useState<string[]>([]);
