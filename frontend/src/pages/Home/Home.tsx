@@ -17,6 +17,6 @@ const Home = () => {
       </ImageList>
     </>
   );
-}
+};
 
 export default Home;

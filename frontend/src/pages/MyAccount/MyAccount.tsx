@@ -11,7 +11,7 @@ const MyAccount = () => {
       <Stack direction="row" spacing={2}>
         <Avatar>BK</Avatar>
         <Stack spacing={1}>
-          <ShowUserId/>
+          <ShowUserId />
           <p>📍Kanazawa</p>
           <p>🔰BeInGo Beginner</p>
         </Stack>

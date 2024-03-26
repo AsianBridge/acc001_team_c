@@ -6,6 +6,6 @@ const MyBingo = () => {
       <BingoOfMyBingo />
     </>
   );
-}
+};
 
 export default MyBingo;
