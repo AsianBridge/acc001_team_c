@@ -19,3 +19,13 @@ export type BingoSquareModalProps = {
   src?: string;
   storeName: string;
 } & StoreEvaluationProps;
+
+export type UserState = {
+  userID: string | undefined;
+  setUserID: (newID: string | undefined) => void;
+};
+
+export type ReviewImageState = {
+  reviewImageID: string | undefined;
+  setReviewImageID: (newID: string | undefined) => void;
+};

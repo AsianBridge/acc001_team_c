@@ -1,4 +1,4 @@
-import { useUserState } from "../store/userStore";
+import { useUserState } from "../state/UserState";
 
 export const ShowUserId = () => {
   const { userID } = useUserState();
@@ -6,11 +6,11 @@ export const ShowUserId = () => {
 };
 
 export const SetUserId = ({ NewID }: { NewID?: string }) => {
-  const { setUserName } = useUserState();
+  const { setUserID } = useUserState();
 
   const handleClick = () => {
     if (typeof NewID === "string") {
-      setUserName(NewID);
+      setUserID(NewID);
     }
   };
 
