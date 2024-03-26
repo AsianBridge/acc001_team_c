@@ -30,4 +30,4 @@ export type BingoState = {
   StoreID?: string;
   setBingoID: (newBingoID?: string) => void;
   setStoreID: (newStoreID?: string) => void;
-}
+};
