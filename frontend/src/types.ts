@@ -17,12 +17,11 @@ export type StoreEvaluationProps = {
   costPerformance?: number;
 };
 
-export type SetStoreEvaluationProps = StoreEvaluationProps &
-{
-  setTaste: Dispatch<SetStateAction<number>>
-  setAtmosphere: Dispatch<SetStateAction<number>>
-  setCostPerformance: Dispatch<SetStateAction<number>>
-}
+export type SetStoreEvaluationProps = StoreEvaluationProps & {
+  setTaste: Dispatch<SetStateAction<number>>;
+  setAtmosphere: Dispatch<SetStateAction<number>>;
+  setCostPerformance: Dispatch<SetStateAction<number>>;
+};
 
 export type BingoSquareModalProps = {
   src?: string;
@@ -42,6 +41,6 @@ export type BingoState = {
 };
 
 export type CaptionProps = {
-  caption:string
-  setCaption:Dispatch<SetStateAction<string>>;
-}
+  caption: string;
+  setCaption: Dispatch<SetStateAction<string>>;
+};

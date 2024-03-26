@@ -25,39 +25,42 @@ export const SetStoreEvaluation = ({
   setTaste,
   setAtmosphere,
   setCostPerformance,
-}: SetStoreEvaluationProps
-) => {
-
+}: SetStoreEvaluationProps) => {
   return (
     <Box>
       <Typography component="legend">味</Typography>
-      <Rating name="simple-controlled" value={taste} max={5}
+      <Rating
+        name="simple-controlled"
+        value={taste}
+        max={5}
         onChange={(event) => {
           const newValue = parseFloat((event.target as HTMLInputElement).value);
-          if (!newValue)
-            return 0;
-          else
-            setTaste(newValue);
+          if (!newValue) return 0;
+          else setTaste(newValue);
         }}
       />
       <Typography component="legend">お店の雰囲気</Typography>
-      <Rating name="simple-controlled" value={atmosphere} max={5}
+      <Rating
+        name="simple-controlled"
+        value={atmosphere}
+        max={5}
         onChange={(event) => {
           const newValue = parseFloat((event.target as HTMLInputElement).value);
-          if (!newValue)
-            return 0;
-          else
-            setAtmosphere(newValue);
-        }} />
+          if (!newValue) return 0;
+          else setAtmosphere(newValue);
+        }}
+      />
       <Typography component="legend">コスパ</Typography>
-      <Rating name="simple-controlled" value={costPerformance} max={5}
+      <Rating
+        name="simple-controlled"
+        value={costPerformance}
+        max={5}
         onChange={(event) => {
           const newValue = parseFloat((event.target as HTMLInputElement).value);
-          if (!newValue)
-            return 0;
-          else
-            setCostPerformance(newValue);
-        }} />
+          if (!newValue) return 0;
+          else setCostPerformance(newValue);
+        }}
+      />
     </Box>
   );
 };

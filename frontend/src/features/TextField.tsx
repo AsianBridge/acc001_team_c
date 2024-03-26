@@ -19,11 +19,7 @@ export const UserIdField = () => {
   );
 };
 
-export const CaptionField = ({
-  caption,
-  setCaption
-}: CaptionProps
-) => {
+export const CaptionField = ({ caption, setCaption }: CaptionProps) => {
   return (
     <>
       <TextField
