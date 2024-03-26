@@ -1,6 +1,7 @@
 import { Box, Button, Modal } from "@mui/material";
 import React from "react";
 import { ShowImage } from "../components/ShowImage";
+import { StoreEvaluation } from "./StoreEvaluation";
 
 export const BingoSquareShowModal = ({ src, storeName }: { src: string | undefined, storeName: string }) => {
 
@@ -37,6 +38,7 @@ export const BingoSquareShowModal = ({ src, storeName }: { src: string | undefin
                         :
                         <>
                             <ShowImage src={src} width="200vw" height="200vh"></ShowImage>
+                            <StoreEvaluation taste={3} atmosphere={4} costPerformance={2} />
                             <h1>{storeName}</h1>
                         </>
                     }
