@@ -1,5 +1,5 @@
+import { FooterMenu } from "../../components/ButtonAggregation";
 import Bingo from "../../features/Bingo";
-import { FooterMenu } from "../../features/ButtonAggregation";
 
 export default function MyBingo() {
     return (

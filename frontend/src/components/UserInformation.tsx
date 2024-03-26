@@ -1,6 +1,6 @@
 import { useUserState } from "../store/userStore";
 
-export const UserProfile = () => {
+export const ShowUserId = () => {
     const { userID } = useUserState();
     return <h3>{userID}</h3>;
 };
