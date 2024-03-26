@@ -20,6 +20,7 @@ export const MyAccountButton = () => {
 
 export const MyBingoButton = () => {
   return (
+
     <Button href="/MyBingo">
       <FooterBingoImage />
     </Button>

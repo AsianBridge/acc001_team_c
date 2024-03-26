@@ -36,5 +36,6 @@ export const FooterBingoImage = () => {
       width="50vw"
       height="50vh"
     />
-  );
-};
+  )
+}
+

@@ -5,6 +5,7 @@ export type UserInformation = {
 };
 
 export type BingoSquareInformation = {
+
   storeName: string | undefined;
   src: string | undefined;
 };

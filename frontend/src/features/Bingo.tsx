@@ -6,6 +6,7 @@ import { BingoSquareShowModal } from "./ShowModal";
 const Square = ({
   storeName,
   src,
+
 }: {
   storeName: string;
   src: string | undefined;
@@ -64,6 +65,7 @@ const Bingo = () => {
       {storeInformation.map((store, index) => (
         <Grid item xs={4} key={index}>
           <Square storeName={store.storeName} src={store.src} />
+
         </Grid>
       ))}
     </Grid>
