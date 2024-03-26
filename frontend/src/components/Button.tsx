@@ -20,7 +20,6 @@ export const MyAccountButton = () => {
 
 export const MyBingoButton = () => {
   return (
-
     <Button href="/MyBingo">
       <FooterBingoImage />
     </Button>
@@ -72,8 +71,11 @@ export const ImageUploader = () => {
           {base64Images.length !== 0 &&
             base64Images.map((image, idx) => (
               <div key={idx} className="flex-shrink-0">
-                <img src={image} className="w-32 h-32 " 
-                onClick={() => handleImageClick(idx)} />
+                <img
+                  src={image}
+                  className="w-32 h-32 "
+                  onClick={() => handleImageClick(idx)}
+                />
               </div>
             ))}
         </div>

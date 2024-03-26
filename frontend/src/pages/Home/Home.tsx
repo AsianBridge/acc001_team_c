@@ -1,5 +1,5 @@
-import { ImageList, ImageListItem } from "@mui/material";
-import { BingoOfHome } from "../../features/Bingo"
+import { ImageList, ImageList, ImageListItem } from "@mui/material";
+import { BingoOfHome } from "../../features/Bingo";
 
 export default function Home() {
   return (
