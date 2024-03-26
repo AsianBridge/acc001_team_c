@@ -5,12 +5,12 @@ export type UserInformation = {
 };
 
 export type BingoSquareInformation = {
-    storeName: string | undefined
-    src: string | undefined
-}
+  storeName: string | undefined;
+  src: string | undefined;
+};
 
 export type StoreEvaluationProps = {
-    taste: number;
-    atmosphere: number;
-    costPerformance: number;
-}
+  taste: number;
+  atmosphere: number;
+  costPerformance: number;
+};

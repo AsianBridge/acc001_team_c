@@ -20,11 +20,11 @@ export const MyAccountButton = () => {
 
 export const MyBingoButton = () => {
   return (
-    <Button href='/MyBingo'>
+    <Button href="/MyBingo">
       <FooterBingoImage />
     </Button>
-  )
-}
+  );
+};
 
 export const ImageComponent = () => {
   const [base64Images, setBase64Images] = useState<string[]>([]);
