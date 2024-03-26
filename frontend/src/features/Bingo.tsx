@@ -1,10 +1,10 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Grid } from "@mui/material";
-import { BingoSquareInformation } from "../types";
+// import { BingoSquareInformation } from "../types";
 
 const Square = ({
-    index,
+    // index,
     storeName,
     src,
 }: {
@@ -18,14 +18,14 @@ const Square = ({
 }
 
 const Bingo = () => {
-    const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
+    // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
 
-    const squareUpdate = (value: number, storeName: string, src: string) => {
-        const nextSquareInformationState = bingoSquareInformationState.slice();
-        nextSquareInformationState[value] = { storeName, src };
+    // const squareUpdate = (value: number, storeName: string, src: string) => {
+    //     const nextSquareInformationState = bingoSquareInformationState.slice();
+    //     nextSquareInformationState[value] = { storeName, src };
 
-        setBingoSquareInformationState(nextSquareInformationState);
-    }
+    //     setBingoSquareInformationState(nextSquareInformationState);
+    // }
 
     const storeInformation = [
         { storeName: "マック", src: "https://pbs.twimg.com/profile_images/1726395545974112256/3bTbEpwe_400x400.jpg" },
