@@ -1,11 +1,12 @@
-import { FooterMenu } from "../../components/ButtonAggregation";
+import Bingo from "../../features/Bingo";
+import { FooterMenu } from "../../features/ButtonAggregation";
 
 export default function MyBingo() {
-  return (
-    <>
-      <h3>Hello MyBingo</h3>
-      <FooterMenu />
-      {/* <Bingo /> */}
-    </>
-  );
+    return (
+        <>
+            <Bingo />
+            <h3>Hello MyBingo</h3>
+            <FooterMenu />
+        </>
+    );
 }
