@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { SetUserId } from "../components/UserInformation";
 import { CaptionProps } from "../types";
 

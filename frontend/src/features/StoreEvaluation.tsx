@@ -32,7 +32,8 @@ export const SetStoreEvaluation = ({
     <Box>
       <Typography component="legend">味</Typography>
       <Rating name="simple-controlled" value={taste} max={5}
-        onChange={(event, newValue) => {
+        onChange={(event) => {
+          const newValue = parseFloat((event.target as HTMLInputElement).value);
           if (!newValue)
             return 0;
           else
@@ -41,7 +42,8 @@ export const SetStoreEvaluation = ({
       />
       <Typography component="legend">お店の雰囲気</Typography>
       <Rating name="simple-controlled" value={atmosphere} max={5}
-        onChange={(event, newValue) => {
+        onChange={(event) => {
+          const newValue = parseFloat((event.target as HTMLInputElement).value);
           if (!newValue)
             return 0;
           else
@@ -49,7 +51,8 @@ export const SetStoreEvaluation = ({
         }} />
       <Typography component="legend">コスパ</Typography>
       <Rating name="simple-controlled" value={costPerformance} max={5}
-        onChange={(event, newValue) => {
+        onChange={(event) => {
+          const newValue = parseFloat((event.target as HTMLInputElement).value);
           if (!newValue)
             return 0;
           else
