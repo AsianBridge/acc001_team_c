@@ -1,6 +1,6 @@
 // import { useState } from "react";
-import { BingoSquareShowModal } from "./ShowModal";
 import { Grid } from "@mui/material";
+import { BingoSquareShowModal } from "./ShowModal";
 // import { BingoSquareInformation } from "../types";
 
 const Square = ({
