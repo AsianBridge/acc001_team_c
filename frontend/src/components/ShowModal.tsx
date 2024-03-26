@@ -16,7 +16,9 @@ export const BingoSquareShowModal = ({ src, storeName }: { src: string | undefin
         <>
             <Button onClick={handleOpen} >
                 {src === undefined ?
-                    <h3>{storeName}へ行こう</h3>
+                    <>
+                        <h3>{storeName}へ行こう</h3>
+                    </>
                     :
                     <ShowImage src={src} width="120vw" height="120vh" />
                 }
