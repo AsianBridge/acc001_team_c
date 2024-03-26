@@ -1,6 +1,6 @@
 import { Box, Button, Modal } from "@mui/material";
 import React from "react";
-import { ShowImage } from "./ShowImage";
+import { ShowImage } from "../components/ShowImage";
 
 export const BingoSquareShowModal = ({
   src,
