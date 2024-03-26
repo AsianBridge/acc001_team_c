@@ -22,15 +22,19 @@ export const BingoSquareShowModal = ({
 
     return (
         <>
+        <Box>
+            <div style={{width:"32vw", height:"32vw", background:"gray"}}>
             <Button onClick={handleOpen} >
                 {src === undefined ?
                     <Box>
-                        <h3>{storeName}へ行こう</h3>
+                        <h3 style={{color:"black", marginLeft:"3vw"}}>{storeName}へ<br></br>行こう</h3>
                     </Box>
                     :
                     <ShowImage src={src} width="120vw" height="120vh" />
                 }
             </Button>
+            </div>
+        </Box>
             <Modal
                 open={open}
                 onClose={handleClose}

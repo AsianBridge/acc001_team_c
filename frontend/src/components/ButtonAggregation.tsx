@@ -4,7 +4,7 @@ import { HomeButton, MyAccountButton, MyBingoButton } from "./Button";
 export const FooterMenu = () => {
   return (
     <>
-      <Grid container spacing={5}>
+      <Grid container spacing={15}>
         <Grid item xs={4}>
           <HomeButton />
         </Grid>
