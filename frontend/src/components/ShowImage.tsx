@@ -4,7 +4,7 @@ type Props = {
   height: string;
 };
 
-export const ShowImage = (props: Props ) => {
+export const ShowImage = (props: Props) => {
   const { src, ...other } = props;
   return <img src={src} {...other}></img>;
 };
@@ -28,3 +28,13 @@ export const AccountImage = () => {
     />
   );
 };
+
+export const FooterBingoImage = () => {
+  return (
+    <ShowImage
+      src="https://tegakisozai.com/wp-content/uploads/2019/09/bingogame_green_55.png"
+      width="50vw"
+      height="50vh"
+    />
+  )
+}

@@ -1,6 +1,6 @@
 import { Box, Button, Modal } from "@mui/material";
 import React from "react";
-import { ShowImage } from "./ShowImage";
+import { ShowImage } from "../components/ShowImage";
 
 export const BingoSquareShowModal = ({ src, storeName }: { src: string | undefined, storeName: string }) => {
 
@@ -16,9 +16,9 @@ export const BingoSquareShowModal = ({ src, storeName }: { src: string | undefin
         <>
             <Button onClick={handleOpen} >
                 {src === undefined ?
-                    <>
+                    <Box>
                         <h3>{storeName}へ行こう</h3>
-                    </>
+                    </Box>
                     :
                     <ShowImage src={src} width="120vw" height="120vh" />
                 }
