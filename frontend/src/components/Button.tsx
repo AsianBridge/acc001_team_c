@@ -27,7 +27,7 @@ export const MyBingoButton = () => {
   );
 };
 
-export const ImageComponent = () => {
+export const ImageUploader = () => {
   const [base64Images, setBase64Images] = useState<string[]>([]);
 
   const handleInputFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,11 +55,14 @@ export const ImageComponent = () => {
     });
   };
 
+  const handleImageClick = (index: number) => {
+    setBase64Images((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
   return (
     <div className="relative border-2 border-red-200 bg-red-100 w-[600px] h-[600px] flex flex-col space-y-4">
       <input
         type="file"
-        multiple // 画像を複数選択できるようにする
         accept="image/jpeg, image/png"
         onChange={handleInputFile}
       />
@@ -69,7 +72,8 @@ export const ImageComponent = () => {
           {base64Images.length !== 0 &&
             base64Images.map((image, idx) => (
               <div key={idx} className="flex-shrink-0">
-                <img src={image} className="w-32 h-32 " />
+                <img src={image} className="w-32 h-32 " 
+                onClick={() => handleImageClick(idx)} />
               </div>
             ))}
         </div>
