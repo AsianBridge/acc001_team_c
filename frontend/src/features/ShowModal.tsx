@@ -52,7 +52,7 @@ export const BingoSquareShowModal = ({
           ) : (
             <>
               <ShowImage src={src} width="200vw" height="200vh"></ShowImage>
-              <StoreEvaluation
+              <ShowStoreEvaluation
                 taste={taste}
                 atmosphere={atmosphere}
                 costPerformance={costPerformance}
