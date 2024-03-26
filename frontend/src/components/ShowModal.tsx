@@ -8,10 +8,14 @@ export const ShowModal = ({ src, storeName }: { src: string, storeName: string }
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const boxStyle = {
+        bgcolor: "background.paper",
+    }
+
     return (
         <>
-            <Button onClick={handleOpen}>
-                <ShowImage src={src} />
+            <Button onClick={handleOpen} >
+                <ShowImage src={src} width="120vw" height="120vh" />
             </Button>
             <Modal
                 open={open}
@@ -19,8 +23,8 @@ export const ShowModal = ({ src, storeName }: { src: string, storeName: string }
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box>
-                    <ShowImage src={src}></ShowImage>
+                <Box sx={boxStyle}>
+                    <ShowImage src={src} width="200vw" height="200vh"></ShowImage>
                     <h1>{storeName}</h1>
                 </Box>
             </Modal>
