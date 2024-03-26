@@ -5,18 +5,14 @@ import { StoreEvaluation } from "./StoreEvaluation";
 import { BingoSquareModalProps } from "../types";
 
 export const BingoSquareShowModal = ({ src, storeName, taste, atmosphere, costPerformance }: BingoSquareModalProps) => {
-}) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
-  const boxStyle = {
-    bgcolor: "background.paper",
-  };
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const boxStyle = {
         bgcolor: "background.paper",
-    }
+    };
 
     return (
         <>
