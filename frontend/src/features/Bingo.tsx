@@ -4,28 +4,12 @@ import { BingoSquareShowModal } from "./ShowModal";
 import { Box, Grid } from "@mui/material";
 // import { BingoSquareInformation } from "../types";
 
-const Square = ({
-  storeName,
-  src,
-  taste,
-  atmosphere,
-  costPerformance,
-}: BingoSquareModalProps) => {
-  return (
-    <BingoSquareShowModal
-      src={src}
-      storeName={storeName}
-      taste={taste}
-      atmosphere={atmosphere}
-      costPerformance={costPerformance}
-    />
-  );
-};
-
 const Bingo = ({
+  scene,
   storeInformation,
 }: {
-  storeInformation: BingoSquareModalProps[];
+  scene: string
+  storeInformation: BingoSquareModalProps[]
 }) => {
   // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
 
@@ -40,7 +24,8 @@ const Bingo = ({
     <Grid container spacing={1}>
       {storeInformation.map((store, index) => (
         <Grid item xs={4} sm={4} key={index}>
-          <Square
+          <BingoSquareShowModal
+            scene={scene}
             storeName={store.storeName}
             src={store.src}
             taste={store.taste}
@@ -128,7 +113,7 @@ export const BingoOfHome = () => {
         <p>ID名:{UserId}</p>
       </Box>
       <Box sx={{ backgroundColor: "black" }}>
-        <Bingo storeInformation={storeInformation} />
+        <Bingo scene={"Home"} storeInformation={storeInformation} />
       </Box>
     </>
   );
@@ -204,7 +189,7 @@ export const BingoOfMyBingo = () => {
   return (
     <>
       <Box sx={{ backgroundColor: "black" }}>
-        <Bingo storeInformation={storeInformation} />
+        <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
       </Box>
     </>
   );

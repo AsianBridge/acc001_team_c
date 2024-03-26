@@ -6,19 +6,23 @@ import { BingoSquareModalProps } from "../types";
 import { ImageUploader } from "../components/Button";
 
 export const BingoSquareShowModal = ({
+  scene,
   src,
   storeName,
   taste,
   atmosphere,
   costPerformance,
-}: BingoSquareModalProps) => {
+}: {
+  scene: string
+} & BingoSquareModalProps
+) => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const boxStyle = {
-    bgcolor: "background.paper",
+  const handleOpen = () => {
+    (scene === "MyBingo" || src !== undefined) && (
+      setOpen(true)
+    )
   };
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -43,15 +47,16 @@ export const BingoSquareShowModal = ({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={boxStyle}>
-          {src === undefined ? (
-            <Box width="50vw" height="10vh">
+        <Box sx={{ bgcolor: "background.paper" }}>
+          {src === undefined && (
+            <Box width="50vw" height="40vh">
               <h3>{storeName}へ行こう</h3>
               <ImageUploader />
             </Box>
-          ) : (
+          )}
+          {src !== undefined && (
             <>
-              <ShowImage src={src} width="200vw" height="200vh"></ShowImage>
+              <ShowImage src={src} width="200vw" height="200vh" />
               <ShowStoreEvaluation
                 taste={taste}
                 atmosphere={atmosphere}
