@@ -3,7 +3,7 @@ import React from "react";
 import { ShowImage } from "../components/ShowImage";
 import { ShowStoreEvaluation } from "./StoreEvaluation";
 import { BingoSquareModalProps } from "../types";
-import { ImageUploader } from "../components/Button";
+import { ImageUploader, ReviewButton } from "../components/Button";
 
 export const BingoSquareShowModal = ({
   scene,
@@ -48,6 +48,7 @@ export const BingoSquareShowModal = ({
           {src === undefined && (
             <Box width="50vw" height="40vh">
               <h3>{storeName}へ行こう</h3>
+              <ReviewButton />
               <ImageUploader />
             </Box>
           )}
