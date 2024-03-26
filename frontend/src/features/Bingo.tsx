@@ -4,8 +4,8 @@ import { Grid } from "@mui/material";
 // import { BingoSquareInformation } from "../types";
 
 const Square = ({
-    storeName,
-    src,
+  storeName,
+  src,
 }: {
   storeName: string;
   src: string | undefined;
@@ -14,20 +14,14 @@ const Square = ({
 };
 
 const Bingo = () => {
-    // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
-    // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
+  // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
 
-    // const squareUpdate = (value: number, storeName: string, src: string) => {
-    //     const nextSquareInformationState = bingoSquareInformationState.slice();
-    //     nextSquareInformationState[value] = { storeName, src };
-    // const squareUpdate = (value: number, storeName: string, src: string) => {
-    //     const nextSquareInformationState = bingoSquareInformationState.slice();
-    //     nextSquareInformationState[value] = { storeName, src };
+  // const squareUpdate = (value: number, storeName: string, src: string) => {
+  //     const nextSquareInformationState = bingoSquareInformationState.slice();
+  //     nextSquareInformationState[value] = { storeName, src };
 
-    //     setBingoSquareInformationState(nextSquareInformationState);
-    // }
-    //     setBingoSquareInformationState(nextSquareInformationState);
-    // }
+  //     setBingoSquareInformationState(nextSquareInformationState);
+  // }
 
   const storeInformation = [
     {
