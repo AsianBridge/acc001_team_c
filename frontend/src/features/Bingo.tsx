@@ -8,8 +8,8 @@ const Bingo = ({
   scene,
   storeInformation,
 }: {
-  scene: string
-  storeInformation: BingoSquareModalProps[]
+  scene: string;
+  storeInformation: BingoSquareModalProps[];
 }) => {
   // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
 

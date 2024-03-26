@@ -13,14 +13,11 @@ export const BingoSquareShowModal = ({
   atmosphere,
   costPerformance,
 }: {
-  scene: string
-} & BingoSquareModalProps
-) => {
+  scene: string;
+} & BingoSquareModalProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
-    (scene === "MyBingo" || src !== undefined) && (
-      setOpen(true)
-    )
+    (scene === "MyBingo" || src !== undefined) && setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
