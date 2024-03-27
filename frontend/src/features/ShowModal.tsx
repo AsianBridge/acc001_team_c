@@ -4,6 +4,7 @@ import { ShowImage } from "../components/ShowImage";
 import { ShowStoreEvaluation } from "./StoreEvaluation";
 import { BingoSquareModalProps } from "../types";
 import { ImageUploader, ReviewButton } from "../components/Button";
+import { ShowCaption } from "../components/ShowText";
 
 export const BingoSquareShowModal = ({
   scene,
@@ -55,12 +56,13 @@ export const BingoSquareShowModal = ({
           {src !== undefined && (
             <>
               <ShowImage src={src} width="200vw" height="200vh" />
+              <h1>{storeName}</h1>
               <ShowStoreEvaluation
                 taste={taste}
                 atmosphere={atmosphere}
                 costPerformance={costPerformance}
               />
-              <h1>{storeName}</h1>
+              <ShowCaption caption={"辛口コメントだよ"} />
             </>
           )}
         </Box>

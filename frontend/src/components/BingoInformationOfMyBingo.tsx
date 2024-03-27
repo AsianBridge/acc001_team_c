@@ -1,16 +1,6 @@
 import { Button } from "@mui/material";
 import { useBingoState } from "../store/ReviewOfBingoState";
 
-export const ShowBingoID = () => {
-  const { BingoID } = useBingoState();
-  return <h3>{BingoID}</h3>;
-};
-
-export const ShowStoreID = () => {
-  const { StoreID } = useBingoState();
-  return <h3>{StoreID}</h3>;
-};
-
 export const SetBingoID = ({ newBingoID }: { newBingoID: string }) => {
   const { setBingoID } = useBingoState();
 
