@@ -2,12 +2,18 @@ import { Stack, Box, Avatar, Tab, Button } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ShowUserId } from "../../components/UserInformation";
 
-const UserId = "User_01";
-
 const MyAccount = () => {
+
+  const [finishedBingoNumber, setFinishedBingoNumber] = useState<undefined | number>(undefined);
+  const [finishedBingosID, setFinishedBingosID] = useState(['ID_1', 'ID_2']);
+
+  useEffect(() => {
+    setFinishedBingoNumber(finishedBingosID.length);
+  }, []);
+
   return (
     <Box height="90vh" width="100vw">
       <Stack
@@ -19,8 +25,7 @@ const MyAccount = () => {
       >
         <Avatar sx={{ width: 90, height: 90 }}>BK</Avatar>
         <Stack spacing={1} style={{ fontWeight: "bold" }}>
-          <ShowUserId />
-          <p style={{ color: "black" }}>{UserId}</p>
+          <p style={{ color: "black" }}>UserID: <ShowUserId /></p>
           <p style={{ color: "black" }}>📍Kanazawa</p>
           <p style={{ color: "black" }}>🔰BeInGo Beginner</p>
         </Stack>
@@ -69,7 +74,7 @@ const MyAccount = () => {
               fontSize: "2.0rem",
             }}
           >
-            0
+            {finishedBingoNumber}
           </p>
         </Stack>
         <Button

@@ -5,7 +5,7 @@ import { UserState } from "../types";
 export const useUserState = create<UserState>()(
   persist<UserState>(
     (set) => ({
-      userID: undefined,
+      userID: "Guest",
       setUserID: (newID: string | undefined) => set({ userID: newID }),
     }),
     {
