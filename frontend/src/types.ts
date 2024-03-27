@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { Area, MediaSize } from "react-easy-crop";
 
 export type UserInformation = {
   UserID: string;
@@ -43,4 +44,21 @@ export type BingoState = {
 export type CaptionProps = {
   caption: string;
   setCaption: Dispatch<SetStateAction<string>>;
+};
+
+export type CropperModalProps = {
+  crop: {
+    x: number;
+    y: number;
+  };
+  setCrop: (crop: { x: number; y: number }) => void;
+  zoom: number;
+  setZoom: (zoom: number) => void;
+  onCropComplete: (croppedArea: Area, croppedAreaPixels: Area) => void;
+  open: boolean;
+  onClose: () => void;
+  imgSrc: string;
+  showCroppedImage: () => void;
+  onMediaLoaded: (mediaSize: MediaSize) => void;
+  minZoom: number;
 };
