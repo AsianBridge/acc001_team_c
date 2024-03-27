@@ -2,6 +2,7 @@ import { Button, makeStyles, Modal, Slider } from "@material-ui/core";
 import React from "react";
 import Cropper, { Area, MediaSize } from "react-easy-crop";
 import { ASPECT_RATIO, CROP_WIDTH } from "../../features/GetCroppedImage";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -88,6 +89,11 @@ const CropperModal: React.FC<Props> = ({
   minZoom,
 }) => {
   const classes = useStyles();
+
+  const navigate = useNavigate();
+    const redirect = () => {
+        navigate("/Review");
+    }
   return (
     <Modal open={open} onClose={onClose} className={classes.root}>
       <div className={classes.modal}>
@@ -140,6 +146,7 @@ const CropperModal: React.FC<Props> = ({
             onClick={() => {
               onClose();
               showCroppedImage();
+              redirect();
             }}
           >
             OK

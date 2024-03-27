@@ -41,6 +41,11 @@ export type BingoState = {
   setStoreID: (newStoreID?: string) => void;
 };
 
+export type CroppedImageState = {
+  croppedImgSrc: string;
+  setCroppedImgSrc: (newCroppedImgSrc: string) => void;
+}
+
 export type CaptionProps = {
   caption: string;
   setCaption: Dispatch<SetStateAction<string>>;

@@ -3,8 +3,9 @@ import React from "react";
 import { ShowImage } from "../components/ShowImage";
 import { ShowStoreEvaluation } from "./StoreEvaluation";
 import { BingoSquareModalProps } from "../types";
-import { ImageUploader, ReviewButton } from "../components/Button";
 import { ShowCaption } from "../components/ShowText";
+import { ImageUploadButton } from "./GetCroppedImage";
+import { ReviewButton } from "../components/Button";
 
 export const BingoSquareShowModal = ({
   scene,
@@ -50,12 +51,12 @@ export const BingoSquareShowModal = ({
             <Box width="50vw" height="40vh">
               <h3>{storeName}へ行こう</h3>
               <ReviewButton />
-              <ImageUploader />
+              <ImageUploadButton />
             </Box>
           )}
           {src !== undefined && (
             <>
-              <ShowImage src={src} width="200vw" height="200vh" />
+              <ShowImage src={src} width="100vw" height="100vh" />
               <h1>{storeName}</h1>
               <ShowStoreEvaluation
                 taste={taste}
