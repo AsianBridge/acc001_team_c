@@ -8,7 +8,7 @@ import { ShowUserId } from "../../components/UserInformation";
 const MyAccount = () => {
 
   const [finishedBingoNumber, setFinishedBingoNumber] = useState<undefined | number>(undefined);
-  const [finishedBingosID, setFinishedBingosID] = useState(['ID_1', 'ID_2']);
+  const [finishedBingosID] = useState(['ID_1', 'ID_2']);
 
   useEffect(() => {
     setFinishedBingoNumber(finishedBingosID.length);
