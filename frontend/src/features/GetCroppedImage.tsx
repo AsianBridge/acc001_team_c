@@ -72,12 +72,13 @@ export const ImageUploadButton: React.FC = () => {
     /** 切り取る領域の情報 */
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
 
-    const setCroppedImgSrc = ({ NewCroppedImgSrc }: { NewCroppedImgSrc: string }) => {
-        const { setCroppedImgSrc } = useCroppedImgSrcState();
-        if (typeof NewCroppedImgSrc === "string") {
-            setCroppedImgSrc(NewCroppedImgSrc);
-        };
-    };
+    const { setCroppedImgSrc } = useCroppedImgSrcState();
+
+    // const setCroppedImgSrc = ({ NewCroppedImgSrc }: { NewCroppedImgSrc: string }) => {
+    //     if (typeof NewCroppedImgSrc === "string") {
+    //         setCroppedImgSrc(NewCroppedImgSrc);
+    //     };
+    // };
 
     /**
      * ファイルアップロード後
@@ -132,11 +133,12 @@ export const ImageUploadButton: React.FC = () => {
         if (!croppedAreaPixels) return;
         try {
             const croppedImage = await getCroppedImg(imgSrc, croppedAreaPixels);
-            setCroppedImgSrc({ NewCroppedImgSrc: croppedImage });
+            setCroppedImgSrc(croppedImage);
         } catch (e) {
             console.error(e);
         }
     }, [croppedAreaPixels, imgSrc]);
+
     return (
         <div className={classes.root}>
             <div className="file-upload-container">
