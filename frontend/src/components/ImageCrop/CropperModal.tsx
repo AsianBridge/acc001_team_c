@@ -91,9 +91,9 @@ const CropperModal: React.FC<Props> = ({
   const classes = useStyles();
 
   const navigate = useNavigate();
-    const redirect = () => {
-        navigate("/Review");
-    }
+  const redirect = () => {
+    navigate("/Review");
+  };
   return (
     <Modal open={open} onClose={onClose} className={classes.root}>
       <div className={classes.modal}>

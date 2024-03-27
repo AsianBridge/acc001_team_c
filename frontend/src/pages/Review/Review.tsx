@@ -15,19 +15,19 @@ const Review = () => {
 
   return (
     <>
-      <Stack style={{marginTop:"10vh"}}>
-      <ShowImage src={imageSrc} width="100vw" height="100vh"/>
+      <Stack style={{ marginTop: "10vh" }}>
+        <ShowImage src={imageSrc} width="100vw" height="100vh" />
       </Stack>
-      <Stack style={{height:"82vh"}}>
-      <SetStoreEvaluation
-        taste={taste}
-        atmosphere={atmosphere}
-        costPerformance={costPerformance}
-        setTaste={setTaste}
-        setAtmosphere={setAtmosphere}
-        setCostPerformance={setCostPerformance}
-      />
-      <CaptionField caption={caption} setCaption={setCaption} />
+      <Stack style={{ height: "82vh" }}>
+        <SetStoreEvaluation
+          taste={taste}
+          atmosphere={atmosphere}
+          costPerformance={costPerformance}
+          setTaste={setTaste}
+          setAtmosphere={setAtmosphere}
+          setCostPerformance={setCostPerformance}
+        />
+        <CaptionField caption={caption} setCaption={setCaption} />
       </Stack>
     </>
   );
