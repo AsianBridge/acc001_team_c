@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SetStoreEvaluation } from "../../features/StoreEvaluation";
 import { CaptionField } from "../../features/TextField";
 import { ShowImage } from "../../components/ShowImage";
+import { Stack } from "@mui/material";
 
 const Review = () => {
   const [imageSrc] = useState(
@@ -14,7 +15,10 @@ const Review = () => {
 
   return (
     <>
-      <ShowImage src={imageSrc} width="100vw" height="100vh" />
+      <Stack style={{marginTop:"10vh"}}>
+      <ShowImage src={imageSrc} width="100vw" height="100vh"/>
+      </Stack>
+      <Stack style={{height:"82vh"}}>
       <SetStoreEvaluation
         taste={taste}
         atmosphere={atmosphere}
@@ -24,6 +28,7 @@ const Review = () => {
         setCostPerformance={setCostPerformance}
       />
       <CaptionField caption={caption} setCaption={setCaption} />
+      </Stack>
     </>
   );
 };

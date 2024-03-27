@@ -15,9 +15,9 @@ const MyAccount = () => {
         spacing={2}
         height="30vh"
         marginLeft="4vw"
-        marginTop="2vh"
+        marginTop="10vh"
       >
-        <Avatar sx={{ width: 90, height: 90 }}>BK</Avatar>
+        <Avatar sx={{ width:"26vw", height:"12vh"}}>BK</Avatar>
         <Stack spacing={1} style={{ fontWeight: "bold" }}>
           <ShowUserId />
           <p style={{ color: "black" }}>{UserId}</p>
