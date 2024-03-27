@@ -7,10 +7,10 @@ const Header: React.FC = () => {
   return (
     <AppBar
       component="header"
-      position="static"
+      position="fixed"
       sx={{ height: "7vh", backgroundColor: "white" }}
     >
-      <Container>
+      <Container sx={{width:"100vw"}}>
         <Box
           width="100vw"
           sx={{
