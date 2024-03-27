@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 import { ShowUserId } from "../../components/UserInformation";
 
 const MyAccount = () => {
-
-  const [finishedBingoNumber, setFinishedBingoNumber] = useState<undefined | number>(undefined);
-  const [finishedBingosID] = useState(['ID_1', 'ID_2']);
+  const [finishedBingoNumber, setFinishedBingoNumber] = useState<
+    undefined | number
+  >(undefined);
+  const [finishedBingosID] = useState(["ID_1", "ID_2"]);
 
   useEffect(() => {
     setFinishedBingoNumber(finishedBingosID.length);
@@ -25,7 +26,9 @@ const MyAccount = () => {
       >
         <Avatar sx={{ width: 90, height: 90 }}>BK</Avatar>
         <Stack spacing={1} style={{ fontWeight: "bold" }}>
-          <p style={{ color: "black" }}>UserID: <ShowUserId /></p>
+          <p style={{ color: "black" }}>
+            UserID: <ShowUserId />
+          </p>
           <p style={{ color: "black" }}>📍Kanazawa</p>
           <p style={{ color: "black" }}>🔰BeInGo Beginner</p>
         </Stack>

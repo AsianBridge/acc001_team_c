@@ -27,12 +27,8 @@ export const MyBingoButton = () => {
 };
 
 export const ReviewButton = () => {
-  return (
-    <Button href="/Review">
-      確定ボタン
-    </Button>
-  )
-}
+  return <Button href="/Review">確定ボタン</Button>;
+};
 
 export const ImageUploader = () => {
   const [base64Images, setBase64Images] = useState<string[]>([]);

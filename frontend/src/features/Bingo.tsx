@@ -9,7 +9,6 @@ const Bingo = ({
   scene: string;
   storeInformation: BingoSquareModalProps[];
 }) => {
-
   return (
     <Grid container spacing={1}>
       {storeInformation.map((store, index) => (
