@@ -1,6 +1,6 @@
 import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
-import { Avatar, Box, Grid, Stack } from "@mui/material";
+import { Avatar, Box, Button, Grid, Stack } from "@mui/material";
 import  Like  from "./like";
 
 const Bingo = ({
@@ -182,9 +182,11 @@ export const BingoOfMyBingo = () => {
 
   return (
     <>
+    <p style={{color:"black",position:"absolute", top:"10vh", left:"33vw", fontSize:"2.0rem", fontWeight: "bold"}}>My BINGO</p>
       <Box sx={{ backgroundColor: "black" }}>
         <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
       </Box>
+      <Stack><Button>投稿する</Button></Stack>
     </>
   );
 };
