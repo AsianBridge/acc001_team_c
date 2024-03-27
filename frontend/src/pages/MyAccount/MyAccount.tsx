@@ -24,7 +24,7 @@ const MyAccount = () => {
         marginLeft="4vw"
         marginTop="10vh"
       >
-        <Avatar sx={{ width:"26vw", height:"12vh"}}>BK</Avatar>
+        <Avatar sx={{ width: "26vw", height: "12vh" }}>BK</Avatar>
         <Stack spacing={1} style={{ fontWeight: "bold" }}>
           <p style={{ color: "black" }}>
             UserID: <ShowUserId />

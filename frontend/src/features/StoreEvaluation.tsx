@@ -27,7 +27,7 @@ export const SetStoreEvaluation = ({
   setCostPerformance,
 }: SetStoreEvaluationProps) => {
   return (
-    <Box sx={{color:"black"}}>
+    <Box sx={{ color: "black" }}>
       <Typography component="legend">味</Typography>
       <Rating
         name="simple-controlled"

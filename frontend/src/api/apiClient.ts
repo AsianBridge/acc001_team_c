@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 const baseURL = import.meta.env.VITE_BACKEND_ENDPOINT;
 
 const apiClient = axios.create({
   baseURL: baseURL,
   timeout: 30000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 

@@ -1,7 +1,7 @@
 import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Button, Grid, Stack } from "@mui/material";
-import  Like  from "./like";
+import Like from "./like";
 
 const Bingo = ({
   scene,
@@ -99,15 +99,24 @@ export const BingoOfHome = () => {
 
   return (
     <>
-    <Stack spacing={-3}>
-    <Box sx={{ color: "black", fontSize: "2rem", display: "flex", alignItems: "center" }}>
-      <Avatar />
-      <p style={{ display: "inline-block", marginLeft: "10px" }}>{UserId}</p>
-    </Box>
-      <Box sx={{ backgroundColor: "black" }}>
-        <Bingo scene={"Home"} storeInformation={storeInformation} />
-      </Box>
-      <Like/>
+      <Stack spacing={-3}>
+        <Box
+          sx={{
+            color: "black",
+            fontSize: "2rem",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Avatar />
+          <p style={{ display: "inline-block", marginLeft: "10px" }}>
+            {UserId}
+          </p>
+        </Box>
+        <Box sx={{ backgroundColor: "black" }}>
+          <Bingo scene={"Home"} storeInformation={storeInformation} />
+        </Box>
+        <Like />
       </Stack>
     </>
   );
@@ -182,11 +191,24 @@ export const BingoOfMyBingo = () => {
 
   return (
     <>
-    <p style={{color:"black",position:"absolute", top:"10vh", left:"33vw", fontSize:"2.0rem", fontWeight: "bold"}}>My BINGO</p>
+      <p
+        style={{
+          color: "black",
+          position: "absolute",
+          top: "10vh",
+          left: "33vw",
+          fontSize: "2.0rem",
+          fontWeight: "bold",
+        }}
+      >
+        My BINGO
+      </p>
       <Box sx={{ backgroundColor: "black" }}>
         <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
       </Box>
-      <Stack><Button>投稿する</Button></Stack>
+      <Stack>
+        <Button>投稿する</Button>
+      </Stack>
     </>
   );
 };

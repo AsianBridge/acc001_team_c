@@ -44,7 +44,7 @@ export type BingoState = {
 export type CroppedImageState = {
   croppedImgSrc: string;
   setCroppedImgSrc: (newCroppedImgSrc: string) => void;
-}
+};
 
 export type CaptionProps = {
   caption: string;

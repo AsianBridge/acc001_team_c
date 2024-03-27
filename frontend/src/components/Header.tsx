@@ -10,7 +10,7 @@ const Header: React.FC = () => {
       position="fixed"
       sx={{ height: "7vh", backgroundColor: "white" }}
     >
-      <Container sx={{width:"100vw"}}>
+      <Container sx={{ width: "100vw" }}>
         <Box
           width="100vw"
           sx={{
