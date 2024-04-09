@@ -4,7 +4,6 @@ import { ShowImage } from "../components/ShowImage";
 import { ShowStoreEvaluation } from "./StoreEvaluation";
 import { BingoSquareModalProps } from "../types";
 import { ShowCaption } from "../components/ShowText";
-import { ImageUploadButton } from "./GetCroppedImage";
 import { ReviewButton } from "../components/Button";
 
 export const BingoSquareShowModal = ({
@@ -51,7 +50,6 @@ export const BingoSquareShowModal = ({
             <Box width="50vw" height="40vh">
               <h3>{storeName}へ行こう</h3>
               <ReviewButton />
-              <ImageUploadButton />
             </Box>
           )}
           {src !== undefined && (
