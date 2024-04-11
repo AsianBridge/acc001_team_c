@@ -35,7 +35,11 @@ export const SubmitReview = ({
 }: {
   isReviewComplete: boolean;
 }) => {
-  return <Button href="/MyBingo" disabled={!isReviewComplete}>投稿する</Button>;
+  return (
+    <Button href="/MyBingo" disabled={!isReviewComplete}>
+      投稿する
+    </Button>
+  );
 };
 
 export const ReviewButton = () => {
