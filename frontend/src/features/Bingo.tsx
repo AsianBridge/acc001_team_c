@@ -1,7 +1,99 @@
 import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
-import { Avatar, Box, Button, Grid, Stack } from "@mui/material";
+import { Avatar, Box, Grid, Stack } from "@mui/material";
 import Like from "./like";
+import { SubmitBingo } from "../components/Button";
+
+const storeInformation: BingoSquareModalProps[] = [
+  {
+    storeName: "マック",
+    src: undefined,
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+  {
+    storeName: "一風堂",
+    src: "https://ec-ippudo.com/img/usr/top/stores/pc/ippudo.jpg",
+    taste: 5,
+    atmosphere: 5,
+    costPerformance: 3,
+  },
+  {
+    storeName: "金沢麺屋大河",
+    src: "https://tshop.r10s.jp/nipponselect/cabinet/item/t03/t03710005.jpg?esh1dplf7cn",
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+  {
+    storeName: "麺屋 達",
+    src: "https://cdn-ak.f.st-hatena.com/images/fotolife/n/ninomiya-shinta/20190912/20190912190215.jpg",
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+  {
+    storeName: "麺屋 吉宗",
+    src: "https://lh6.googleusercontent.com/proxy/VYcf3XKKpSOyQ_hPUIZ5gecrHmE_UZqMIQ821K41zyvCtnPbYuBIJOj7PkT_htw_mVIN3fxF8OhnSc8s_Ygt8LVqxYv_bMaTtBX09hI94w",
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+  {
+    storeName: "築地銀だこ",
+    src: undefined,
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+  {
+    storeName: "築地銀だこ",
+    src: undefined,
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+  {
+    storeName: "築地銀だこ",
+    src: undefined,
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+  {
+    storeName: "ラーメン太る",
+    src: "https://tblg.k-img.com/restaurant/images/Rvw/223211/640x640_rect_30d622011b39cdd47d317beeba8a732f.jpg",
+    taste: 3,
+    atmosphere: 4,
+    costPerformance: 2,
+  },
+];
+
+const checkBingo = (storeInformation: BingoSquareModalProps[]) => {
+  const BingoLines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let i = 0; i < BingoLines.length; i++) {
+    const [a, b, c] = BingoLines[i];
+    if (
+      storeInformation[a].src != undefined &&
+      storeInformation[b].src != undefined &&
+      storeInformation[c].src != undefined
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
 
 const Bingo = ({
   scene,
@@ -29,72 +121,6 @@ const Bingo = ({
 };
 
 export const BingoOfHome = () => {
-  const storeInformation: BingoSquareModalProps[] = [
-    {
-      storeName: "マック",
-      src: "https://pbs.twimg.com/profile_images/1726395545974112256/3bTbEpwe_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "一風堂",
-      src: "https://ec-ippudo.com/img/usr/top/stores/pc/ippudo.jpg",
-      taste: 5,
-      atmosphere: 5,
-      costPerformance: 3,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: undefined,
-      taste: undefined,
-      atmosphere: undefined,
-      costPerformance: undefined,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-  ];
-
   const UserId = "User1";
 
   return (
@@ -123,72 +149,6 @@ export const BingoOfHome = () => {
 };
 
 export const BingoOfMyBingo = () => {
-  const storeInformation: BingoSquareModalProps[] = [
-    {
-      storeName: "マック",
-      src: "https://pbs.twimg.com/profile_images/1726395545974112256/3bTbEpwe_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "一風堂",
-      src: "https://ec-ippudo.com/img/usr/top/stores/pc/ippudo.jpg",
-      taste: 5,
-      atmosphere: 5,
-      costPerformance: 3,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: undefined,
-      taste: undefined,
-      atmosphere: undefined,
-      costPerformance: undefined,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-  ];
-
   return (
     <>
       <p
@@ -206,9 +166,7 @@ export const BingoOfMyBingo = () => {
       <Box sx={{ backgroundColor: "black" }}>
         <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
       </Box>
-      <Stack>
-        <Button>投稿する</Button>
-      </Stack>
+      <Stack>{checkBingo(storeInformation) && <SubmitBingo />}</Stack>
     </>
   );
 };
