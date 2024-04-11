@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@mui/base/Button";
+import { Button } from "@mui/material";
 import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
 
 export const HomeButton = () => {
@@ -35,7 +35,7 @@ export const SubmitReview = ({
 }: {
   isReviewComplete: boolean;
 }) => {
-  return <Button disabled={!isReviewComplete}>投稿する</Button>;
+  return <Button href="/MyBingo" disabled={!isReviewComplete}>投稿する</Button>;
 };
 
 export const ReviewButton = () => {
