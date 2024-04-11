@@ -1,7 +1,7 @@
 import { Box, Button, Modal } from "@mui/material";
 import React from "react";
 import { ShowImage } from "../components/ShowImage";
-import { ShowStoreEvaluation } from "./StoreEvaluation";
+import { ShowStoreEvaluation } from "./StoreView";
 import { BingoSquareModalProps } from "../types";
 import { ShowCaption } from "../components/ShowText";
 import { ReviewButton } from "../components/Button";

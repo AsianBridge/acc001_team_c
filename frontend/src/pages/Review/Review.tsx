@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SetStoreEvaluation } from "../../features/StoreEvaluation";
+import { SetStoreEvaluation } from "../../features/StoreView";
 import { CaptionField } from "../../features/TextField";
 import { ShowImage } from "../../components/ShowImage";
 import { Stack } from "@mui/material";
