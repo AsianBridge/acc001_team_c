@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
-import { SetUserId } from "../components/UserInformation";
+import { SetUserId } from "../store/stateManager";
 import { CaptionProps } from "../types";
 
 export const UserIdField = () => {
