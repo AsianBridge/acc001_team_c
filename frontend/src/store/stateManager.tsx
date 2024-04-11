@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
-import { useBingoState } from "../store/ReviewOfBingoState";
+import { useBingoState } from "./ReviewOfBingoState";
+import { useUserState } from "./UserState";
 
 export const SetBingoID = ({ newBingoID }: { newBingoID: string }) => {
   const { setBingoID } = useBingoState();
@@ -23,4 +24,21 @@ export const SetStoreID = ({ newStoreID }: { newStoreID: string }) => {
   };
 
   return <Button onClick={handleClick}>StoreIDを更新</Button>;
+};
+
+export const ShowUserId = () => {
+  const { userID } = useUserState();
+  return <>{userID}</>;
+};
+
+export const SetUserId = ({ NewID }: { NewID?: string }) => {
+  const { setUserID } = useUserState();
+
+  const handleClick = () => {
+    if (typeof NewID === "string") {
+      setUserID(NewID);
+    }
+  };
+
+  return <Button onClick={handleClick}> IDを更新 </Button>;
 };
