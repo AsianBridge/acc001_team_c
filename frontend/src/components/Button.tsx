@@ -30,8 +30,12 @@ export const SubmitBingo = () => {
   return <Button>投稿する</Button>;
 };
 
-export const SubmitReview = () => {
-  return <Button>投稿する</Button>;
+export const SubmitReview = ({
+  isReviewComplete,
+}: {
+  isReviewComplete: boolean;
+}) => {
+  return <Button disabled={!isReviewComplete}>投稿する</Button>;
 };
 
 export const ReviewButton = () => {

@@ -15,11 +15,7 @@ const Review = () => {
   const [caption, setCaption] = useState("");
 
   const isReviewComplete = () => {
-    if (
-      taste != 0 &&
-      atmosphere != 0 &&
-      costPerformance != 0
-    ) {
+    if (taste != 0 && atmosphere != 0 && costPerformance != 0) {
       return true;
     }
     return false;
@@ -41,8 +37,8 @@ const Review = () => {
         />
         <CaptionField caption={caption} setCaption={setCaption} />
       </Stack>
-      <Stack style={{ height: "60vh"}}>
-      {isReviewComplete() && <SubmitReview />}
+      <Stack style={{ height: "60vh" }}>
+        <SubmitReview isReviewComplete={isReviewComplete()} />
       </Stack>
     </>
   );
