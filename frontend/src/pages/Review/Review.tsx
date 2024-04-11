@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SetStoreEvaluation } from "../../features/StoreReview";
+import { SetStoreReview } from "../../features/StoreReview";
 import { CaptionField } from "../../features/TextField";
 import { ShowImage } from "../../components/ShowImage";
 import { Stack } from "@mui/material";
@@ -19,7 +19,7 @@ const Review = () => {
         <ShowImage src={imageSrc} width="100vw" height="100vh" />
       </Stack>
       <Stack style={{ height: "82vh" }}>
-        <SetStoreEvaluation
+        <SetStoreReview
           taste={taste}
           atmosphere={atmosphere}
           costPerformance={costPerformance}

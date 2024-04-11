@@ -18,7 +18,7 @@ export const ShowStoreReview = ({
   );
 };
 
-export const SetStoreReView = ({
+export const SetStoreReview = ({
   taste,
   atmosphere,
   costPerformance,
