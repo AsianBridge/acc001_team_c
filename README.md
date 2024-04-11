@@ -15,8 +15,8 @@ React + Go + AWS App
   └── components
   └── features
   └── pages
-      ├── Home
-      ├── MyAccount
-      ├── MyBingo
-      └── Review
+    ├── Home
+    ├── MyAccount
+    ├── MyBingo
+    └── Review
   └── store
