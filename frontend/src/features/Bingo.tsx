@@ -84,12 +84,16 @@ const checkBingo = (storeInformation: BingoSquareModalProps[]) => {
 
   for (let i = 0; i < BingoLines.length; i++) {
     const [a, b, c] = BingoLines[i];
-    if ((storeInformation[a].src != undefined) && (storeInformation[b].src != undefined) && (storeInformation[c].src != undefined)) {
+    if (
+      storeInformation[a].src != undefined &&
+      storeInformation[b].src != undefined &&
+      storeInformation[c].src != undefined
+    ) {
       return true;
     }
   }
   return false;
-}
+};
 
 const Bingo = ({
   scene,
@@ -117,7 +121,6 @@ const Bingo = ({
 };
 
 export const BingoOfHome = () => {
-
   const UserId = "User1";
 
   return (
@@ -163,9 +166,7 @@ export const BingoOfMyBingo = () => {
       <Box sx={{ backgroundColor: "black" }}>
         <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
       </Box>
-      <Stack>
-        {checkBingo(storeInformation) && <SubmitBingo />}
-      </Stack>
+      <Stack>{checkBingo(storeInformation) && <SubmitBingo />}</Stack>
     </>
   );
 };
