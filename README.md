@@ -10,13 +10,13 @@ React + Go + AWS App
 ## srcディレクトリ構成
 
 - src
-  - api
-  - assets
-  - components
-  - features
-  - pages
-    - Home
-    - MyAccount
-    - MyBingo
-    - Review
-  - store
+  └── api
+  └── assets
+  └── components
+  └── features
+  └── pages
+      ├── Home
+      ├── MyAccount
+      ├── MyBingo
+      └── Review
+  └── store
