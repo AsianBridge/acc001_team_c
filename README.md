@@ -11,15 +11,15 @@ React + Go + AWS App
 </dev>
 <h2>srcディレクトリ構成</h2>
 <dev>
-src
-├── api
-├── assets
-├── components
-├── features
-├── pages
-│   ├── Home
-│   ├── MyAccount
-│   ├── MyBingo
-│   └── Review
+src<br>
+├── api<br>
+├── assets<br>
+├── components<br>
+├── features<br>
+├── pages<br>
+│   ├── Home<br>
+│   ├── MyAccount<br>
+│   ├── MyBingo<br>
+│   └── Review<br>
 └── store
 </dev>
