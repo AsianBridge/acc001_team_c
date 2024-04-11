@@ -26,6 +26,14 @@ export const MyBingoButton = () => {
   );
 };
 
+export const SubmitBingo = () => {
+  return (
+    <Button>
+      投稿する
+    </Button>
+  )
+}
+
 export const ReviewButton = () => {
   return <Button href="/Review">確定ボタン</Button>;
 };
