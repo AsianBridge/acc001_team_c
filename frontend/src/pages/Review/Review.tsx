@@ -3,7 +3,7 @@ import { SetStoreReview } from "../../features/StoreReview";
 import { CaptionField } from "../../features/TextField";
 import { ShowImage } from "../../components/ShowImage";
 import { Stack } from "@mui/material";
-import { SubmitReview } from "../../components/Button";
+import { SubmitReviewButton } from "../../components/Button";
 
 const Review = () => {
   const [imageSrc] = useState(
@@ -38,7 +38,7 @@ const Review = () => {
         <CaptionField caption={caption} setCaption={setCaption} />
       </Stack>
       <Stack style={{ height: "60vh" }}>
-        <SubmitReview isReviewComplete={isReviewComplete()} />
+        <SubmitReviewButton isReviewComplete={isReviewComplete()} />
       </Stack>
     </>
   );
