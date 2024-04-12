@@ -12,13 +12,13 @@ export type BingoSquareInformation = {
   src?: string;
 };
 
-export type StoreEvaluationProps = {
+export type StoreViewProps = {
   taste?: number;
   atmosphere?: number;
   costPerformance?: number;
 };
 
-export type SetStoreEvaluationProps = StoreEvaluationProps & {
+export type SetStoreViewProps = StoreViewProps & {
   setTaste: Dispatch<SetStateAction<number>>;
   setAtmosphere: Dispatch<SetStateAction<number>>;
   setCostPerformance: Dispatch<SetStateAction<number>>;
@@ -27,7 +27,7 @@ export type SetStoreEvaluationProps = StoreEvaluationProps & {
 export type BingoSquareModalProps = {
   src?: string;
   storeName: string;
-} & StoreEvaluationProps;
+} & StoreViewProps;
 
 export type UserState = {
   userID?: string;

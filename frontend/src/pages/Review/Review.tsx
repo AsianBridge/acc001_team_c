@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { SetStoreEvaluation } from "../../features/StoreEvaluation";
+import { SetStoreReview } from "../../features/StoreReview";
 import { CaptionField } from "../../features/TextField";
 import { ShowImage } from "../../components/ShowImage";
 import { Stack } from "@mui/material";
+import { SubmitReviewButton } from "../../components/Button";
 
 const Review = () => {
   const [imageSrc] = useState(
@@ -13,13 +14,20 @@ const Review = () => {
   const [costPerformance, setCostPerformance] = useState(0);
   const [caption, setCaption] = useState("");
 
+  const isReviewComplete = () => {
+    if (taste != 0 && atmosphere != 0 && costPerformance != 0) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <>
       <Stack style={{ marginTop: "10vh" }}>
         <ShowImage src={imageSrc} width="100vw" height="100vh" />
       </Stack>
-      <Stack style={{ height: "82vh" }}>
-        <SetStoreEvaluation
+      <Stack style={{ height: "25vh" }}>
+        <SetStoreReview
           taste={taste}
           atmosphere={atmosphere}
           costPerformance={costPerformance}
@@ -28,6 +36,9 @@ const Review = () => {
           setCostPerformance={setCostPerformance}
         />
         <CaptionField caption={caption} setCaption={setCaption} />
+      </Stack>
+      <Stack style={{ height: "60vh" }}>
+        <SubmitReviewButton isReviewComplete={isReviewComplete()} />
       </Stack>
     </>
   );

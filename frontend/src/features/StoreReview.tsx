@@ -1,11 +1,11 @@
 import { Box, Rating, Typography } from "@mui/material";
-import { SetStoreEvaluationProps, StoreEvaluationProps } from "../types";
+import { SetStoreViewProps, StoreViewProps } from "../types";
 
-export const ShowStoreEvaluation = ({
+export const ShowStoreReview = ({
   taste,
   atmosphere,
   costPerformance,
-}: StoreEvaluationProps) => {
+}: StoreViewProps) => {
   return (
     <Box>
       <Typography component="legend">味</Typography>
@@ -18,14 +18,14 @@ export const ShowStoreEvaluation = ({
   );
 };
 
-export const SetStoreEvaluation = ({
+export const SetStoreReview = ({
   taste,
   atmosphere,
   costPerformance,
   setTaste,
   setAtmosphere,
   setCostPerformance,
-}: SetStoreEvaluationProps) => {
+}: SetStoreViewProps) => {
   return (
     <Box sx={{ color: "black" }}>
       <Typography component="legend">味</Typography>
