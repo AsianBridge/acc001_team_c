@@ -1,8 +1,8 @@
 import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Grid, Stack } from "@mui/material";
-import Like from "./like";
 import { SubmitBingoButton } from "../components/Button";
+import Like from "./Like";
 
 const storeInformation: BingoSquareModalProps[] = [
   {
