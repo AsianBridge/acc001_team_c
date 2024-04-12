@@ -54,9 +54,7 @@ function LikeButton() {
           ♥
         </span>
       </span>
-      <span>
-      ×{likeCounter}
-      </span>
+      <span>×{likeCounter}</span>
     </p>
   );
 }
