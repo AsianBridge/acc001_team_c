@@ -94,8 +94,8 @@ export const LikeButton = () => {
         <span>×{likeCounter}</span>
       </p>
     </header>
-  )
-}
+  );
+};
 // export const ImageUploader = () => {
 //   const [base64Images, setBase64Images] = useState<string>();
 
