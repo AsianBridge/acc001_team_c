@@ -141,7 +141,9 @@ export const BingoOfHome = () => {
         <Box sx={{ backgroundColor: "black" }}>
           <Bingo scene={"Home"} storeInformation={storeInformation} />
         </Box>
-        <LikeButton />
+        <Box>
+          <LikeButton />
+        </Box>
       </Stack>
     </>
   );
