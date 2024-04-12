@@ -137,8 +137,9 @@
 指定したbingoIdにいいねする  
 {  
   "httpMethod": "POST_GOOD",  
+  "good_number": "2",  
   "bingoId": "20240408045050"  
-}  
+}   
 戻り値  
 失敗　　Bingo not found  
 成功　　Successful  
