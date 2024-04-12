@@ -2,8 +2,9 @@ import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Grid, Stack } from "@mui/material";
 import { LikeButton, SubmitBingoButton } from "../components/Button";
+import { FC } from "react";
 
-const storeInformation: BingoSquareModalProps[] = [
+const storeInformations: BingoSquareModalProps[] = [
   {
     storeName: "マック",
     src: undefined,
@@ -119,7 +120,9 @@ const Bingo = ({
   );
 };
 
-export const BingoOfHome = () => {
+export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
+  storeInformation,
+}) => {
   const UserId = "User1";
 
   return (
@@ -165,9 +168,9 @@ export const BingoOfMyBingo = () => {
         My BINGO
       </p>
       <Box sx={{ backgroundColor: "black" }}>
-        <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
+        <Bingo scene={"MyBingo"} storeInformation={storeInformations} />
       </Box>
-      <Stack>{checkBingo(storeInformation) && <SubmitBingoButton />}</Stack>
+      <Stack>{checkBingo(storeInformations) && <SubmitBingoButton />}</Stack>
     </>
   );
 };
