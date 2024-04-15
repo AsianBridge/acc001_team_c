@@ -1,44 +1,44 @@
-import { Button } from "@mui/material";
 import { useBingoState } from "./ReviewOfBingoState";
 import { useUserState } from "./UserState";
 
-export const SetBingoID = ({ newBingoID }: { newBingoID: string }) => {
+const setBingoID = ({ newBingoID }: { newBingoID: string }) => {
   const { setBingoID } = useBingoState();
 
-  const handleClick = () => {
-    if (typeof newBingoID === "string") {
-      setBingoID(newBingoID);
-    }
-  };
-
-  return <Button onClick={handleClick}>BingoIDを更新</Button>;
+  if (typeof newBingoID === "string") {
+    setBingoID(newBingoID);
+  }
 };
 
-export const SetStoreID = ({ newStoreID }: { newStoreID: string }) => {
+const getBingoID = () => {
+  const { BingoID } = useBingoState();
+  return BingoID;
+};
+
+const setStoreID = ({ newStoreID }: { newStoreID: string }) => {
   const { setStoreID } = useBingoState();
-
-  const handleClick = () => {
-    if (typeof newStoreID === "string") {
-      setStoreID(newStoreID);
-    }
-  };
-
-  return <Button onClick={handleClick}>StoreIDを更新</Button>;
+  if (typeof newStoreID === "string") {
+    setStoreID(newStoreID);
+  }
 };
 
-export const ShowUserId = () => {
+const getUserId = () => {
   const { userID } = useUserState();
-  return <>{userID}</>;
+  return userID;
 };
 
-export const SetUserId = ({ NewID }: { NewID?: string }) => {
+const setUserId = ({ NewID }: { NewID?: string }) => {
   const { setUserID } = useUserState();
-
-  const handleClick = () => {
-    if (typeof NewID === "string") {
-      setUserID(NewID);
-    }
-  };
-
-  return <Button onClick={handleClick}> IDを更新 </Button>;
+  if (typeof NewID === "string") {
+    setUserID(NewID);
+  }
 };
+
+const globalState = {
+  setBingoID,
+  getBingoID,
+  setStoreID,
+  getUserId,
+  setUserId,
+};
+
+export default globalState;
