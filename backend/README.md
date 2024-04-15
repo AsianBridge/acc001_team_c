@@ -233,4 +233,19 @@ bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_tas
 }  
 戻り値  
 失敗　　Already posted  
-成功　　Successful  
+成功　　Successful 
+
+***GET_STORE_ID***  
+指定したbingoIdのビンゴの構成を返す  
+{  
+  "httpMethod": "GET_STORE_ID",  
+  "bingoId": "20240408045050"  
+}  
+戻り値  
+失敗　　No Bingo  
+成功　　json形式のビンゴの構成  
+good_number(いいねの数)がない場合もある  
+{  
+  "statusCode": 200,  
+  "body": "{\"store_id_8\": \"16\", \"store_id_7\": \"15\", \"store_id_6\": \"14\", \"store_id_5\": \"13\", \"store_id_9\": \"17\", \"maker_id\": \"kamide\", \"good_number\": 4.0, \"bingo_id\": 20240408045050.0, \"store_id_4\": \"12\", \"store_id_3\": \"11\", \"store_id_2\": \"10\", \"store_id_1\": \"9\"}"  
+}  
