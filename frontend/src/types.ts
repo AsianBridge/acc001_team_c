@@ -30,8 +30,8 @@ export type BingoSquareModalProps = {
 } & StoreViewProps;
 
 export type UserState = {
-  userID?: string;
-  setUserID: (newID?: string) => void;
+  userID: string;
+  setUserID: (newID: string) => void;
 };
 
 export type BingoState = {
@@ -67,3 +67,8 @@ export type CropperModalProps = {
   onMediaLoaded: (mediaSize: MediaSize) => void;
   minZoom: number;
 };
+
+export interface getDoneBingoIdType {
+  statusCode: number;
+  body: string[];
+}

@@ -1,3 +1,4 @@
+import { getDoneBingoIdType } from "../types";
 import apiClient from "./apiClient";
 
 const getStoreById = async (storeId: string) => {
@@ -15,6 +16,24 @@ const getMyBingoByUserId = async (userId: string) => {
     userId: userId,
   };
   const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
+
+const confirmationId = async (userId: string) => {
+  const postData = {
+    httpMethod: "CONFIRMATION_ID",
+    userId: userId,
+  };
+  const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
+
+const getDoneBingoId = async (userId: string) => {
+  const postData = {
+    httpMethod: "GET_DONE_BINGO",
+    userId: userId,
+  };
+  const response = await apiClient.post<getDoneBingoIdType[]>("", postData);
   return response.data;
 };
 
@@ -40,7 +59,9 @@ const postReview = async (review: Review) => {
 const api = {
   getStoreById,
   getMyBingoByUserId,
+  confirmationId,
   postReview,
+  getDoneBingoId,
 };
 
 export default api;
