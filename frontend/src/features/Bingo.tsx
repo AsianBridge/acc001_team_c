@@ -4,7 +4,7 @@ import { Avatar, Box, Grid, Stack } from "@mui/material";
 import { LikeButton, SubmitBingoButton } from "../components/Button";
 import { FC } from "react";
 
-const storeInformations: BingoSquareModalProps[] = [
+const storeInformation: BingoSquareModalProps[] = [
   {
     storeName: "マック",
     src: undefined,
@@ -168,9 +168,9 @@ export const BingoOfMyBingo = () => {
         My BINGO
       </p>
       <Box sx={{ backgroundColor: "black" }}>
-        <Bingo scene={"MyBingo"} storeInformation={storeInformations} />
+        <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
       </Box>
-      <Stack>{checkBingo(storeInformations) && <SubmitBingoButton />}</Stack>
+      <Stack>{checkBingo(storeInformation) && <SubmitBingoButton />}</Stack>
     </>
   );
 };
