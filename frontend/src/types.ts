@@ -70,5 +70,5 @@ export type CropperModalProps = {
 
 export interface getDoneBingoIdType {
   statusCode: number;
-  body: string[];
+  body: { user_id: string; flag: string; bingo_id: number } | string;
 }
