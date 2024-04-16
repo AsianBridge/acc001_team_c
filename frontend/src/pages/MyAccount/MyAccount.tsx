@@ -3,35 +3,33 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-// import api from "../../api/api";
-// import { getDoneBingoIdType } from "../../types";
+import api from "../../api/api";
+import { getDoneBingoIdType } from "../../types";
 import { useUserState } from "../../store/UserState";
 
-// async function getDoneBingoId(setDoneBingoId: Dispatch<SetStateAction<number>>) {
-//   try {
-//     const responseDataArray: getDoneBingoIdType[] = await api.getDoneBingoIdByUserId("kamide2");
-//     console.log(responseDataArray);
+const getDoneBingoId = async(userID:string,setFinishedBingoNumber: Dispatch<SetStateAction<number>>) => {
+  try {
+    const responseDataArray: getDoneBingoIdType[] = await api.getDoneBingoIdByUserId(userID);
 
-//     if (responseDataArray.length > 0) {
-//       if (typeof responseDataArray[0].body === "object") {
-//         setDoneBingoId(responseDataArray.length)
-//         console.log(responseDataArray.length)
-//       } else {
-//         setDoneBingoId(responseDataArray.length);
-//         console.log(responseDataArray.length)
-//       }
-//     }
-//   } catch (error) {
-//     console.error("Error fetching DoneBingoId:", error);
-//   }
-// }
+    if (responseDataArray.length > 0) {
+      if (typeof responseDataArray[0].body !== "object") {
+        setFinishedBingoNumber(responseDataArray.length)
+      }
+    }else{
+      setFinishedBingoNumber(0);
+    }
+  } catch (error) {
+    console.error("Error fetching DoneBingoId:", error);
+  }
+}
 
 const MyAccount = () => {
-  const { userID } = useUserState();
+  const { userID,setUserID } = useUserState();
   const [finishedBingoNumber, setFinishedBingoNumber] = useState<number>(0);
 
   useEffect(() => {
-    // getDoneBingoId(setFinishedBingoNumber);
+    setUserID("kamide2");
+    getDoneBingoId(userID,setFinishedBingoNumber);
   }, [finishedBingoNumber]);
 
   return (
