@@ -1,6 +1,8 @@
 import apiClient from "./apiClient";
 import { getDoneBingoIdType } from "../types";
 
+// まだAPIは完全に完成していないです。
+
 const getACByUserId = async (storeId: string) => {
   const postData = {
     httpMethod: "GET_AC",
@@ -48,7 +50,7 @@ const getMyBingoByUserId = async (userId: string) => {
 
 const getKeepBingoIdByUserId = async (storeId: string) => {
   const postData = {
-    httpMethod: "GET_STORE",
+    httpMethod: "GET_KEEP_BINGO",
     storeId: storeId,
   };
   const response = await apiClient.post<string>("", postData);
@@ -57,7 +59,7 @@ const getKeepBingoIdByUserId = async (storeId: string) => {
 
 const getMakedBingoIdByUserId = async (storeId: string) => {
   const postData = {
-    httpMethod: "GET_STORE",
+    httpMethod: "GET_MAKED_BINGO",
     storeId: storeId,
   };
   const response = await apiClient.post<string>("", postData);
