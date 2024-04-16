@@ -2,18 +2,37 @@ import { Stack, Box, Avatar, Tab, Button } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { useEffect, useState } from "react";
-import { ShowUserId } from "../../store/stateManager";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+// import api from "../../api/api";
+// import { getDoneBingoIdType } from "../../types";
+import { useUserState } from "../../store/UserState";
+
+// async function getDoneBingoId(setDoneBingoId: Dispatch<SetStateAction<number>>) {
+//   try {
+//     const responseDataArray: getDoneBingoIdType[] = await api.getDoneBingoIdByUserId("kamide2");
+//     console.log(responseDataArray);
+
+//     if (responseDataArray.length > 0) {
+//       if (typeof responseDataArray[0].body === "object") {
+//         setDoneBingoId(responseDataArray.length)
+//         console.log(responseDataArray.length)
+//       } else {
+//         setDoneBingoId(responseDataArray.length);
+//         console.log(responseDataArray.length)
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error fetching DoneBingoId:", error);
+//   }
+// }
 
 const MyAccount = () => {
-  const [finishedBingoNumber, setFinishedBingoNumber] = useState<
-    undefined | number
-  >(undefined);
-  const [finishedBingosID] = useState(["ID_1", "ID_2"]);
+  const { userID } = useUserState();
+  const [finishedBingoNumber, setFinishedBingoNumber] = useState<number>(0);
 
   useEffect(() => {
-    setFinishedBingoNumber(finishedBingosID.length);
-  }, []);
+    // getDoneBingoId(setFinishedBingoNumber);
+  }, [finishedBingoNumber]);
 
   return (
     <Box height="90vh" width="100vw">
@@ -26,9 +45,7 @@ const MyAccount = () => {
       >
         <Avatar sx={{ width: "26vw", height: "12vh" }}>BK</Avatar>
         <Stack spacing={1} style={{ fontWeight: "bold" }}>
-          <p style={{ color: "black" }}>
-            UserID: <ShowUserId />
-          </p>
+          <p style={{ color: "black" }}>UserID: {userID}</p>
           <p style={{ color: "black" }}>📍Kanazawa</p>
           <p style={{ color: "black" }}>🔰BeInGo Beginner</p>
         </Stack>
