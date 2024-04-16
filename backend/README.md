@@ -69,10 +69,10 @@ bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_tas
   "body": "{\"user_id\": \"kamide\", \"flag\": \"0\", \"star_cp_1\": \"5\", \"bingo_id\": 20240408045050.0, \"review_1\": \"\\u3088\\u304b\\u3063\\u305f\\u3067\\u3059\", \"pi_3\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/988df94c-e8b9-42b3-b566-a5ea0d075101.jpg\", \"star_taste_1\": \"4\", \"star_atmosphere_1\": \"3\"}"  
 }  
   
-***GET_KEEP***  
+***GET_KEEP_BINGO***  
 自分が保存したビンゴを取得  
 {  
-  "httpMethod": "GET_KEEP",  
+  "httpMethod": "GET_KEEP_BINGO",  
   "userId": "kamide"   
 }  
 戻り値  
