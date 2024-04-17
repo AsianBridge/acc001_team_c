@@ -47,8 +47,7 @@
 戻り値  
 失敗　　No Bingo  
 成功　　ビンゴのjson形式の情報  
-bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている可能性がある  
-(登録していない情報は返ってこない)  
+bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている    
 {  
   "statusCode": 200,  
   "body": "{\"user_id\": \"kamide\", \"flag\": \"4\", \"star_cp_1\": \"5\", \"bingo_id\": 20240408045050.0, \"review_1\": \"\\u3088\\u304b\\u3063\\u305f\\u3067\\u3059\", \"pi_3\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/988df94c-e8b9-42b3-b566-a5ea0d075101.jpg\", \"star_taste_1\": \"4\", \"star_atmosphere_1\": \"3\"}"  
@@ -62,8 +61,7 @@ bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_tas
 }  
 戻り値  
 成功　　json形式のビンゴ情報  
-bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている可能性がある  
-(登録していない情報は返ってこない)  
+bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている  
 {  
   "statusCode": 200,  
   "body": "{\"user_id\": \"kamide\", \"flag\": \"0\", \"star_cp_1\": \"5\", \"bingo_id\": 20240408045050.0, \"review_1\": \"\\u3088\\u304b\\u3063\\u305f\\u3067\\u3059\", \"pi_3\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/988df94c-e8b9-42b3-b566-a5ea0d075101.jpg\", \"star_taste_1\": \"4\", \"star_atmosphere_1\": \"3\"}"  
@@ -78,8 +76,7 @@ bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_tas
 戻り値  
 失敗　　No bingo  
 成功　　json形式のビンゴ情報  
-bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている可能性がある  
-(登録していない情報は返ってこない)  
+bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている    
 {  
   "statusCode": 200,  
   "body": "{\"user_id\": \"kamide2\", \"flag\": \"1\", \"bingo_id\": 20240408045050.0}"  
@@ -94,8 +91,7 @@ bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_tas
 戻り値  
 失敗　　No bingo  
 成功　　json形式のビンゴ情報　 
-bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている可能性がある  
-(登録していない情報は返ってこない)  
+bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている  
 {  
   "statusCode": 200,  
   "body": "{\"user_id\": \"kamide\", \"flag\": \"2\", \"star_cp_1\": \"5\", \"bingo_id\": 20240408045050.0, \"review_1\": \"\\u3088\\u304b\\u3063\\u305f\\u3067\\u3059\", \"pi_3\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/988df94c-e8b9-42b3-b566-a5ea0d075101.jpg\", \"star_taste_1\": \"4\", \"star_atmosphere_1\": \"3\"}"  

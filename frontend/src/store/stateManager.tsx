@@ -1,44 +1,44 @@
-import { Button } from "@mui/material";
-import { useBingoState } from "./ReviewOfBingoState";
-import { useUserState } from "./UserState";
+// import { useBingoState } from "./ReviewOfBingoState";
+// import { useUserState } from "./UserState";
 
-export const SetBingoID = ({ newBingoID }: { newBingoID: string }) => {
-  const { setBingoID } = useBingoState();
+// const setBingoID = ({ newBingoID }: { newBingoID: string }) => {
+//   const { setBingoID } = useBingoState();
 
-  const handleClick = () => {
-    if (typeof newBingoID === "string") {
-      setBingoID(newBingoID);
-    }
-  };
+//   if (typeof newBingoID === "string") {
+//     setBingoID(newBingoID);
+//   }
+// };
 
-  return <Button onClick={handleClick}>BingoIDを更新</Button>;
-};
+// const getBingoID = () => {
+//   const { BingoID } = useBingoState();
+//   return BingoID;
+// };
 
-export const SetStoreID = ({ newStoreID }: { newStoreID: string }) => {
-  const { setStoreID } = useBingoState();
+// const setStoreID = ({ newStoreID }: { newStoreID: string }) => {
+//   const { setStoreID } = useBingoState();
+//   if (typeof newStoreID === "string") {
+//     setStoreID(newStoreID);
+//   }
+// };
 
-  const handleClick = () => {
-    if (typeof newStoreID === "string") {
-      setStoreID(newStoreID);
-    }
-  };
+// const getUserId = () => {
+//   const { userID } = useUserState();
+//   return userID;
+// };
 
-  return <Button onClick={handleClick}>StoreIDを更新</Button>;
-};
+// const setUserId = ({ NewID }: { NewID?: string }) => {
+//   const { setUserID } = useUserState();
+//   if (typeof NewID === "string") {
+//     setUserID(NewID);
+//   }
+// };
 
-export const ShowUserId = () => {
-  const { userID } = useUserState();
-  return <>{userID}</>;
-};
+// const globalState = {
+//   setBingoID,
+//   getBingoID,
+//   setStoreID,
+//   getUserId,
+//   setUserId,
+// };
 
-export const SetUserId = ({ NewID }: { NewID?: string }) => {
-  const { setUserID } = useUserState();
-
-  const handleClick = () => {
-    if (typeof NewID === "string") {
-      setUserID(NewID);
-    }
-  };
-
-  return <Button onClick={handleClick}> IDを更新 </Button>;
-};
+// export default globalState;
