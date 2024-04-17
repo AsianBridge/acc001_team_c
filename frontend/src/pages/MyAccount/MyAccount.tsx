@@ -7,31 +7,82 @@ import api from "../../api/api";
 import { getDoneBingoIdType } from "../../types";
 import { useUserState } from "../../store/UserState";
 
-const getDoneBingoId = async(userID:string,setFinishedBingoNumber: Dispatch<SetStateAction<number>>) => {
+const getDoneBingoInformation = async (
+  userID: string,
+  setDoneBingoId: Dispatch<SetStateAction<getDoneBingoIdType[] | undefined>>,
+  setDoneBingoNumber: Dispatch<SetStateAction<number>>,
+) => {
   try {
-    const responseDataArray: getDoneBingoIdType[] = await api.getDoneBingoIdByUserId(userID);
+    const responseDataArray: getDoneBingoIdType[] =
+      await api.getDoneBingoIdByUserId(userID);
 
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
-        setFinishedBingoNumber(responseDataArray.length)
+        setDoneBingoNumber(responseDataArray.length);
+        setDoneBingoId(responseDataArray);
       }
-    }else{
-      setFinishedBingoNumber(0);
+    } else {
+      setDoneBingoNumber(0);
     }
   } catch (error) {
     console.error("Error fetching DoneBingoId:", error);
   }
-}
+};
+
+type BingoTabProps = {
+  userID: string;
+  setDoneBingoNumber: Dispatch<SetStateAction<number>>;
+};
+
+const BingoTab = ({ userID, setDoneBingoNumber }: BingoTabProps) => {
+  const [value, setValue] = useState("1");
+  const [doneBingoId, setDoneBingoId] = useState<getDoneBingoIdType[]>();
+
+  useEffect(() => {
+    getDoneBingoInformation(userID, setDoneBingoId, setDoneBingoNumber);
+    console.log(userID);
+  }, [userID]);
+
+  useEffect(() => {
+    console.log(doneBingoId);
+  }, [doneBingoId]);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    event.preventDefault();
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: "100%", typography: "body1" }}>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <TabList onChange={handleChange}>
+            <Tab label="保存したBINGO" value="1" />
+            <Tab label="作成したBINGO" value="2" />
+            <Tab label="投稿したBINGO" value="3" />
+          </TabList>
+        </Box>
+        <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
+          保存したBINGOはありません
+        </TabPanel>
+        <TabPanel value="2" style={{ color: "black", textAlign: "center" }}>
+          作成したBINGOはありません
+        </TabPanel>
+        <TabPanel value="3" style={{ color: "black", textAlign: "center" }}>
+          投稿したBINGOはありません
+        </TabPanel>
+      </TabContext>
+    </Box>
+  );
+};
 
 const MyAccount = () => {
   const { userID,setUserID } = useUserState();
-  const [finishedBingoNumber, setFinishedBingoNumber] = useState<number>(0);
+  const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
 
-  useEffect(() => {
+  useEffect(()=>{
     setUserID("kamide2");
-    getDoneBingoId(userID,setFinishedBingoNumber);
-  }, [finishedBingoNumber]);
-
+  },[])
   return (
     <Box height="90vh" width="100vw">
       <Stack
@@ -92,7 +143,7 @@ const MyAccount = () => {
               fontSize: "2.0rem",
             }}
           >
-            {finishedBingoNumber}
+            {doneBingoNumber}
           </p>
         </Stack>
         <Button
@@ -108,39 +159,7 @@ const MyAccount = () => {
           編集
         </Button>
       </Stack>
-      <BingoTab />
-    </Box>
-  );
-};
-
-const BingoTab = () => {
-  const [value, setValue] = useState("1");
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    event.preventDefault();
-    setValue(newValue);
-  };
-
-  return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange}>
-            <Tab label="保存したBINGO" value="1" />
-            <Tab label="作成したBINGO" value="2" />
-            <Tab label="投稿したBINGO" value="3" />
-          </TabList>
-        </Box>
-        <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
-          保存したBINGOはありません
-        </TabPanel>
-        <TabPanel value="2" style={{ color: "black", textAlign: "center" }}>
-          作成したBINGOはありません
-        </TabPanel>
-        <TabPanel value="3" style={{ color: "black", textAlign: "center" }}>
-          投稿したBINGOはありません
-        </TabPanel>
-      </TabContext>
+      <BingoTab userID={userID} setDoneBingoNumber={setDoneBingoNumber} />
     </Box>
   );
 };
