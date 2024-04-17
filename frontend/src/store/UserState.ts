@@ -6,7 +6,7 @@ export const useUserState = create<UserState>()(
   persist<UserState>(
     (set) => ({
       userID: "Guest",
-      setUserID: (newID: string | undefined) => set({ userID: newID }),
+      setUserID: (newID: string) => set({ userID: newID }),
     }),
     {
       name: "user-storage",
