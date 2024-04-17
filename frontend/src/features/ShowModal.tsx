@@ -34,7 +34,7 @@ export const BingoSquareShowModal = ({
                 </h3>
               </Box>
             ) : (
-              <ShowImage src={src} width="120vw" height="120vh" />
+              <ShowImage src={src} width="100%" height="auto" />
             )}
           </Button>
         </div>
@@ -54,7 +54,7 @@ export const BingoSquareShowModal = ({
           )}
           {src !== undefined && (
             <>
-              <ShowImage src={src} width="100vw" height="100vh" />
+              <ShowImage src={src} width="auto" height="auto" />
               <h1>{storeName}</h1>
               <ShowStoreReview
                 taste={taste}

@@ -33,7 +33,7 @@ export const FooterBingoImage = () => {
   return (
     <ShowImage
       src="https://www.silhouette-illust.com/wp-content/uploads/2017/09/bingo_card_37352-300x300.jpg"
-      width="60vw"
+      width="50vw"
       height="56vh"
     />
   );

@@ -1,38 +1,29 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
-import { Container, Box } from "@mui/material";
+import { Box } from "@mui/material";
 
 const Header: React.FC = () => {
   return (
     <AppBar
       component="header"
       position="fixed"
-      sx={{ height: "7vh", backgroundColor: "white" }}
+      sx={{ height: "7vh", backgroundColor: "white",display: "flex", alignItems: "center", justifyContent: "center",}}
     >
-      <Container sx={{ width: "100vw" }}>
-        <Box
-          width="100vw"
+      <Box>
+        <Typography
+          component="h1"
+          variant="h6"
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            position: "fixed",
+            color: "black",
+            fontFamily: "Impact",
+            fontSize: "min(7vw, 2rem)",
+            textAlign: "center",
           }}
         >
-          <Typography
-            component="h1"
-            fontSize="2rem"
-            sx={{
-              color: "black",
-              marginLeft: "35vw",
-              marginTop: "3vw",
-              fontFamily: "Impact",
-            }}
-          >
-            BeInGo
-          </Typography>
-        </Box>
-      </Container>
+          BeInGo
+        </Typography>
+      </Box>
     </AppBar>
   );
 };
