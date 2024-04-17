@@ -92,12 +92,12 @@
   border-radius: 8px;
 }
 
-.input h1{
+.input h1 {
   margin: 0px 30px;
   color: #de6f14;
 }
 
-.input input{
+.input input {
   height: 50px;
   width: 400px;
   background: transparent;
@@ -107,11 +107,35 @@
   font-size: 15px;
 }
 
-.login_button{ 
+.login_button {
   padding-top: 20px;
   justify-content: center;
   font-size: 20px;
 }
 
-.login_button
+.error-message {
+  color: #cc0000;
+}
 
+.error {
+  color: brown;
+}
+
+/* App.css */
+
+.auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #d48e16;
+}
