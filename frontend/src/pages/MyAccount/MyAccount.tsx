@@ -77,12 +77,12 @@ const BingoTab = ({ userID, setDoneBingoNumber }: BingoTabProps) => {
 };
 
 const MyAccount = () => {
-  const { userID,setUserID } = useUserState();
+  const { userID, setUserID } = useUserState();
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
 
-  useEffect(()=>{
+  useEffect(() => {
     setUserID("kamide2");
-  },[])
+  }, []);
   return (
     <Box height="90vh" width="100vw">
       <Stack
