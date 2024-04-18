@@ -9,8 +9,15 @@
 失敗　　No Acount  
 成功　　登録したアカウント情報   
 {  
-  "statusCode": 200,  
-  "body": "[{\"birthday_year\": \"2005\", \"password\": \"kamikami\", \"user_id\": \"kamide\", \"birthday_day\": \"21\", \"residence\": \"\\u77f3\\u5ddd\\u770c\", \"birthday_month\": \"7\", \"mail_address\": \"kamide@gmail.com\"}]"  
+　"statusCode": 200,  
+　"body": "{  
+　　　\"birthday_year\": \"2005\",  
+　　　\"password\": \"kamikami\",  
+　　　\"user_id\": \"kamide\",  
+　　　\"birthday_day\": \"21\",  
+　　　\"residence\": \"\\u77f3\\u5ddd\\u770c\", \"birthday_month\": \"7\",  
+　　　\"mail_address\": \"kamide@gmail.com\"  
+　}"   
 }  
 
 ***POST_AC***  
@@ -50,7 +57,10 @@
 bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている    
 {  
   "statusCode": 200,  
-  "body": "{\"user_id\": \"kamide\", \"flag\": \"4\", \"star_cp_1\": \"5\", \"bingo_id\": 20240408045050.0, \"review_1\": \"\\u3088\\u304b\\u3063\\u305f\\u3067\\u3059\", \"pi_3\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/988df94c-e8b9-42b3-b566-a5ea0d075101.jpg\", \"star_taste_1\": \"4\", \"star_atmosphere_1\": \"3\"}"  
+  "body": "{
+  \"user_id\": \"kamide\", 
+  \"flag\": \"4\", 
+  \"star_cp_1\": \"5\", \"bingo_id\": 20240408045050.0, \"review_1\": \"\\u3088\\u304b\\u3063\\u305f\\u3067\\u3059\", \"pi_3\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/988df94c-e8b9-42b3-b566-a5ea0d075101.jpg\", \"star_taste_1\": \"4\", \"star_atmosphere_1\": \"3\"}"  
 }  
   
 ***GET_MYBINGO***  
@@ -62,10 +72,25 @@ bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_tas
 戻り値  
 成功　　json形式のビンゴ情報  
 bodyには「user_id」「flag」「bingo_id」「star_cp_1」(1〜9)「star_taste_1」(1〜9)「star_atmosphere_1」(1〜9)「review_1」(1〜9)「pi_1」(1〜9)が入っている  
-{  
-  "statusCode": 200,  
-  "body": "{\"user_id\": \"kamide\", \"flag\": \"0\", \"star_cp_1\": \"5\", \"bingo_id\": 20240408045050.0, \"review_1\": \"\\u3088\\u304b\\u3063\\u305f\\u3067\\u3059\", \"pi_3\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/988df94c-e8b9-42b3-b566-a5ea0d075101.jpg\", \"star_taste_1\": \"4\", \"star_atmosphere_1\": \"3\"}"  
-}  
+[  
+　{  
+　　　"statusCode": 200,  
+　　　"body": "{  
+　　　　　　\"user_id\": \"minami\",  
+　　　　　　\"bingo_id\": 20240408045050.0,  
+　　　　　　\"flag\": 0.0,  
+　　　　　　\"pi_1\": \"undefine\",  
+　　　　　　\"pi_2\": \"undefine\",  
+　　　　　　\"pi_3\": \"undefine\",  
+　　　　　　\"pi_4\": \"undefine\",  
+　　　　　　\"pi_5\": \"undefine\",  
+　　　　　　\"pi_6\": \"undefine\",  
+　　　　　　\"pi_7\": \"undefine\",  
+　　　　　　\"pi_8\": \"undefine\",  
+　　　　　　\"pi_9\": \"undefine\"  
+　　　　}"  
+　}  
+]   
   
 ***GET_KEEP_BINGO***  
 自分が保存したビンゴを取得  
