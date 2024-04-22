@@ -126,16 +126,19 @@ export interface getMyBingoIdsBodyType {
   picture9: string;
 }
 
-export interface ReviewInformation {
-  statusCode: number;
-  body: {
-    star_atmosphere_2: string;
-    star_cp: string;
-    star_taste: string;
-    review: string;
-  };
-}
-
 export interface BingoInformation {
   goodNumber: number;
 }
+
+export type ReviewInformation = {
+  caption: string;
+  starTaste: number;
+  starAtmosphere: number;
+  starCP: number;
+};
+
+export type Reviewer = {
+  userId: string;
+  bingoId: string;
+  storeNumber: string;
+};
