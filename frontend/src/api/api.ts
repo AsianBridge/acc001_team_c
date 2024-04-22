@@ -1,5 +1,5 @@
 import apiClient from "./apiClient";
-import { getDoneBingoIdType } from "../types";
+import { getDoneBingoIdType, getMyBingoIdType } from "../types";
 
 // まだAPIは完全に完成していないです。
 
@@ -42,9 +42,9 @@ const getDoneBingoIdByUserId = async (userId: string) => {
 const getMyBingoByUserId = async (userId: string) => {
   const postData = {
     httpMethod: "GET_MYBINGO",
-    userInformation: userId,
+    userId: userId,
   };
-  const response = await apiClient.post<string>("", postData);
+  const response = await apiClient.post<getMyBingoIdType>("", postData);
   return response.data;
 };
 
@@ -102,6 +102,24 @@ const getBingo = async (review: Review) => {
   return response.data;
 };
 
+const getStoreIdByBingoId = async (bingoId: string) => {
+  const postData = {
+    httpMethod: "GET_STORE_ID",
+    storeId: bingoId,
+  };
+  const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
+
+const getReview = async (toReview: toReview) => {
+  const postData = {
+    httpMethod: "GET_REVIEW",
+    ...toReview,
+  };
+  const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
+
 type Review = {
   bingoId: string;
   userId: string;
@@ -110,6 +128,12 @@ type Review = {
   starTaste: number;
   starAtmosphere: number;
   starCP: number;
+};
+
+type toReview = {
+  userId: string;
+  bingoId: string;
+  storeNumber: string;
 };
 
 const api = {
@@ -124,6 +148,8 @@ const api = {
   getStoreById,
   postMyBingo,
   getBingo,
+  getStoreIdByBingoId,
+  getReview,
 };
 
 export default api;
