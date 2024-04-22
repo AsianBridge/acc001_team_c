@@ -8,7 +8,13 @@ const Header: React.FC = () => {
     <AppBar
       component="header"
       position="fixed"
-      sx={{ height: "7vh", backgroundColor: "white",display: "flex", alignItems: "center", justifyContent: "center",}}
+      sx={{
+        height: "7vh",
+        backgroundColor: "white",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <Box>
         <Typography
