@@ -34,7 +34,7 @@ export const BingoSquareShowModal = ({
   const [reviewInformation, setReviewInformation] =
     useState<ReviewInformation>();
 
-    const {setUserID} = useUserState();
+  const { setUserID } = useUserState();
   try {
     useAsync(async () => {
       if (src) {
@@ -43,7 +43,7 @@ export const BingoSquareShowModal = ({
           bingoId: bingoId,
           storeNumber: `${storeNumber + 1}`,
         };
-        setUserID("kamide2")
+        setUserID("kamide2");
 
         const response: getReviewType = await api.getReview(Reviewer);
 
@@ -57,7 +57,7 @@ export const BingoSquareShowModal = ({
 
         setReviewInformation(review);
       }
-    },[]);
+    }, []);
   } catch (e) {
     console.error(e);
   }

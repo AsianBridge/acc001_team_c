@@ -140,9 +140,7 @@ export const BingoOfMyBingo = () => {
     }
   });
 
-  useEffect(()=>{
-    
-  })
+  useEffect(() => {});
 
   return (
     <>

@@ -80,7 +80,7 @@ export interface getMyBingoIdType {
 
 export interface getReviewType {
   statusCode: number;
-  body:getReviewProps;
+  body: getReviewProps;
 }
 
 export interface getMyBingoIdsBodyType {
