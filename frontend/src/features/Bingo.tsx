@@ -1,76 +1,13 @@
-import { BingoSquareModalProps } from "../types";
+import { BingoSquareModalProps, getMyBingoIdType } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Grid, Stack } from "@mui/material";
 import { LikeButton, SubmitBingoButton } from "../components/Button";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { useUserState } from "../store/UserState";
+import { useAsync } from "react-use";
+import api from "../api/api";
 
-const storeInformation: BingoSquareModalProps[] = [
-  {
-    storeName: "マック",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "一風堂",
-    src: "https://ec-ippudo.com/img/usr/top/stores/pc/ippudo.jpg",
-    taste: 5,
-    atmosphere: 5,
-    costPerformance: 3,
-  },
-  {
-    storeName: "金沢麺屋大河",
-    src: "https://tshop.r10s.jp/nipponselect/cabinet/item/t03/t03710005.jpg?esh1dplf7cn",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "麺屋 達",
-    src: "https://cdn-ak.f.st-hatena.com/images/fotolife/n/ninomiya-shinta/20190912/20190912190215.jpg",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "麺屋 吉宗",
-    src: "https://lh6.googleusercontent.com/proxy/VYcf3XKKpSOyQ_hPUIZ5gecrHmE_UZqMIQ821K41zyvCtnPbYuBIJOj7PkT_htw_mVIN3fxF8OhnSc8s_Ygt8LVqxYv_bMaTtBX09hI94w",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "築地銀だこ",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "築地銀だこ",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "築地銀だこ",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "ラーメン太る",
-    src: "https://tblg.k-img.com/restaurant/images/Rvw/223211/640x640_rect_30d622011b39cdd47d317beeba8a732f.jpg",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-];
-
-const checkBingo = (storeInformation: BingoSquareModalProps[]) => {
+const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
   const BingoLines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -81,41 +18,75 @@ const checkBingo = (storeInformation: BingoSquareModalProps[]) => {
     [0, 4, 8],
     [2, 4, 6],
   ];
-
-  for (let i = 0; i < BingoLines.length; i++) {
-    const [a, b, c] = BingoLines[i];
-    if (
-      storeInformation[a].src != undefined &&
-      storeInformation[b].src != undefined &&
-      storeInformation[c].src != undefined
-    ) {
-      return true;
+  if (bingoInformation) {
+    for (let i = 0; i < BingoLines.length; i++) {
+      const [a, b, c] = BingoLines[i];
+      if (
+        bingoInformation[a].src != undefined &&
+        bingoInformation[b].src != undefined &&
+        bingoInformation[c].src != undefined
+      ) {
+        return true;
+      }
     }
+    return false;
   }
-  return false;
+};
+
+const getBingoInformation = async (userID: string) => {
+  try {
+    const getMyBingoIdResponse: getMyBingoIdType =
+      await api.getMyBingoByUserId(userID);
+
+    if (getMyBingoIdResponse && getMyBingoIdResponse.body) {
+      const bingoSquares: BingoSquareModalProps[] = [];
+      const bodyObject = JSON.parse(getMyBingoIdResponse.body);
+
+      for (let i = 1; i <= 9; i++) {
+        bingoSquares.push({
+          src: bodyObject[`pi_${i}`],
+          storeName: bodyObject[`store_name_${i}`],
+        });
+      }
+
+      if (bingoSquares)
+        return {
+          bingoSquares,
+          userId: bodyObject[`user_id`],
+          bingoId: bodyObject[`bingo_id`],
+        };
+    }
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 const Bingo = ({
   scene,
   storeInformation,
+  userId,
+  bingoId,
 }: {
   scene: string;
-  storeInformation: BingoSquareModalProps[];
+  storeInformation?: BingoSquareModalProps[];
+  userId: string;
+  bingoId: string;
 }) => {
   return (
     <Grid container spacing={1}>
-      {storeInformation.map((store, index) => (
-        <Grid item xs={4} sm={4} key={index}>
-          <BingoSquareShowModal
-            scene={scene}
-            storeName={store.storeName}
-            src={store.src}
-            taste={store.taste}
-            atmosphere={store.atmosphere}
-            costPerformance={store.costPerformance}
-          />
-        </Grid>
-      ))}
+      {storeInformation &&
+        storeInformation.map((store, index) => (
+          <Grid item xs={4} sm={4} key={index}>
+            <BingoSquareShowModal
+              scene={scene}
+              storeName={store.storeName}
+              src={store.src}
+              userId={userId}
+              bingoId={bingoId}
+              storeNumber={index as unknown as string}
+            />
+          </Grid>
+        ))}
     </Grid>
   );
 };
@@ -142,7 +113,7 @@ export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
           </p>
         </Box>
         <Box sx={{ backgroundColor: "black" }}>
-          <Bingo scene={"Home"} storeInformation={storeInformation} />
+          {/* <Bingo scene={"Home"} storeInformation={storeInformation} /> */}
         </Box>
         <Box>
           <LikeButton />
@@ -153,6 +124,26 @@ export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
 };
 
 export const BingoOfMyBingo = () => {
+  const [bingoInformation, setBingoInformation] =
+    useState<BingoSquareModalProps[]>();
+  const { userID } = useUserState();
+  const [userId, setUserId] = useState("");
+  const [bingoId, setBingoId] = useState("");
+
+  useAsync(async () => {
+    const result = await getBingoInformation(userID);
+    if (result) {
+      const { bingoSquares, userId, bingoId } = result;
+      setBingoInformation(bingoSquares);
+      setUserId(userId);
+      setBingoId(bingoId);
+    }
+  });
+
+  useEffect(()=>{
+    
+  })
+
   return (
     <>
       <p
@@ -168,9 +159,14 @@ export const BingoOfMyBingo = () => {
         My BINGO
       </p>
       <Box sx={{ backgroundColor: "black" }}>
-        <Bingo scene={"MyBingo"} storeInformation={storeInformation} />
+        <Bingo
+          scene={"MyBingo"}
+          storeInformation={bingoInformation}
+          userId={userId}
+          bingoId={bingoId}
+        />
       </Box>
-      <Stack>{checkBingo(storeInformation) && <SubmitBingoButton />}</Stack>
+      <Stack>{checkBingo(bingoInformation) && <SubmitBingoButton />}</Stack>
     </>
   );
 };

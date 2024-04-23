@@ -1,6 +1,7 @@
 import { BingoOfMyBingo } from "../../features/Bingo";
+import { NextPage } from "next";
 
-const MyBingo = () => {
+const MyBingo: NextPage = () => {
   return (
     <>
       <BingoOfMyBingo />

@@ -1,31 +1,71 @@
 import { Box, Button, Modal } from "@mui/material";
-import React from "react";
+import { useState } from "react";
 import { ShowImage } from "../components/ShowImage";
 import { ShowStoreReview } from "./StoreReview";
-import { BingoSquareModalProps } from "../types";
+import {
+  BingoSquareModalProps,
+  getReviewProps,
+  getReviewType,
+  Reviewer,
+  ReviewInformation,
+} from "../types";
 import { ShowCaption } from "../components/ShowText";
 import { ReviewButton } from "../components/Button";
+import { useAsync } from "react-use";
+import api from "../api/api";
+import { useUserState } from "../store/UserState";
 
 export const BingoSquareShowModal = ({
   scene,
   src,
   storeName,
-  taste,
-  atmosphere,
-  costPerformance,
+  userId,
+  bingoId,
+  storeNumber,
 }: {
   scene: string;
-} & BingoSquareModalProps) => {
-  const [open, setOpen] = React.useState(false);
+} & BingoSquareModalProps &
+  Reviewer) => {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => {
     (scene === "MyBingo" || src !== undefined) && setOpen(true);
   };
   const handleClose = () => setOpen(false);
+  const [reviewInformation, setReviewInformation] =
+    useState<ReviewInformation>();
+
+    const {setUserID} = useUserState();
+  try {
+    useAsync(async () => {
+      if (src) {
+        const Reviewer: Reviewer = {
+          userId: userId,
+          bingoId: bingoId,
+          storeNumber: `${storeNumber + 1}`,
+        };
+        setUserID("kamide2")
+
+        const response: getReviewType = await api.getReview(Reviewer);
+
+        // console.log(response);
+        const review: ReviewInformation = {
+          caption: response.body.review,
+          starTaste: response.body.star_taste as unknown as number,
+          starAtmosphere: response.body.star_atmosphere as unknown as number,
+          starCP: response.body.star_cp as unknown as number,
+        };
+
+        setReviewInformation(review);
+      }
+    },[]);
+  } catch (e) {
+    console.error(e);
+  }
 
   return (
     <>
       <Box>
-        <div style={{ width: "32vw", height: "32vw", background: "gray" }}>
+        <div style={{ width: "3vw", height: "32vw", background: "gray" }}>
           <Button onClick={handleOpen}>
             {src === undefined ? (
               <Box>
@@ -57,11 +97,11 @@ export const BingoSquareShowModal = ({
               <ShowImage src={src} width="auto" height="auto" />
               <h1>{storeName}</h1>
               <ShowStoreReview
-                taste={taste}
-                atmosphere={atmosphere}
-                costPerformance={costPerformance}
+                taste={reviewInformation?.starTaste}
+                atmosphere={reviewInformation?.starAtmosphere}
+                costPerformance={reviewInformation?.starCP}
               />
-              <ShowCaption caption={"辛口コメントだよ"} />
+              <ShowCaption caption={reviewInformation?.caption} />
             </>
           )}
         </Box>
