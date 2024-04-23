@@ -27,7 +27,7 @@ export type SetStoreViewProps = StoreViewProps & {
 export type BingoSquareModalProps = {
   src?: string;
   storeName: string;
-} & StoreViewProps;
+};
 
 export type UserState = {
   userID: string;
@@ -68,42 +68,6 @@ export type CropperModalProps = {
   minZoom: number;
 };
 
-type starAtmospheres = {
-  star_atmosphere_1: string;
-  star_atmosphere_2: string;
-  star_atmosphere_3: string;
-  star_atmosphere_4: string;
-  star_atmosphere_5: string;
-  star_atmosphere_6: string;
-  star_atmosphere_7: string;
-  star_atmosphere_8: string;
-  star_atmosphere_9: string;
-};
-
-type starCpes = {
-  star_cp_1: string;
-  star_cp_2: string;
-  star_cp_3: string;
-  star_cp_4: string;
-  star_cp_5: string;
-  star_cp_6: string;
-  star_cp_7: string;
-  star_cp_8: string;
-  star_cp_9: string;
-};
-
-type starTastes = {
-  star_taste_1: string;
-  star_taste_2: string;
-  star_taste_3: string;
-  star_taste_4: string;
-  star_taste_5: string;
-  star_taste_6: string;
-  star_taste_7: string;
-  star_taste_8: string;
-  star_taste_9: string;
-};
-
 export interface getDoneBingoIdType {
   statusCode: number;
   body: { user_id: string; flag: string; bingo_id: number } | string;
@@ -112,6 +76,11 @@ export interface getDoneBingoIdType {
 export interface getMyBingoIdType {
   statusCode: number;
   body: string;
+}
+
+export interface getReviewType {
+  statusCode: number;
+  body:getReviewProps;
 }
 
 export interface getMyBingoIdsBodyType {
@@ -141,4 +110,11 @@ export type Reviewer = {
   userId: string;
   bingoId: string;
   storeNumber: string;
+};
+
+export type getReviewProps = {
+  review: string;
+  star_atmosphere: string;
+  star_cp: string;
+  star_taste: string;
 };
