@@ -78,6 +78,11 @@ export interface getMyBingoIdType {
   body: string;
 }
 
+export interface getBingoType {
+  statusCode: number;
+  body: string;
+}
+
 export interface getReviewType {
   statusCode: number;
   body: getReviewProps;

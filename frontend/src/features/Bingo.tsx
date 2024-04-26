@@ -1,11 +1,8 @@
-import { BingoSquareModalProps, getMyBingoIdType } from "../types";
+import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Grid, Stack } from "@mui/material";
 import { LikeButton, SubmitBingoButton } from "../components/Button";
-import { FC, useEffect, useState } from "react";
-import { useUserState } from "../store/UserState";
-import { useAsync } from "react-use";
-import api from "../api/api";
+import { FC } from "react";
 
 const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
   const BingoLines = [
@@ -30,34 +27,6 @@ const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
       }
     }
     return false;
-  }
-};
-
-const getBingoInformation = async (userID: string) => {
-  try {
-    const getMyBingoIdResponse: getMyBingoIdType =
-      await api.getMyBingoByUserId(userID);
-
-    if (getMyBingoIdResponse && getMyBingoIdResponse.body) {
-      const bingoSquares: BingoSquareModalProps[] = [];
-      const bodyObject = JSON.parse(getMyBingoIdResponse.body);
-
-      for (let i = 1; i <= 9; i++) {
-        bingoSquares.push({
-          src: bodyObject[`pi_${i}`],
-          storeName: bodyObject[`store_name_${i}`],
-        });
-      }
-
-      if (bingoSquares)
-        return {
-          bingoSquares,
-          userId: bodyObject[`user_id`],
-          bingoId: bodyObject[`bingo_id`],
-        };
-    }
-  } catch (e) {
-    console.error(e);
   }
 };
 
@@ -91,11 +60,11 @@ const Bingo = ({
   );
 };
 
-export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
-  storeInformation,
-}) => {
-  const UserId = "User1";
-
+export const BingoOfHome: FC<{
+  bingoInformation: BingoSquareModalProps[] | undefined;
+  userId: string;
+  bingoId: string;
+}> = ({ bingoInformation, userId, bingoId }) => {
   return (
     <>
       <Stack spacing={-3}>
@@ -109,11 +78,16 @@ export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
         >
           <Avatar />
           <p style={{ display: "inline-block", marginLeft: "10px" }}>
-            {UserId}
+            {userId}
           </p>
         </Box>
         <Box sx={{ backgroundColor: "black" }}>
-          {/* <Bingo scene={"Home"} storeInformation={storeInformation} /> */}
+          <Bingo
+            scene={"Home"}
+            storeInformation={bingoInformation}
+            userId={userId}
+            bingoId={bingoId}
+          />
         </Box>
         <Box>
           <LikeButton />
@@ -123,25 +97,11 @@ export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
   );
 };
 
-export const BingoOfMyBingo = () => {
-  const [bingoInformation, setBingoInformation] =
-    useState<BingoSquareModalProps[]>();
-  const { userID } = useUserState();
-  const [userId, setUserId] = useState("");
-  const [bingoId, setBingoId] = useState("");
-
-  useAsync(async () => {
-    const result = await getBingoInformation(userID);
-    if (result) {
-      const { bingoSquares, userId, bingoId } = result;
-      setBingoInformation(bingoSquares);
-      setUserId(userId);
-      setBingoId(bingoId);
-    }
-  },[]);
-
-  useEffect(() => {});
-
+export const BingoOfMyBingo: FC<{
+  bingoInformation: BingoSquareModalProps[] | undefined;
+  userId: string;
+  bingoId: string;
+}> = ({ bingoInformation, userId, bingoId }) => {
   return (
     <>
       <p
