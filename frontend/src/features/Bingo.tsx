@@ -138,7 +138,7 @@ export const BingoOfMyBingo = () => {
       setUserId(userId);
       setBingoId(bingoId);
     }
-  });
+  },[]);
 
   useEffect(() => {});
 
