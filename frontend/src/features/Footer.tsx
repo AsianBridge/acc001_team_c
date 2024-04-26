@@ -10,13 +10,25 @@ const Footer = () => {
     <AppBar
       component="footer"
       position="fixed"
-      sx={{ backgroundColor: "white", height: "100vh", marginTop: "90vh", textAlign:"center",}}
+      sx={{
+        backgroundColor: "white",
+        height: "100vh",
+        marginTop: "90vh",
+        textAlign: "center",
+      }}
     >
       <Container maxWidth="md">
-        <Box sx={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Box
+          sx={{
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Grid container spacing={0}>
             <Grid item xs={4}>
-              <HomeButton/>
+              <HomeButton />
             </Grid>
             <Grid item xs={4}>
               <MyBingoButton />

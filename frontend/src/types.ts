@@ -27,7 +27,7 @@ export type SetStoreViewProps = StoreViewProps & {
 export type BingoSquareModalProps = {
   src?: string;
   storeName: string;
-} & StoreViewProps;
+};
 
 export type UserState = {
   userID: string;
@@ -72,3 +72,49 @@ export interface getDoneBingoIdType {
   statusCode: number;
   body: { user_id: string; flag: string; bingo_id: number } | string;
 }
+
+export interface getMyBingoIdType {
+  statusCode: number;
+  body: string;
+}
+
+export interface getReviewType {
+  statusCode: number;
+  body: getReviewProps;
+}
+
+export interface getMyBingoIdsBodyType {
+  picture1: string;
+  picture2: string;
+  picture3: string;
+  picture4: string;
+  picture5: string;
+  picture6: string;
+  picture7: string;
+  picture8: string;
+  picture9: string;
+}
+
+export interface BingoInformation {
+  goodNumber: number;
+}
+
+export type ReviewInformation = {
+  caption: string;
+  starTaste: number;
+  starAtmosphere: number;
+  starCP: number;
+};
+
+export type Reviewer = {
+  userId: string;
+  bingoId: string;
+  storeNumber: string;
+};
+
+export type getReviewProps = {
+  review: string;
+  star_atmosphere: string;
+  star_cp: string;
+  star_taste: string;
+};
