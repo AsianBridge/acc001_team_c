@@ -297,3 +297,11 @@ good_number(いいねの数)がない場合もある
 　　　　}  
 　}  
 ]  
+
+***POST_STORE***  
+指定したお店の情報を登録する  
+{  
+　　"httpMethod": "POST_STORE",  
+　　"name": "8番ラーメン津幡店",  
+　　"address": "石川県河北郡津幡町横浜に72-1"  
+}  
