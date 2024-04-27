@@ -305,3 +305,29 @@ good_number(いいねの数)がない場合もある
 　　"name": "8番ラーメン津幡店",  
 　　"address": "石川県河北郡津幡町横浜に72-1"  
 }  
+戻り値  
+成功　　Successful  
+
+***GET_DONE_BINGO_NUMBER***  
+指定した期間に達成したビンゴの数を返す  
+{  
+　　"httpMethod": "GET_DONE_BINGO_NUMBER",  
+　　"period": "Day",(または"Month"か"Year")  
+　　"start": "27"  
+}  
+戻り値  
+失敗　　Invalid request(startの範囲が不適切な場合)  
+　　　　No data(データがない場合)  
+成功　　達成したビンゴの数  
+
+***GET_POSTED_BINGO_NUMBER***  
+指定した期間に達成したビンゴの数を返す  
+{  
+　　"httpMethod": "GET_POSTED_BINGO_NUMBER",  
+　　"period": "Day",(または"Month"か"Year")  
+　　"start": "27"  
+}  
+戻り値  
+失敗　　Invalid request(startの範囲が不適切な場合)  
+　　　　No data(データがない場合)  
+成功　　達成したビンゴの数  
