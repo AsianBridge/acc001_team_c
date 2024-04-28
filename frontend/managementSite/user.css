@@ -1,0 +1,151 @@
+header {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 15%;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.store{
+    position: fixed;
+    top: 10%;
+    left: 1%;
+    color: white;
+}
+
+.user{
+    position: fixed;
+    top: 18%;
+    left: 1%;
+    color: white;
+}
+
+.home{
+    position: fixed;
+    top: 26%;
+    left: 1%;
+    color: white;
+}
+
+.h1{
+    position: absolute;
+    top: 5%;
+    left: 40%;
+}
+
+.square{
+    position: absolute;
+    top: 3%;
+    left: 25%;
+    width: 70%;
+    height: 20%;
+    background-color: #a9a9a9;
+}
+.name{
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    width: 65%;
+}
+
+.botan{
+    position: absolute;
+    top: 80%;
+    left: 45%;
+    width: 10%;
+}
+
+.button2{
+    position: absolute;
+    top: 80%;
+    left: 45%;
+    width: 10%;
+}
+
+.name_name{
+    position: absolute;
+    top: 55%;
+    left: 15%;
+}
+
+.clickable-account {
+    cursor: pointer;
+    color: blue;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}
+
+.clickable-account:hover {
+    background-color: #e0e0e0;
+}
+
+.results{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 70%;
+}
+
+.square2{
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    width: 70%;
+    height: 20%;
+    background-color: #a9a9a9;
+}
+
+.user_id{
+    position: absolute;
+    top: 3%;
+    left: 2%;
+}
+
+.user_id_r{
+    position: absolute;
+    top: 3%;
+    left: 15%;
+}
+
+.email{
+    position: absolute;
+    top: 23%;
+    left: 2%;
+}
+
+.email_r{
+    position: absolute;
+    top: 23%;
+    left: 15%;
+}
+
+.birth{
+    position: absolute;
+    top: 43%;
+    left: 2%;
+}
+
+.birth_r{
+    position: absolute;
+    top: 43%;
+    left: 15%;
+}
+
+.resi{
+    position: absolute;
+    top: 63%;
+    left: 2%;
+}
+
+.resi_r{
+    position: absolute;
+    top: 63%;
+    left: 15%;
+}
