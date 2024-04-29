@@ -1,3 +1,5 @@
+const charts = {};
+
 async function onClick() {
     const resultContaine = document.getElementById("ac");
     if (resultContaine) {
@@ -53,6 +55,7 @@ function displayResults(data) {
 }
 
 async function handleAccountClick(accountName) {
+    //ユーザを選択した後のhtmlタグを追加
     const resultContaine = document.getElementById("result");
     resultContaine.innerHTML = ''; // 以前の検索結果をクリア
 
@@ -116,6 +119,137 @@ async function handleAccountClick(accountName) {
     button.textContent = "アカウント削除";
     resultContainer.appendChild(button);
 
+    const glaph = document.createElement('div');
+    glaph.className = "glaph";
+    glaph.id = "glaph_s";
+    resultContainer1.appendChild(glaph);
+
+    //グラフのタグを追加
+
+    const resultContainer2 = document.getElementById("glaph_s");
+    resultContainer2.innerHTML = ''; // 以前の検索結果をクリア
+
+    const glaph_done_day = document.createElement('canvas');
+    glaph_done_day.id = 'glaph_done_day';
+    resultContainer2.appendChild(glaph_done_day);
+
+    const glaph_done_day_in = document.createElement('input');
+    glaph_done_day_in.id = 'glaph_done_day_in';
+    glaph_done_day_in.name = 'glaph_done_day_in';
+    resultContainer2.appendChild(glaph_done_day_in);
+
+    const glaph_done_day_la_f = document.createElement('label');
+    glaph_done_day_la_f.textContent = "変更範囲";
+    glaph_done_day_la_f.className = 'glaph_done_day_la_f';
+    glaph_done_day_la_f.for = 'glaph_done_day_in';
+    resultContainer2.appendChild(glaph_done_day_la_f);
+
+    const glaph_done_day_la_b = document.createElement('label');
+    glaph_done_day_la_b.textContent = "まで";
+    glaph_done_day_la_b.className = 'glaph_done_day_la_b';
+    glaph_done_day_la_b.for = 'glaph_done_day_in';
+    resultContainer2.appendChild(glaph_done_day_la_b);
+
+    const glaph_done_day_button = document.createElement('button');
+    glaph_done_day_button.addEventListener('click', function () {
+        change("Day", "done", accountName);
+    });
+    glaph_done_day_button.className = "glaph_done_day_button";
+    glaph_done_day_button.textContent = "変更";
+    resultContainer2.appendChild(glaph_done_day_button);
+
+    const glaph_done_month = document.createElement('canvas');
+    glaph_done_month.id = 'glaph_done_month';
+    resultContainer2.appendChild(glaph_done_month);
+
+    const glaph_done_month_in = document.createElement('input');
+    glaph_done_month_in.id = 'glaph_done_month_in';
+    glaph_done_month_in.name = 'glaph_done_month_in';
+    resultContainer2.appendChild(glaph_done_month_in);
+
+    const glaph_done_month_la_f = document.createElement('label');
+    glaph_done_month_la_f.textContent = "変更範囲";
+    glaph_done_month_la_f.className = 'glaph_done_month_la_f';
+    glaph_done_month_la_f.for = 'glaph_done_month_in';
+    resultContainer2.appendChild(glaph_done_month_la_f);
+
+    const glaph_done_month_la_b = document.createElement('label');
+    glaph_done_month_la_b.textContent = "まで";
+    glaph_done_month_la_b.className = 'glaph_done_month_la_b';
+    glaph_done_month_la_b.for = 'glaph_done_month_in';
+    resultContainer2.appendChild(glaph_done_month_la_b);
+
+    const glaph_done_month_button = document.createElement('button');
+    glaph_done_month_button.addEventListener('click', function () {
+        change("Month", "done", accountName);
+    });
+    glaph_done_month_button.className = "glaph_done_month_button";
+    glaph_done_month_button.textContent = "変更";
+    resultContainer2.appendChild(glaph_done_month_button);
+
+    const glaph_posted_day = document.createElement('canvas');
+    glaph_posted_day.id = 'glaph_posted_day';
+    resultContainer2.appendChild(glaph_posted_day);
+
+    const glaph_posted_day_in = document.createElement('input');
+    glaph_posted_day_in.id = 'glaph_posted_day_in';
+    glaph_posted_day_in.name = 'glaph_posted_day_in';
+    resultContainer2.appendChild(glaph_posted_day_in);
+
+    const glaph_posted_day_la_f = document.createElement('label');
+    glaph_posted_day_la_f.textContent = "変更範囲";
+    glaph_posted_day_la_f.className = 'glaph_posted_day_la_f';
+    glaph_posted_day_la_f.for = 'glaph_posted_day_in';
+    resultContainer2.appendChild(glaph_posted_day_la_f);
+
+    const glaph_posted_day_la_b = document.createElement('label');
+    glaph_posted_day_la_b.textContent = "まで";
+    glaph_posted_day_la_b.className = 'glaph_posted_day_la_b';
+    glaph_posted_day_la_b.for = 'glaph_posted_day_in';
+    resultContainer2.appendChild(glaph_posted_day_la_b);
+
+    const glaph_posted_day_button = document.createElement('button');
+    glaph_posted_day_button.addEventListener('click', function () {
+        change("Day", "posted", accountName);
+    });
+    glaph_posted_day_button.className = "glaph_posted_day_button";
+    glaph_posted_day_button.textContent = "変更";
+    resultContainer2.appendChild(glaph_posted_day_button);
+
+    const glaph_posted_month = document.createElement('canvas');
+    glaph_posted_month.id = 'glaph_posted_month';
+    resultContainer2.appendChild(glaph_posted_month);
+
+    const glaph_posted_month_in = document.createElement('input');
+    glaph_posted_month_in.id = 'glaph_posted_month_in';
+    glaph_posted_month_in.name = 'glaph_posted_month_in';
+    resultContainer2.appendChild(glaph_posted_month_in);
+
+    const glaph_posted_month_la_f = document.createElement('label');
+    glaph_posted_month_la_f.textContent = "変更範囲";
+    glaph_posted_month_la_f.className = 'glaph_posted_month_la_f';
+    glaph_posted_month_la_f.for = 'glaph_posted_month_in';
+    resultContainer2.appendChild(glaph_posted_month_la_f);
+
+    const glaph_posted_month_la_b = document.createElement('label');
+    glaph_posted_month_la_b.textContent = "まで";
+    glaph_posted_month_la_b.className = 'glaph_posted_month_la_b';
+    glaph_posted_month_la_b.for = 'glaph_posted_month_in';
+    resultContainer2.appendChild(glaph_posted_month_la_b);
+
+    const glaph_posted_month_button = document.createElement('button');
+    glaph_posted_month_button.addEventListener('click', function () {
+        change("Month", "posted", accountName);
+    });
+    glaph_posted_month_button.className = "glaph_posted_month_button";
+    glaph_posted_month_button.textContent = "変更";
+    resultContainer2.appendChild(glaph_posted_month_button);
+
+    //グラフを書く
+    await createGraph("Day", "glaph_done_day", "done", new Date().getDate().toString(), accountName);
+    await createGraph("Month", "glaph_done_month", "done", (new Date().getMonth() + 1).toString(), accountName);
+    await createGraph("Day", "glaph_posted_day", "posted", new Date().getDate().toString(), accountName);
+    await createGraph("Month", "glaph_posted_month", "posted", (new Date().getMonth() + 1).toString(), accountName);
 }
 
 async function callAPI_get_ac(name) {
@@ -195,4 +329,108 @@ async function callAPI_delete(name) {
         console.error('Failed to fetch data:', error);
         alert('An error occurred, please try again later.');
     }
+}
+
+async function createGraph(period, id, type, start, accountName) {
+    data = await callAPI2(period, start, type, accountName);
+
+    if (charts[id]) {
+        charts[id].destroy();
+    }
+    printGraph(data, period, id, start, type);
+}
+
+async function callAPI2(period, start, type, accountName) {
+    try {
+        const url = "https://91mi77ivgg.execute-api.ap-northeast-1.amazonaws.com/dev";
+        const headers = {
+            "Content-Type": "application/json"
+        };
+
+        let now = start;
+
+        let body;
+        if (type == "done") {
+            body = JSON.stringify({ "httpMethod": "GET_DONE_BINGO_NUMBER", "period": period, "start": now, "userId": accountName});
+        } else if (type == "posted") {
+            body = JSON.stringify({ "httpMethod": "GET_POSTED_BINGO_NUMBER", "period": period, "start": now, "userId": accountName});
+        } else {
+            return -1;
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: headers,
+            body: body,
+            redirect: 'follow'
+        };
+
+        const response = await fetch(url, requestOptions);
+        if (!response.ok) {
+            throw new Error('Network response was not ok.');
+        }
+        const result = await response.json();
+        return result.body;
+    } catch (error) {
+        console.error('Failed to fetch data:', error);
+        alert('An error occurred, please try again later.');
+    }
+}
+
+function printGraph(data, period, id, start, type) {
+    if (period == "Day") {
+        period = "日";
+    } else if (period == "Month") {
+        period = "月";
+    } else if (period == "Year") {
+        period = "年";
+    }
+    var ctx = document.getElementById(id).getContext('2d');
+    let now_num = Number(start);
+
+    // dataが配列であることを確認し、そうでない場合は配列にする
+    if (!Array.isArray(data)) {
+        data = [data];  // もしdataが単一の値であれば、配列に変換
+    }
+
+    data = data.map(item => parseInt(item, 10));
+    data.reverse();
+    let label;
+    if (type == "done") {
+        label = period + "別ビンゴ達成数";
+    } else if (type == "posted") {
+        label = period + "別ビンゴ投稿数";
+    }
+
+    charts[id] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [(now_num - 5).toString() + period, (now_num - 4).toString() + period, (now_num - 3).toString() + period, (now_num - 2).toString() + period, (now_num - 1).toString() + period, start + period],
+            datasets: [{
+                label: label,
+                data: data,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function change(period, type, accountName){
+    let id;
+    if (period == "Day"){
+        id = type + "_day";
+    } else if (period == "Month"){
+        id = type + "_month";
+    } else if (period == "Year"){
+        id = type + "_year";
+    }
+     id = "glaph_" + id
+    var start = document.getElementById(id + "_in").value;
+    createGraph(period, id, type, start, accountName);
 }
