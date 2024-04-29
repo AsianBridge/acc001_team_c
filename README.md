@@ -23,7 +23,22 @@ React + Go + AWS App
 ![インフラ](https://github.com/AsianBridge/acc001_team_c/assets/142758536/80a4f68d-5fdb-4d4a-b8e8-da69a611f83e)
 
 ## 4-ファイル構成
-bakend
+backend  
+　├── Dockerfile  
+　├── README.md  
+　├── docker-compose.yml  
+　├── go.mod  
+　├── go.sum  
+　├── main.go  
+　├── post_cmd.txt  
+　├── pre_cmd.txt  
+　├── lambda_function.py  
+　├── account.py  
+　├── bingo.py  
+　├── number.py  
+　├── review.py  
+　├── search.py  
+　└── store.py  
 　　
 
 ## 5-機能一覧
