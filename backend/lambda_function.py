@@ -786,15 +786,14 @@ def get_done_bingo_number(event, context):
             'body': json.dumps('Invalid request')
         }
     
-    response = table.scan(
-        FilterExpression=Attr('done_time').exists()
-    )
-    
-    if not response['Items']:
-        return {
-            'statusCode': 404,
-            'body': json.dumps('No data')
-        }
+    if 'userId' in event:
+        response = table.scan(
+            FilterExpression=Attr('done_time').exists() & Attr('user_id').eq(event['userId'])
+        )
+    else:
+        response = table.scan(
+            FilterExpression=Attr('done_time').exists()
+        )
     
     number = [0] * 6
     
@@ -834,17 +833,15 @@ def get_posted_bingo_number(event, context):
             'statusCode': 400,
             'body': json.dumps('Invalid request')
         }
-    
-    response = table.scan(
-        FilterExpression=Attr('posted_time').exists()
-    )
-    
-    if not response['Items']:
-        return {
-            'statusCode': 404,
-            'body': json.dumps('No data')
-        }
-    
+    if 'userId' in event:
+        response = table.scan(
+            FilterExpression=Attr('posted_time').exists() & Attr('user_id').eq(event['userId'])
+        )
+    else:
+        response = table.scan(
+            FilterExpression=Attr('posted_time').exists()
+        )
+
     number = [0] * 6
     
     if event['period'] == 'Year':
