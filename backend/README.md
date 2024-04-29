@@ -2,9 +2,6 @@
 
 このドキュメントでは、提供されるAPIの各関数について説明します。各関数は特定のタスクを実行し、JSON形式でデータを受け取りまた返します。  
 
-- [アカウント関連](#アカウント関連)
-  - [GET_AC](#get_ac)
-
 ## 戻り値の型  
 戻り値の型は以下のようになっている。関数の説明で書かれている「戻り値」とはbodyの中身を指す  
 ```
@@ -28,8 +25,43 @@
 \"pi_6\": \"undefine\",  
 \"pi_7\": \"undefine\",
 \"pi_8\": \"undefine\",  
-\"pi_9\": \"undefine\"   
+\"pi_9\": \"undefine\"
 ```
+
+## 目次  
+- [アカウント関連](#アカウント関連)
+  - [GET_AC](#get_ac)
+  - [POST_AC](#post_ac)
+  - [CONFIRMATION_ID](#confirmation_id)
+  - [UPDATE_AC](#update_ac)
+  - [DELETE_AC](#delete_ac)
+- [ビンゴ関連](#ビンゴ関連)
+  - [GET_BINGO](#get_bingo)
+  - [POST_BINGO](#post_bingo)
+  - [GET_KEEP_BINGO](#get_keep_bingo)
+  - [POST_KEEP](#post_keep)
+  - [GET_DONE_BINGO](#get_done_bingo)
+  - [GET_MAKED_BINGO](#get_maked_bingo)
+  - [GET_MYBINGO](#get_mybingo)
+  - [POST_MYBINGO](#post_mybingo)
+  - [POST_GOOD](#post_good)
+- [レビュー関連](#レビュー関連)
+  - [POST_REVIEW](#post_review)
+  - [GET_REVIEW](#get_review)
+  - [POST_IMAGE](#post_image)
+- [店舗関連](#店舗関連)
+  - [GET_STORE](#get_store)
+  - [POST_STORE](#post_store)
+  - [UPDATE_STORE](#update_store)
+  - [GET_STORE_ID](#get_store_id)
+- [総数などのデータ関連](#総数などのデータ関連)
+  - [GET_DONE_BINGO_NUMBER](#get_done_bingo_number)
+  - [GET_POSTED_BINGO_NUMBER](#get_posted_bingo_number)
+  - [GET_ALL_NUMBER](#get_all_number)
+- [検索関連](#検索関連)
+  - [SEARCH_AC](#search_ac)
+  - [SEARCH_STORE](#search_store)
+
 ## Functions  
 * ## アカウント関連  
 ### GET_AC  
