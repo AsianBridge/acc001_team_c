@@ -22,7 +22,11 @@ React + Go + AWS App
 
 ![インフラ](https://github.com/AsianBridge/acc001_team_c/assets/142758536/80a4f68d-5fdb-4d4a-b8e8-da69a611f83e)
 
-## 4-機能一覧
+## 4-ファイル構成
+bakend
+　　
+
+## 5-機能一覧
 詳細な使い方などはbackendのREADME.mdに書いてあります。
 * アカウント周辺
   * アカウント情報登録
