@@ -45,6 +45,7 @@
   - [GET_MYBINGO](#get_mybingo)
   - [POST_MYBINGO](#post_mybingo)
   - [POST_GOOD](#post_good)
+  - [POST_PLAY](#post_play)
 - [レビュー関連](#レビュー関連)
   - [POST_REVIEW](#post_review)
   - [GET_REVIEW](#get_review)
@@ -206,7 +207,7 @@
   * 成功　　json形式のビンゴ情報の配列
  
 ### POST_KEEP  
-指定したuserIdの人が指定した、contributor_idが作った指定したbingoIdのビンゴを保存する  
+指定したuserIdの人が、指定したcontributor_idの人が作った指定したbingoIdのビンゴを保存する  
 * 引数
 ```
 {  
@@ -285,6 +286,21 @@
 * 戻り値  
   * 失敗　　Bingo not found  
   * 成功　　Successful
+
+### POST_PLAY  
+指定したuserIdの人が、指定したcontributor_idが作った指定したbingoIdのビンゴをプレイ中にする   
+* 引数
+```
+{  
+    "httpMethod": "POST_PLAY",  
+    "userId": "kamide",  
+    "bingoId": "20240408045050",  
+    "contributor_id": "kamide2"  
+}
+```
+* 戻り値
+  * 失敗　　Bingo not found
+  * 成功　　Successful　　
  
 * ## レビュー関連  
   
