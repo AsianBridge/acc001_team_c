@@ -1,8 +1,13 @@
 import { BingoSquareModalProps } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Grid, Stack } from "@mui/material";
-import { LikeButton, SubmitBingoButton } from "../components/Button";
+import {
+  KeepBingoButton,
+  LikeButton,
+  SubmitBingoButton,
+} from "../components/Button";
 import { FC } from "react";
+import { useUserState } from "../store/UserState";
 
 const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
   const BingoLines = [
@@ -64,7 +69,10 @@ export const BingoOfHome: FC<{
   bingoInformation: BingoSquareModalProps[] | undefined;
   userId: string;
   bingoId: string;
-}> = ({ bingoInformation, userId, bingoId }) => {
+  goodNum: number;
+}> = ({ bingoInformation, userId, bingoId, goodNum }) => {
+  const { userID } = useUserState();
+
   return (
     <>
       <Stack spacing={-3}>
@@ -82,15 +90,22 @@ export const BingoOfHome: FC<{
           </p>
         </Box>
         <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
-          { <Bingo
-            scene={"Home"}
-            bingoInformation={bingoInformation}
-            userId={userId}
-            bingoId={bingoId}
-          /> }
+          {
+            <Bingo
+              scene={"Home"}
+              bingoInformation={bingoInformation}
+              userId={userId}
+              bingoId={bingoId}
+            />
+          }
         </Box>
         <Box>
-          <LikeButton />
+          <LikeButton bingoId={bingoId} goodNum={goodNum} />
+          <KeepBingoButton
+            userId={userID}
+            bingoId={bingoId}
+            contributorId={userId}
+          />
         </Box>
       </Stack>
     </>

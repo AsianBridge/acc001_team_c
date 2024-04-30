@@ -1,37 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="store.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="store.css" />
     <script src="store.js"></script>
     <title>店舗管理</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        BeInGo管理
-        <span onclick="window.location.href='store.html'" class="store">店舗管理</span>
-        <span onclick="window.location.href='user.html'" class="user">ユーザ管理</span>
-        <span onclick="window.location.href='index.html'" class="home">HOME</span>
+      BeInGo管理
+      <span onclick="window.location.href='store.html'" class="store"
+        >店舗管理</span
+      >
+      <span onclick="window.location.href='user.html'" class="user"
+        >ユーザ管理</span
+      >
+      <span onclick="window.location.href='index.html'" class="home">HOME</span>
     </header>
     <div class="square">
-        <h1 class="h1">店舗登録</h1>
-        <label for="in_name" class="name_name">店舗名</label>
-        <input id="in_name" class="name" name="in_name">
-        <label for="in_address" class="address_name">店舗住所</label>
-        <input id="in_address" class="address" name="in_address">
-        <button class="botan" onclick="onClick()">登録</button>
+      <h1 class="h1">店舗登録</h1>
+      <label for="in_name" class="name_name">店舗名</label>
+      <input id="in_name" class="name" name="in_name" />
+      <label for="in_address" class="address_name">店舗住所</label>
+      <input id="in_address" class="address" name="in_address" />
+      <button class="botan" onclick="onClick()">登録</button>
     </div>
     <div class="square2">
-        <h2>店舗検索</h2>
-        <label for="in_name_s" class="in_name_s_l">店舗名</label>
-        <input id="in_name_s" class="in_name_s" name="in_name_s">
-        <button class="botan2" onclick="onClick2()">検索</button>
+      <h2>店舗検索</h2>
+      <label for="in_name_s" class="in_name_s_l">店舗名</label>
+      <input id="in_name_s" class="in_name_s" name="in_name_s" />
+      <button class="botan2" onclick="onClick2()">検索</button>
     </div>
     <div id="result" class="results"></div>
     <div id="ac"></div>
-</body>
-
+  </body>
 </html>

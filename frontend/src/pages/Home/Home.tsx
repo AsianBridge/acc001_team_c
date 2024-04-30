@@ -19,12 +19,17 @@ const getBingoInformation = async () => {
           storeName: getBingoResponse.body[`store_name_${i}`],
         });
       }
+      console.log(getBingoResponse.body[`bingo_id`]);
+      const getGoodResult = await api.getGoodByBingoId(
+        getBingoResponse.body[`bingo_id`],
+      );
 
-      if (bingoSquares)
+      if (bingoSquares && getGoodResult)
         return {
           bingoSquares,
           userId: getBingoResponse.body[`user_id`],
           bingoId: getBingoResponse.body[`bingo_id`],
+          goodNum: getGoodResult.body,
         };
     }
   } catch (e) {
@@ -37,14 +42,16 @@ const Home = () => {
     useState<BingoSquareModalProps[]>();
   const [userId, setUserId] = useState("");
   const [bingoId, setBingoId] = useState("");
+  const [goodNum, setGoodNum] = useState(0);
 
   useAsync(async () => {
     const result = await getBingoInformation();
     if (result) {
-      const { bingoSquares, userId, bingoId } = result;
+      const { bingoSquares, userId, bingoId, goodNum } = result;
       setBingoInformation(bingoSquares);
       setUserId(userId);
       setBingoId(bingoId);
+      setGoodNum(goodNum);
     }
   }, []);
 
@@ -56,6 +63,7 @@ const Home = () => {
             bingoInformation={bingoInformation}
             userId={userId}
             bingoId={bingoId}
+            goodNum={goodNum}
           />
         </ImageListItem>
       </ImageList>

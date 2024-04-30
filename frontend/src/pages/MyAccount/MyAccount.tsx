@@ -19,7 +19,6 @@ const getKeepBingoInformation = async (
 
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
-        return responseDataArray.length, responseDataArray;
         setKeepBingoNumber(responseDataArray.length);
         setKeepBingoId(responseDataArray);
       }
@@ -42,7 +41,6 @@ const getDoneBingoInformation = async (
 
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
-        return responseDataArray.length, responseDataArray;
         setDoneBingoNumber(responseDataArray.length);
         setDoneBingoId(responseDataArray);
       }
@@ -84,19 +82,23 @@ const BingoTab = ({
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <Tab label="保存したBINGO" value="1" sx={{ width: 'calc(100% / 3)' }} />
-            <Tab label="作成したBINGO" value="2" sx={{ width: 'calc(100% / 3)' }} />
-            <Tab label="投稿したBINGO" value="3" sx={{ width: 'calc(100% / 3)' }} />
+            <Tab label="保存したBINGO" value="1" sx={{ width: 'calc(100% / 2)' }} />
+            <Tab label="投稿したBINGO" value="" sx={{ width: 'calc(100% / 2)' }} />
           </TabList>
         </Box>
         <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
-          保存したBINGOはありません
+          {keepBingoId === undefined ? (
+            <Box>保存したBINGOはありません</Box>
+          ) : (
+            <Box>{showBingoBox(keepBingoId)}</Box>
+          )}
         </TabPanel>
         <TabPanel value="2" style={{ color: "black", textAlign: "center" }}>
-          作成したBINGOはありません
-        </TabPanel>
-        <TabPanel value="3" style={{ color: "black", textAlign: "center" }}>
-          投稿したBINGOはありません
+          {doneBingoId === undefined ? (
+            <Box>投稿したBINGOはありません</Box>
+          ) : (
+            <Box>{showBingoBox(doneBingoId)}</Box>
+          )}
         </TabPanel>
       </TabContext>
     </Box>
@@ -215,6 +217,17 @@ const MyAccount: NextPage = () => {
       />
     </Box>
   );
+};
+
+const showBingoBox = (BingoIds: getBingoIdType[]) => {
+  const handleClick = () => {
+    console.log("押されたよ");
+  };
+  return BingoIds.map((store, index) => (
+    <Button key={index} onClick={handleClick}>
+      <Box>{index}個目です。</Box>
+    </Button>
+  ));
 };
 
 export default MyAccount;

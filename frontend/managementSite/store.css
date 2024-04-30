@@ -1,154 +1,154 @@
 header {
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    width: 15%;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    font-size: 30px;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 15%;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  font-size: 30px;
 }
 
-.store{
-    position: fixed;
-    top: 10%;
-    left: 1%;
-    color: white;
+.store {
+  position: fixed;
+  top: 10%;
+  left: 1%;
+  color: white;
 }
 
-.user{
-    position: fixed;
-    top: 18%;
-    left: 1%;
-    color: white;
+.user {
+  position: fixed;
+  top: 18%;
+  left: 1%;
+  color: white;
 }
 
-.home{
-    position: fixed;
-    top: 26%;
-    left: 1%;
-    color: white;
+.home {
+  position: fixed;
+  top: 26%;
+  left: 1%;
+  color: white;
 }
 
-h1{
-    position: absolute;
-    top: 5%;
-    left: 40%;
-    font-size: 200%
+h1 {
+  position: absolute;
+  top: 5%;
+  left: 40%;
+  font-size: 200%;
 }
 
-h3{
-    position: absolute;
-    top: 5%;
-    left: 40%;
-    font-size: 200%
+h3 {
+  position: absolute;
+  top: 5%;
+  left: 40%;
+  font-size: 200%;
 }
 
-.square{
-    position: absolute;
-    top: 3%;
-    left: 25%;
-    width: 70%;
-    height: 30%;
-    background-color: #a9a9a9;
+.square {
+  position: absolute;
+  top: 3%;
+  left: 25%;
+  width: 70%;
+  height: 30%;
+  background-color: #a9a9a9;
 }
 
-.square2{
-    position: absolute;
-    top: 40%;
-    left: 25%;
-    width: 70%;
-    height: 20%;
-    background-color: #a9a9a9;
+.square2 {
+  position: absolute;
+  top: 40%;
+  left: 25%;
+  width: 70%;
+  height: 20%;
+  background-color: #a9a9a9;
 }
 
-.square3{
-    position: absolute;
-    top: 70%;
-    left: 25%;
-    width: 70%;
-    height: 30%;
-    background-color: #a9a9a9;
+.square3 {
+  position: absolute;
+  top: 70%;
+  left: 25%;
+  width: 70%;
+  height: 30%;
+  background-color: #a9a9a9;
 }
 
-.name{
-    position: absolute;
-    top: 45%;
-    left: 25%;
-    width: 65%;
+.name {
+  position: absolute;
+  top: 45%;
+  left: 25%;
+  width: 65%;
 }
 
-.address{
-    position: absolute;
-    top: 60%;
-    left: 25%;
-    width: 65%;
+.address {
+  position: absolute;
+  top: 60%;
+  left: 25%;
+  width: 65%;
 }
 
-.botan{
-    position: absolute;
-    top: 80%;
-    left: 40%;
-    width: 10%;
+.botan {
+  position: absolute;
+  top: 80%;
+  left: 40%;
+  width: 10%;
 }
 
-.name_name{
-    position: absolute;
-    top: 45%;
-    left: 15%;
+.name_name {
+  position: absolute;
+  top: 45%;
+  left: 15%;
 }
 
-.address_name{
-    position: absolute;
-    top: 60%;
-    left: 15%;
+.address_name {
+  position: absolute;
+  top: 60%;
+  left: 15%;
 }
 
-.in_name_s_l{
-    position: absolute;
-    top: 55%;
-    left: 15%;
+.in_name_s_l {
+  position: absolute;
+  top: 55%;
+  left: 15%;
 }
 
-.in_name_s{
-    position: absolute;
-    top: 55%;
-    left: 25%;
-    width: 65%;
+.in_name_s {
+  position: absolute;
+  top: 55%;
+  left: 25%;
+  width: 65%;
 }
 
-.botan2{
-    position: absolute;
-    top: 80%;
-    left: 40%;
-    width: 10%;
+.botan2 {
+  position: absolute;
+  top: 80%;
+  left: 40%;
+  width: 10%;
 }
 
-h2{
-    position: absolute;
-    top: 5%;
-    left: 40%;
-    font-size: 200%
+h2 {
+  position: absolute;
+  top: 5%;
+  left: 40%;
+  font-size: 200%;
 }
 
 .clickable-account {
-    cursor: pointer;
-    color: blue;
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f8f8f8;
+  cursor: pointer;
+  color: blue;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
 }
 
 .clickable-account:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
-.results{
-    position: absolute;
-    top: 65%;
-    left: 25%;
-    width: 70%;
+.results {
+  position: absolute;
+  top: 65%;
+  left: 25%;
+  width: 70%;
 }
