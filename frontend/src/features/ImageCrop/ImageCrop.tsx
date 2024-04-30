@@ -1,18 +1,19 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef } from "react";
 
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
   Crop,
   PixelCrop,
-  convertToPixelCrop,
-} from 'react-image-crop'
+} from "react-image-crop";
 
-import 'react-image-crop/dist/ReactCrop.css'
-import { useDebounceEffect } from './useDebounseEffect'
-import { canvasPreview } from './CanvasPreview'
+import "react-image-crop/dist/ReactCrop.css";
+import { useDebounceEffect } from "./useDebounseEffect";
+import { canvasPreview } from "./CanvasPreview";
+import { convertImageToBase64 } from "./ImageConverter";
+import { sendImageToServer } from "./ImageConverter";
 
-//これは、％アスペクトクロップの作り方と中央にある方法を示すためです 
+//これは、％アスペクトクロップの作り方と中央にある方法を示すためです
 //これは少し難しいです。いくつかのヘルパー関数を使用します。
 function centerAspectCrop(
   mediaWidth: number,
@@ -22,7 +23,7 @@ function centerAspectCrop(
   return centerCrop(
     makeAspectCrop(
       {
-        unit: '%',
+        unit: "%",
         width: 90,
       },
       aspect,
@@ -31,59 +32,60 @@ function centerAspectCrop(
     ),
     mediaWidth,
     mediaHeight,
-  )
+  );
 }
 
 export default function ImageCrop() {
-  const [imgSrc, setImgSrc] = useState('')
-  const previewCanvasRef = useRef<HTMLCanvasElement>(null)
-  const imgRef = useRef<HTMLImageElement>(null)
-  const hiddenAnchorRef = useRef<HTMLAnchorElement>(null)
-  const blobUrlRef = useRef('')
-  const [crop, setCrop] = useState<Crop>()
-  const [completedCrop, setCompletedCrop] = useState<PixelCrop>()
-  const [scale, setScale] = useState(1)
-  const [rotate, setRotate] = useState(0)
-  const [aspect, setAspect] = useState<number | undefined>(16 / 9)
+  const [imgSrc, setImgSrc] = useState("");
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const hiddenAnchorRef = useRef<HTMLAnchorElement>(null);
+  const blobUrlRef = useRef("");
+  const [crop, setCrop] = useState<Crop>();
+  const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
+  const [scale, setScale] = useState(1);
+  const [rotate, setRotate] = useState(0);
+  const [aspect, setAspect] = useState<number | undefined>(1 / 1);
 
-  function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
+  async function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
-      setCrop(undefined) // Makes crop preview update between images.
-      const reader = new FileReader()
-      reader.addEventListener('load', () =>
-        setImgSrc(reader.result?.toString() || ''),
-      )
-      reader.readAsDataURL(e.target.files[0])
+      setCrop(undefined);
+      const file = e.target.files[0];
+      try {
+        const base64 = await convertImageToBase64(file);
+        setImgSrc(base64);
+        const response = await sendImageToServer(base64);
+        console.log(response);
+      } catch (error) {
+        console.error("Error converting image to Base64:", error);
+      }
     }
   }
 
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     if (aspect) {
-      const { width, height } = e.currentTarget
-      setCrop(centerAspectCrop(width, height, aspect))
+      const { width, height } = e.currentTarget;
+      setCrop(centerAspectCrop(width, height, aspect));
     }
   }
 
   async function onDownloadCropClick() {
-    const image = imgRef.current
-    const previewCanvas = previewCanvasRef.current
+    const image = imgRef.current;
+    const previewCanvas = previewCanvasRef.current;
     if (!image || !previewCanvas || !completedCrop) {
-      throw new Error('Crop canvas does not exist')
+      throw new Error("Crop canvas does not exist");
     }
 
-    // This will size relative to the uploaded image
-    // size. If you want to size according to what they
-    // are looking at on screen, remove scaleX + scaleY
-    const scaleX = image.naturalWidth / image.width
-    const scaleY = image.naturalHeight / image.height
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
 
     const offscreen = new OffscreenCanvas(
       completedCrop.width * scaleX,
       completedCrop.height * scaleY,
-    )
-    const ctx = offscreen.getContext('2d')
+    );
+    const ctx = offscreen.getContext("2d");
     if (!ctx) {
-      throw new Error('No 2d context')
+      throw new Error("No 2d context");
     }
 
     ctx.drawImage(
@@ -96,21 +98,19 @@ export default function ImageCrop() {
       0,
       offscreen.width,
       offscreen.height,
-    )
-    // You might want { type: "image/jpeg", quality: <0 to 1> } to
-    // reduce image size
+    );
     const blob = await offscreen.convertToBlob({
-      type: 'image/png',
-    })
+      type: "image/png",
+    });
 
     if (blobUrlRef.current) {
-      URL.revokeObjectURL(blobUrlRef.current)
+      URL.revokeObjectURL(blobUrlRef.current as string);
     }
-    blobUrlRef.current = URL.createObjectURL(blob)
+    blobUrlRef.current = URL.createObjectURL(blob);
 
     if (hiddenAnchorRef.current) {
-      hiddenAnchorRef.current.href = blobUrlRef.current
-      hiddenAnchorRef.current.click()
+      hiddenAnchorRef.current.href = blobUrlRef.current;
+      hiddenAnchorRef.current.click();
     }
   }
 
@@ -122,34 +122,22 @@ export default function ImageCrop() {
         imgRef.current &&
         previewCanvasRef.current
       ) {
-        // We use canvasPreview as it's much faster than imgPreview.
         canvasPreview(
           imgRef.current,
           previewCanvasRef.current,
           completedCrop,
           scale,
           rotate,
-        )
+        );
       }
     },
     100,
     [completedCrop, scale, rotate],
-  )
+  );
 
-  function handleToggleAspectClick() {
-    if (aspect) {
-      setAspect(undefined)
-    } else {
-      setAspect(16 / 9)
-
-      if (imgRef.current) {
-        const { width, height } = imgRef.current
-        const newCrop = centerAspectCrop(width, height, 16 / 9)
-        setCrop(newCrop)
-        // Updates the preview
-        setCompletedCrop(convertToPixelCrop(newCrop, width, height))
-      }
-    }
+  function onButtonClick() {
+    setAspect(1 / 1);
+    onDownloadCropClick();
   }
 
   return (
@@ -157,7 +145,7 @@ export default function ImageCrop() {
       <div className="Crop-Controls">
         <input type="file" accept="image/*" onChange={onSelectFile} />
         <div>
-          <label htmlFor="scale-input">Scale: </label>
+          <label htmlFor="scale-input">スケール: </label>
           <input
             id="scale-input"
             type="number"
@@ -168,7 +156,7 @@ export default function ImageCrop() {
           />
         </div>
         <div>
-          <label htmlFor="rotate-input">Rotate: </label>
+          <label htmlFor="rotate-input">回し: 　　</label>
           <input
             id="rotate-input"
             type="number"
@@ -179,21 +167,15 @@ export default function ImageCrop() {
             }
           />
         </div>
-        <div>
-          <button onClick={handleToggleAspectClick}>
-            Toggle aspect {aspect ? 'off' : 'on'}
-          </button>
-        </div>
       </div>
       {!!imgSrc && (
         <ReactCrop
           crop={crop}
+          circularCrop
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
           aspect={aspect}
-          // minWidth={400}
           minHeight={100}
-          // circularCrop
         >
           <img
             ref={imgRef}
@@ -210,34 +192,18 @@ export default function ImageCrop() {
             <canvas
               ref={previewCanvasRef}
               style={{
-                border: '1px solid black',
-                objectFit: 'contain',
+                border: "1px solid black",
+                objectFit: "contain",
                 width: completedCrop.width,
                 height: completedCrop.height,
               }}
             />
           </div>
           <div>
-            <button onClick={onDownloadCropClick}>Download Crop</button>
-            <div style={{ fontSize: 12, color: '#666' }}>
-              If you get a security error when downloading try opening the
-              Preview in a new tab (icon near top right).
-            </div>
-            <a
-              href="#hidden"
-              ref={hiddenAnchorRef}
-              download
-              style={{
-                position: 'absolute',
-                top: '-200vh',
-                visibility: 'hidden',
-              }}
-            >
-              Hidden download
-            </a>
+            <button onClick={onButtonClick}>アップロードする</button>
           </div>
         </>
       )}
     </div>
-  )
+  );
 }
