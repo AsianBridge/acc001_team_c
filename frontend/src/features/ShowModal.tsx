@@ -64,7 +64,7 @@ export const BingoSquareShowModal = ({
   return (
     <>
       <Box>
-        <div style={{ width: "32vw", height: "32vw", background: "gray" }}>
+        <div style={{ width: "auto", height: "32vw", background: "gray" }}>  {/*本当はheight:autoにしたい.画像が正方形ならその方が都合いい*/}
           <Button onClick={handleOpen}>
             {src === undefined ? (
               <Box>
