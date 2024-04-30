@@ -14,15 +14,11 @@ React + Go + AWS App
 ![AWS](https://camo.qiitausercontent.com/80f7178661d22fbadfb685d5a336059bb829c25a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d416d617a6f6e2532306177732d3233324633452e7376673f6c6f676f3d616d617a6f6e2d617773267374796c653d666f722d7468652d6261646765)
 ![Python](https://camo.qiitausercontent.com/eb8e0216005c7badaaa4bf7eb2be4d177990d747/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d507974686f6e2d4632433633432e7376673f6c6f676f3d707974686f6e267374796c653d666f722d7468652d6261646765)
 
-## 2-API用URL
-
-<https://91mi77ivgg.execute-api.ap-northeast-1.amazonaws.com/dev>
-
-## 3-インフラ図
+## 2-インフラ図
 
 ![インフラ](https://github.com/AsianBridge/acc001_team_c/assets/142758536/80a4f68d-5fdb-4d4a-b8e8-da69a611f83e)
 
-## 4-ファイル構成
+## 3-ファイル構成
 lambdaで使用しているファイル。メインのファイルはlamdba_function.py。
 backend  
 　├── README.md  
@@ -35,7 +31,7 @@ backend
 　└── store.py  
 　　
 
-## 5-機能一覧
+## 4-機能一覧
 詳細な使い方などはbackendのREADME.mdに書いてあります。
 * アカウント周辺
   * アカウント情報登録
@@ -54,6 +50,7 @@ backend
   * 保存したビンゴを取得
   * ビンゴ構成を登録
   * ビンゴをプレイ中にする
+  * いいねの数を取得  
 * レビュー周辺
   * レビュー登録
   * レビュー取得

@@ -81,9 +81,9 @@ const BingoTab = ({
     <Box sx={{ width: "100%", typography: "body1" }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange}>
-            <Tab label="保存したBINGO" value="1" />
-            <Tab label="投稿したBINGO" value="2" />
+          <TabList onChange={handleChange} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+            <Tab label="保存したBINGO" value="1" sx={{ width: 'calc(100% / 2)' }} />
+            <Tab label="投稿したBINGO" value="" sx={{ width: 'calc(100% / 2)' }} />
           </TabList>
         </Box>
         <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
@@ -109,6 +109,7 @@ const MyAccount: NextPage = () => {
   const { userID, setUserID } = useUserState();
   const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
+  const imageUrl = "https://example.com/image.jpg"; // 画像のURLに置き換える
 
   useEffect(() => {
     setUserID("kamide2");
@@ -122,7 +123,27 @@ const MyAccount: NextPage = () => {
         marginLeft="4vw"
         marginTop="10vh"
       >
-        <Avatar sx={{ width: "26vw", height: "12vh" }}>BK</Avatar>
+        <div
+          style={{
+            width: "100px",
+            height: "100px",
+            borderRadius: "50%",
+            backgroundColor: "lightgray", // 代替の背景色
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt="No Image"
+              style={{ maxWidth: "100%", maxHeight: "100%", borderRadius: "50%" }}
+            />
+          ) : (
+            "No Image"
+          )}
+        </div>
         <Stack spacing={1} style={{ fontWeight: "bold" }}>
           <p style={{ color: "black" }}>UserID: {userID}</p>
           <p style={{ color: "black" }}>📍Kanazawa</p>
