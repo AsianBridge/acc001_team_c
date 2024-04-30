@@ -1,4 +1,4 @@
-import { Stack, Box, Avatar, Tab, Button } from "@mui/material";
+import { Stack, Box, Tab, Button } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
