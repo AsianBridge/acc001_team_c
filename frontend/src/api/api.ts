@@ -1,10 +1,9 @@
 import apiClient from "./apiClient";
 import {
-  getDoneBingoIdType,
+  getBingoIdType,
   getMyBingoIdType,
   getReviewType,
   Reviewer,
-  ReviewInformation,
 } from "../types";
 
 // まだAPIは完全に完成していないです。
@@ -41,7 +40,7 @@ const getDoneBingoIdByUserId = async (userId: string) => {
     httpMethod: "GET_DONE_BINGO",
     userId: userId,
   };
-  const response = await apiClient.post<getDoneBingoIdType[]>("", postData);
+  const response = await apiClient.post<getBingoIdType[]>("", postData);
   return response.data;
 };
 
@@ -59,7 +58,7 @@ const getKeepBingoIdByUserId = async (storeId: string) => {
     httpMethod: "GET_KEEP_BINGO",
     storeId: storeId,
   };
-  const response = await apiClient.post<string>("", postData);
+  const response = await apiClient.post<getBingoIdType[]>("", postData);
   return response.data;
 };
 
@@ -90,23 +89,23 @@ const getMakedBingoIdByUserId = async (storeId: string) => {
 //   return response.data;
 // };
 
-// const postMyBingo = async (review: Review) => {
-//   const postData = {
-//     httpMethod: "POST_REVIEW",
-//     ...review,
-//   };
-//   const response = await apiClient.post<Review>("", postData);
-//   return response.data;
-// };
+const postMyBingo = async (userId: string, bingoId: string) => {
+  const postData = {
+    httpMethod: "POST_MYBINGO",
+    userId,
+    bingoId,
+  };
+  const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
 
-// const getBingo = async (review: ReviewInformation) => {
-//   const postData = {
-//     httpMethod: "POST_REVIEW",
-//     ...review,
-//   };
-//   const response = await apiClient.post<ReviewInformation>("", postData);
-//   return response.data;
-// };
+const getBingo = async () => {
+  const postData = {
+    httpMethod: "GET_BINGO",
+  };
+  const response = await apiClient.post("", postData);
+  return response.data;
+};
 
 const getStoreIdByBingoId = async (bingoId: string) => {
   const postData = {
@@ -136,8 +135,8 @@ const api = {
   getMakedBingoIdByUserId,
   // postReview,
   // getStoreById,
-  // postMyBingo,
-  // getBingo,
+  postMyBingo,
+  getBingo,
   getStoreIdByBingoId,
   getReview,
 };
