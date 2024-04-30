@@ -46,7 +46,7 @@ export const BingoSquareShowModal = ({
 
         const response: getReviewType = await api.getReview(Reviewer);
         const review: ReviewInformation = {
-          caption: response.body.review,
+          caption: response.body.review ?? undefined,
           starTaste: parseInt(response.body.star_taste),
           starAtmosphere: parseInt(response.body.star_atmosphere),
           starCP: parseInt(response.body.star_cp),

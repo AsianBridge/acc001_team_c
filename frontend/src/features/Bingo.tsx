@@ -32,24 +32,24 @@ const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
 
 const Bingo = ({
   scene,
-  storeInformation,
+  bingoInformation,
   userId,
   bingoId,
 }: {
   scene: string;
-  storeInformation?: BingoSquareModalProps[];
+  bingoInformation?: BingoSquareModalProps[];
   userId: string;
   bingoId: string;
 }) => {
   return (
     <Grid container spacing={1}>
-      {storeInformation &&
-        storeInformation.map((store, index) => (
+      {bingoInformation &&
+        bingoInformation.map((store, index) => (
           <Grid item xs={4} sm={4} key={index}>
             <BingoSquareShowModal
               scene={scene}
               storeName={store.storeName}
-              src={store.src}
+              src={store.src ?? undefined}
               userId={userId}
               bingoId={bingoId}
               storeNumber={index as unknown as string}
@@ -84,7 +84,7 @@ export const BingoOfHome: FC<{
         <Box sx={{ backgroundColor: "black" }}>
           <Bingo
             scene={"Home"}
-            storeInformation={bingoInformation}
+            bingoInformation={bingoInformation}
             userId={userId}
             bingoId={bingoId}
           />
@@ -119,12 +119,16 @@ export const BingoOfMyBingo: FC<{
       <Box sx={{ backgroundColor: "black" }}>
         <Bingo
           scene={"MyBingo"}
-          storeInformation={bingoInformation}
+          bingoInformation={bingoInformation}
           userId={userId}
           bingoId={bingoId}
         />
       </Box>
-      <Stack>{checkBingo(bingoInformation) && <SubmitBingoButton />}</Stack>
+      <Stack>
+        {checkBingo(bingoInformation) && (
+          <SubmitBingoButton userId={userId} bingoId={bingoId} />
+        )}
+      </Stack>
     </>
   );
 };

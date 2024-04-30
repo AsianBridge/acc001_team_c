@@ -89,7 +89,7 @@ const getMakedBingoIdByUserId = async (storeId: string) => {
 //   return response.data;
 // };
 
-const postMyBingo = async (userId:string,bingoId:string) => {
+const postMyBingo = async (userId: string, bingoId: string) => {
   const postData = {
     httpMethod: "POST_MYBINGO",
     userId,
