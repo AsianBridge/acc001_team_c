@@ -100,7 +100,7 @@ export const KeepBingoButton = ({
   contributorId: string;
 }) => {
   const handleClick = async () => {
-    console.log(await api.postKeepByUserId(userId, bingoId, contributorId));
+    await api.postKeepByUserId(userId, bingoId, contributorId);
   };
   return <Button onClick={handleClick}>保存</Button>;
 };
@@ -138,8 +138,7 @@ export const LikeButton = ({
     };
 
     const newTimerId = setTimeout(async () => {
-      console.log("時間が経過しました");
-      console.log(await api.postGoodByBingoId(goodCounter + 1, bingoId));
+    await api.postGoodByBingoId(goodCounter + 1, bingoId);
     }, 2000);
     setTimerId(newTimerId);
 
@@ -150,7 +149,6 @@ export const LikeButton = ({
     setTimeout(() => {
       setColor("white"); // 1秒後に白に戻す
       setGoodCounter(goodCounter + 1);
-      console.log(goodCounter);
     }, 100);
   };
 

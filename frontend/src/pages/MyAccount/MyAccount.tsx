@@ -221,7 +221,6 @@ const MyAccount: NextPage = () => {
 
 const showBingoBox = (BingoIds: getBingoIdType[]) => {
   const handleClick = () => {
-    console.log("押されたよ");
   };
   return BingoIds.map((bingoId, index) => (
     <Button key={index} onClick={handleClick}>

@@ -10,8 +10,6 @@ const getBingoInformation = async () => {
   try {
     const getBingoResponse = await api.getBingo();
 
-    console.log(getBingoResponse);
-
     if (getBingoResponse && getBingoResponse.body) {
       for (let i = 1; i <= 9; i++) {
         bingoSquares.push({
@@ -19,7 +17,6 @@ const getBingoInformation = async () => {
           storeName: getBingoResponse.body[`store_name_${i}`],
         });
       }
-      console.log(getBingoResponse.body[`bingo_id`]);
       const getGoodResult = await api.getGoodByBingoId(
         getBingoResponse.body[`bingo_id`],
       );
