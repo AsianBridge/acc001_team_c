@@ -95,6 +95,7 @@ export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
   storeInformation,
 }) => {
   const UserId = "User1";
+  const BingoId = "Bingo123";//追加
 
   return (
     <>
@@ -112,8 +113,13 @@ export const BingoOfHome: FC<{ storeInformation: BingoSquareModalProps[] }> = ({
             {UserId}
           </p>
         </Box>
-        <Box sx={{ backgroundColor: "black" }}>
-          {/* <Bingo scene={"Home"} storeInformation={storeInformation} /> */}
+        <Box sx={{ backgroundColor: "black", width: "100vw", height: "46vh" }}>
+          { <Bingo
+            scene={"Home"}
+            storeInformation={storeInformation}
+            userId={UserId}
+            bingoId={BingoId}
+          /> }
         </Box>
         <Box>
           <LikeButton />
