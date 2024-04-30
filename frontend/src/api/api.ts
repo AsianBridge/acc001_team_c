@@ -89,14 +89,15 @@ const getMakedBingoIdByUserId = async (storeId: string) => {
 //   return response.data;
 // };
 
-// const postMyBingo = async (review: Review) => {
-//   const postData = {
-//     httpMethod: "POST_REVIEW",
-//     ...review,
-//   };
-//   const response = await apiClient.post<Review>("", postData);
-//   return response.data;
-// };
+const postMyBingo = async (userId:string,bingoId:string) => {
+  const postData = {
+    httpMethod: "POST_MYBINGO",
+    userId,
+    bingoId,
+  };
+  const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
 
 const getBingo = async () => {
   const postData = {
@@ -134,7 +135,7 @@ const api = {
   getMakedBingoIdByUserId,
   // postReview,
   // getStoreById,
-  // postMyBingo,
+  postMyBingo,
   getBingo,
   getStoreIdByBingoId,
   getReview,
