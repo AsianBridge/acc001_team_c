@@ -25,6 +25,9 @@ export type SetStoreViewProps = StoreViewProps & {
 };
 
 export type BingoSquareModalProps = {
+  taste?: number;
+  atmosphere?: number;
+  costPerformance?: number;
   src?: string;
   storeName: string;
 };

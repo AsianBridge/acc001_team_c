@@ -62,13 +62,13 @@ export const BingoSquareShowModal = ({
   return (
     <>
       <Box>
-        <div style={{ width: "3vw", height: "32vw", background: "gray" }}>
+        <div style={{ width: "32vw", height: "32vw", background: "gray" }}>
           <Button onClick={handleOpen}>
             {src === undefined ? (
               <Box>
-                <h3 style={{ color: "black", marginLeft: "3vw" }}>
+                <p style={{ color: "black", marginLeft: "3vw" }}>
                   {storeName}へ<br></br>行こう
-                </h3>
+                </p>
               </Box>
             ) : (
               <ShowImage src={src} width="100%" height="auto" />

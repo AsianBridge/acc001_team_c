@@ -81,13 +81,13 @@ export const BingoOfHome: FC<{
             {userId}
           </p>
         </Box>
-        <Box sx={{ backgroundColor: "black" }}>
-          <Bingo
+        <Box sx={{ backgroundColor: "black", width: "100vw", height: "46vh" }}>
+          { <Bingo
             scene={"Home"}
-            bingoInformation={bingoInformation}
-            userId={userId}
-            bingoId={bingoId}
-          />
+            storeInformation={storeInformation}
+            userId={UserId}
+            bingoId={BingoId}
+          /> }
         </Box>
         <Box>
           <LikeButton />
