@@ -1,5 +1,11 @@
 import apiClient from "./apiClient";
-import { getDoneBingoIdType } from "../types";
+import {
+  getBingoIdType,
+  getGoodType,
+  getMyBingoIdType,
+  getReviewType,
+  Reviewer,
+} from "../types";
 
 // まだAPIは完全に完成していないです。
 
@@ -30,30 +36,55 @@ const confirmationIdByUserId = async (userId: string) => {
   return response.data;
 };
 
+const postKeepByUserId = async (
+  userId: string,
+  bingoId: string,
+  contributorId: string,
+) => {
+  const postData = {
+    httpMethod: "POST_KEEP",
+    userId: userId,
+    bingoId: bingoId,
+    contributorId: contributorId,
+  };
+  const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
+
 const getDoneBingoIdByUserId = async (userId: string) => {
   const postData = {
     httpMethod: "GET_DONE_BINGO",
     userId: userId,
   };
-  const response = await apiClient.post<getDoneBingoIdType[]>("", postData);
+  const response = await apiClient.post<getBingoIdType[]>("", postData);
   return response.data;
 };
 
 const getMyBingoByUserId = async (userId: string) => {
   const postData = {
     httpMethod: "GET_MYBINGO",
-    userInformation: userId,
+    userId: userId,
+  };
+  const response = await apiClient.post<getMyBingoIdType>("", postData);
+  return response.data;
+};
+
+const postGoodByBingoId = async (goodNum: number, bingoId: string) => {
+  const postData = {
+    httpMethod: "POST_GOOD",
+    good_number: goodNum,
+    bingoId: bingoId,
   };
   const response = await apiClient.post<string>("", postData);
   return response.data;
 };
 
-const getKeepBingoIdByUserId = async (storeId: string) => {
+const getKeepBingoIdByUserId = async (userId: string) => {
   const postData = {
     httpMethod: "GET_KEEP_BINGO",
-    storeId: storeId,
+    userId: userId,
   };
-  const response = await apiClient.post<string>("", postData);
+  const response = await apiClient.post<getBingoIdType[]>("", postData);
   return response.data;
 };
 
@@ -66,64 +97,86 @@ const getMakedBingoIdByUserId = async (storeId: string) => {
   return response.data;
 };
 
-const postReview = async (review: Review) => {
+const getGoodByBingoId = async (bingoId: string) => {
   const postData = {
-    httpMethod: "POST_REVIEW",
-    ...review,
+    httpMethod: "GET_GOOD",
+    bingoId: bingoId,
   };
-  const response = await apiClient.post<Review>("", postData);
+  const response = await apiClient.post<getGoodType>("", postData);
   return response.data;
 };
 
-const getStoreById = async (storeId: string) => {
+// const postReview = async (review: Review) => {
+//   const postData = {
+//     httpMethod: "POST_REVIEW",
+//     ...review,
+//   };
+//   const response = await apiClient.post<Review>("", postData);
+//   return response.data;
+// };
+
+// const getStoreById = async (storeId: string) => {
+//   const postData = {
+//     httpMethod: "GET_STORE",
+//     storeId: storeId,
+//   };
+//   const response = await apiClient.post<string>("", postData);
+//   return response.data;
+// };
+
+const postMyBingo = async (userId: string, bingoId: string) => {
   const postData = {
-    httpMethod: "GET_STORE",
-    storeId: storeId,
+    httpMethod: "POST_MYBINGO",
+    userId,
+    bingoId,
   };
   const response = await apiClient.post<string>("", postData);
   return response.data;
 };
 
-const postMyBingo = async (review: Review) => {
+const getBingo = async () => {
   const postData = {
-    httpMethod: "POST_REVIEW",
-    ...review,
+    httpMethod: "GET_BINGO",
   };
-  const response = await apiClient.post<Review>("", postData);
+  const response = await apiClient.post("", postData);
   return response.data;
 };
 
-const getBingo = async (review: Review) => {
+const getStoreIdByBingoId = async (bingoId: string) => {
   const postData = {
-    httpMethod: "POST_REVIEW",
-    ...review,
+    httpMethod: "GET_STORE_ID",
+    storeId: bingoId,
   };
-  const response = await apiClient.post<Review>("", postData);
+  const response = await apiClient.post<string>("", postData);
   return response.data;
 };
 
-type Review = {
-  bingoId: string;
-  userId: string;
-  storeId: string;
-  caption: string;
-  starTaste: number;
-  starAtmosphere: number;
-  starCP: number;
+const getReview = async (Reviewer: Reviewer) => {
+  const postData = {
+    httpMethod: "GET_REVIEW",
+    ...Reviewer,
+  };
+  const response = await apiClient.post<getReviewType>("", postData);
+  return response.data;
 };
 
 const api = {
   getACByUserId,
   postACByUserAC,
   confirmationIdByUserId,
+  postKeepByUserId,
   getDoneBingoIdByUserId,
   getMyBingoByUserId,
+  postGoodByBingoId,
   getKeepBingoIdByUserId,
   getMakedBingoIdByUserId,
-  postReview,
-  getStoreById,
+  getGoodByBingoId,
+  // postReview,
+  // getStoreById,
   postMyBingo,
   getBingo,
+  getStoreIdByBingoId,
+  getReview,
 };
 
 export default api;

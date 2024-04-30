@@ -1,6 +1,15 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
-import { useState } from "react";
+import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import api from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export const HomeButton = () => {
   return (
@@ -26,8 +35,74 @@ export const MyBingoButton = () => {
   );
 };
 
-export const SubmitBingoButton = () => {
-  return <Button>投稿する</Button>;
+export const SubmitBingoButton = ({
+  userId,
+  bingoId,
+}: {
+  userId: string;
+  bingoId: string;
+}) => {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const AlertDialog = ({
+    open,
+    setOpen,
+  }: {
+    open: boolean;
+    setOpen: Dispatch<SetStateAction<boolean>>;
+  }) => {
+    const navigate = useNavigate();
+    const PostMyBingo = async () => {
+      await api.postMyBingo(userId, bingoId);
+      navigate("/");
+    };
+    return (
+      <Fragment>
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"最終確認"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              完了したビンゴを投稿してもいいですか？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>投稿しない</Button>
+            <Button onClick={PostMyBingo} autoFocus>
+              投稿する
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    );
+  };
+  return (
+    <>
+      <AlertDialog open={open} setOpen={setOpen} />
+      <Button onClick={handleClickOpen}>投稿する</Button>;
+    </>
+  );
+};
+
+export const KeepBingoButton = ({
+  userId,
+  bingoId,
+  contributorId,
+}: {
+  userId: string;
+  bingoId: string;
+  contributorId: string;
+}) => {
+  const handleClick = async () => {
+    console.log(await api.postKeepByUserId(userId, bingoId, contributorId));
+  };
+  return <Button onClick={handleClick}>保存</Button>;
 };
 
 export const SubmitReviewButton = ({
@@ -46,18 +121,25 @@ export const ReviewButton = () => {
   return <Button href="/Review">確定ボタン</Button>;
 };
 
-export const LikeButton = () => {
+export const LikeButton = ({
+  bingoId,
+  goodNum,
+}: {
+  bingoId: string;
+  goodNum: number;
+}) => {
   const [color, setColor] = useState("white");
   const [timerId, setTimerId] = useState<number | undefined>(undefined);
-  const [likeCounter, setLikeCounter] = useState<number>(0);
+  const [goodCounter, setGoodCounter] = useState<number>(0);
 
   const handleClick = () => {
     const ResetTimeout = () => {
       clearTimeout(timerId);
     };
 
-    const newTimerId = setTimeout(() => {
-      console.log("時間が経過しました。");
+    const newTimerId = setTimeout(async () => {
+      console.log("時間が経過しました");
+      console.log(await api.postGoodByBingoId(goodCounter + 1, bingoId));
     }, 2000);
     setTimerId(newTimerId);
 
@@ -67,7 +149,8 @@ export const LikeButton = () => {
 
     setTimeout(() => {
       setColor("white"); // 1秒後に白に戻す
-      setLikeCounter(likeCounter + 1);
+      setGoodCounter(goodCounter + 1);
+      console.log(goodCounter);
     }, 100);
   };
 
@@ -91,11 +174,12 @@ export const LikeButton = () => {
             ♥
           </span>
         </span>
-        <span>×{likeCounter}</span>
+        <span>×{goodNum + goodCounter}</span>
       </p>
     </header>
   );
 };
+
 // export const ImageUploader = () => {
 //   const [base64Images, setBase64Images] = useState<string>();
 

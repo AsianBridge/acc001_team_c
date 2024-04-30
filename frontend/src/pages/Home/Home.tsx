@@ -1,85 +1,70 @@
 import { Box, ImageList, ImageListItem } from "@mui/material";
 import { BingoOfHome } from "../../features/Bingo";
 import { BingoSquareModalProps } from "../../types";
+import api from "../../api/api";
+import { useState } from "react";
+import { useAsync } from "react-use";
 
-const storeInformation: BingoSquareModalProps[] = [
-  {
-    storeName: "マック",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "一風堂",
-    src: "https://ec-ippudo.com/img/usr/top/stores/pc/ippudo.jpg",
-    taste: 5,
-    atmosphere: 5,
-    costPerformance: 3,
-  },
-  {
-    storeName: "金沢麺屋大河",
-    src: "https://tshop.r10s.jp/nipponselect/cabinet/item/t03/t03710005.jpg?esh1dplf7cn",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "麺屋 達",
-    src: "https://cdn-ak.f.st-hatena.com/images/fotolife/n/ninomiya-shinta/20190912/20190912190215.jpg",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "麺屋 吉宗",
-    src: "https://lh6.googleusercontent.com/proxy/VYcf3XKKpSOyQ_hPUIZ5gecrHmE_UZqMIQ821K41zyvCtnPbYuBIJOj7PkT_htw_mVIN3fxF8OhnSc8s_Ygt8LVqxYv_bMaTtBX09hI94w",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "築地銀だこ",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "築地銀だこ",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "築地銀だこ",
-    src: undefined,
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-  {
-    storeName: "ラーメン太る",
-    src: "https://tblg.k-img.com/restaurant/images/Rvw/223211/640x640_rect_30d622011b39cdd47d317beeba8a732f.jpg",
-    taste: 3,
-    atmosphere: 4,
-    costPerformance: 2,
-  },
-];
+const getBingoInformation = async () => {
+  const bingoSquares: BingoSquareModalProps[] = [];
+  try {
+    const getBingoResponse = await api.getBingo();
+
+    console.log(getBingoResponse);
+
+    if (getBingoResponse && getBingoResponse.body) {
+      for (let i = 1; i <= 9; i++) {
+        bingoSquares.push({
+          src: getBingoResponse.body[`pi_${i}`],
+          storeName: getBingoResponse.body[`store_name_${i}`],
+        });
+      }
+      console.log(getBingoResponse.body[`bingo_id`]);
+      const getGoodResult = await api.getGoodByBingoId(
+        getBingoResponse.body[`bingo_id`],
+      );
+
+      if (bingoSquares && getGoodResult)
+        return {
+          bingoSquares,
+          userId: getBingoResponse.body[`user_id`],
+          bingoId: getBingoResponse.body[`bingo_id`],
+          goodNum: getGoodResult.body,
+        };
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 const Home = () => {
+  const [bingoInformation, setBingoInformation] =
+    useState<BingoSquareModalProps[]>();
+  const [userId, setUserId] = useState("");
+  const [bingoId, setBingoId] = useState("");
+  const [goodNum, setGoodNum] = useState(0);
+
+  useAsync(async () => {
+    const result = await getBingoInformation();
+    if (result) {
+      const { bingoSquares, userId, bingoId, goodNum } = result;
+      setBingoInformation(bingoSquares);
+      setUserId(userId);
+      setBingoId(bingoId);
+      setGoodNum(goodNum);
+    }
+  }, []);
+
   return (
     <>
       <ImageList sx={{ width: "100vw", height: "90vh" }} cols={1}>
         <ImageListItem>
-          <BingoOfHome storeInformation={storeInformation} />
-        </ImageListItem>
-        <ImageListItem>
-          <BingoOfHome storeInformation={storeInformation} />
-        </ImageListItem>
-        <ImageListItem>
-          <BingoOfHome storeInformation={storeInformation} />
+          <BingoOfHome
+            bingoInformation={bingoInformation}
+            userId={userId}
+            bingoId={bingoId}
+            goodNum={goodNum}
+          />
         </ImageListItem>
       </ImageList>
     </>
