@@ -83,7 +83,7 @@ const BingoTab = ({
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
             <Tab label="保存したBINGO" value="1" sx={{ width: 'calc(100% / 2)' }} />
-            <Tab label="投稿したBINGO" value="" sx={{ width: 'calc(100% / 2)' }} />
+            <Tab label="投稿したBINGO" value="2" sx={{ width: 'calc(100% / 2)' }} />
           </TabList>
         </Box>
         <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
