@@ -1,6 +1,15 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
-import { useState } from "react";
+import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import api from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export const HomeButton = () => {
   return (
@@ -26,8 +35,59 @@ export const MyBingoButton = () => {
   );
 };
 
-export const SubmitBingoButton = () => {
-  return <Button>投稿する</Button>;
+export const SubmitBingoButton = ({
+  userId,
+  bingoId,
+}: {
+  userId: string;
+  bingoId: string;
+}) => {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const AlertDialog = ({
+    open,
+    setOpen,
+  }: {
+    open: boolean;
+    setOpen: Dispatch<SetStateAction<boolean>>;
+  }) => {
+    const navigate = useNavigate();
+    const PostMyBingo = async () => {
+      // await api.postMyBingo(userId,bingoId);
+      navigate("/");
+    };
+    return (
+      <Fragment>
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"最終確認"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              完了したビンゴを投稿してもいいですか？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>投稿しない</Button>
+            <Button onClick={PostMyBingo} autoFocus>
+              投稿する
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    );
+  };
+  return (
+    <>
+      <AlertDialog open={open} setOpen={setOpen} />
+      <Button onClick={handleClickOpen}>投稿する</Button>;
+    </>
+  );
 };
 
 export const SubmitReviewButton = ({
