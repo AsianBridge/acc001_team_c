@@ -1,8 +1,10 @@
+import json
+
 import account
 import bingo
 import review
 import store
-import number
+import number 
 import search
 
 def lambda_handler(event, context):
@@ -88,7 +90,10 @@ def lambda_handler(event, context):
     elif http_method == "UPDATE_STORE":
         #お店を検索
         return store.update_store(event, context)
-    else:
+    elif http_method == "POST_PLAY":
+        #ビンゴをプレイ中にする
+        return bingo.post_play(event, context)
+    else: 
         return {
             "statusCode": 405,
             "body": json.dumps("Method not allowed")
