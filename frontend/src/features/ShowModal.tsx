@@ -89,7 +89,7 @@ export const BingoSquareShowModal = ({
           )}
           {src !== undefined && (
             <>
-              <ShowImage src={src} width="auto" height="auto" />
+              <ShowImage src={src} width="100vh" height="auto" />
               <h1>{storeName}</h1>
               <ShowStoreReview
                 taste={reviewInformation?.starTaste}
