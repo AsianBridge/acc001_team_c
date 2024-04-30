@@ -4,20 +4,45 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import api from "../../api/api";
-import { getDoneBingoIdType } from "../../types";
+import { getBingoIdType } from "../../types";
 import { useUserState } from "../../store/UserState";
+import { NextPage } from "next";
+
+const getKeepBingoInformation = async (
+  userID: string,
+  setKeepBingoId: Dispatch<SetStateAction<getBingoIdType[] | undefined>>,
+  setKeepBingoNumber: Dispatch<SetStateAction<number>>,
+) => {
+  try {
+    const responseDataArray: getBingoIdType[] =
+      await api.getKeepBingoIdByUserId(userID);
+
+    if (responseDataArray.length > 0) {
+      if (typeof responseDataArray[0].body !== "object") {
+        return responseDataArray.length, responseDataArray;
+        setKeepBingoNumber(responseDataArray.length);
+        setKeepBingoId(responseDataArray);
+      }
+    } else {
+      setKeepBingoNumber(0);
+    }
+  } catch (error) {
+    console.error("Error fetching DoneBingoId:", error);
+  }
+};
 
 const getDoneBingoInformation = async (
   userID: string,
-  setDoneBingoId: Dispatch<SetStateAction<getDoneBingoIdType[] | undefined>>,
+  setDoneBingoId: Dispatch<SetStateAction<getBingoIdType[] | undefined>>,
   setDoneBingoNumber: Dispatch<SetStateAction<number>>,
 ) => {
   try {
-    const responseDataArray: getDoneBingoIdType[] =
+    const responseDataArray: getBingoIdType[] =
       await api.getDoneBingoIdByUserId(userID);
 
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
+        return responseDataArray.length, responseDataArray;
         setDoneBingoNumber(responseDataArray.length);
         setDoneBingoId(responseDataArray);
       }
@@ -31,21 +56,23 @@ const getDoneBingoInformation = async (
 
 type BingoTabProps = {
   userID: string;
+  setKeepBingoNumber: Dispatch<SetStateAction<number>>;
   setDoneBingoNumber: Dispatch<SetStateAction<number>>;
 };
 
-const BingoTab = ({ userID, setDoneBingoNumber }: BingoTabProps) => {
+const BingoTab = ({
+  userID,
+  setKeepBingoNumber,
+  setDoneBingoNumber,
+}: BingoTabProps) => {
   const [value, setValue] = useState("1");
-  const [doneBingoId, setDoneBingoId] = useState<getDoneBingoIdType[]>();
+  const [keepBingoId, setKeepBingoId] = useState<getBingoIdType[]>();
+  const [doneBingoId, setDoneBingoId] = useState<getBingoIdType[]>();
 
   useEffect(() => {
+    getKeepBingoInformation(userID, setKeepBingoId, setKeepBingoNumber);
     getDoneBingoInformation(userID, setDoneBingoId, setDoneBingoNumber);
-    console.log(userID);
   }, [userID]);
-
-  useEffect(() => {
-    console.log(doneBingoId);
-  }, [doneBingoId]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault();
@@ -76,8 +103,9 @@ const BingoTab = ({ userID, setDoneBingoNumber }: BingoTabProps) => {
   );
 };
 
-const MyAccount = () => {
+const MyAccount: NextPage = () => {
   const { userID, setUserID } = useUserState();
+  const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
 
   useEffect(() => {
@@ -109,7 +137,7 @@ const MyAccount = () => {
               fontWeight: "bold",
             }}
           >
-            Create BINGO
+            Keep BINGO
           </p>
           <p
             style={{
@@ -132,7 +160,7 @@ const MyAccount = () => {
               fontSize: "2.0rem",
             }}
           >
-            0
+            {keepBingoNumber}
           </p>
           <p
             style={{
@@ -159,7 +187,11 @@ const MyAccount = () => {
           編集
         </Button>
       </Stack>
-      <BingoTab userID={userID} setDoneBingoNumber={setDoneBingoNumber} />
+      <BingoTab
+        userID={userID}
+        setKeepBingoNumber={setKeepBingoNumber}
+        setDoneBingoNumber={setDoneBingoNumber}
+      />
     </Box>
   );
 };
