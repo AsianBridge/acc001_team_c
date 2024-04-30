@@ -4,7 +4,6 @@ import { ShowImage } from "../components/ShowImage";
 import { ShowStoreReview } from "./StoreReview";
 import {
   BingoSquareModalProps,
-  getReviewProps,
   getReviewType,
   Reviewer,
   ReviewInformation,
@@ -46,13 +45,11 @@ export const BingoSquareShowModal = ({
         setUserID("kamide2");
 
         const response: getReviewType = await api.getReview(Reviewer);
-
-        // console.log(response);
         const review: ReviewInformation = {
           caption: response.body.review,
-          starTaste: response.body.star_taste as unknown as number,
-          starAtmosphere: response.body.star_atmosphere as unknown as number,
-          starCP: response.body.star_cp as unknown as number,
+          starTaste: parseInt(response.body.star_taste),
+          starAtmosphere: parseInt(response.body.star_atmosphere),
+          starCP: parseInt(response.body.star_cp),
         };
 
         setReviewInformation(review);
