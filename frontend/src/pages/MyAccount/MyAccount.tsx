@@ -223,9 +223,9 @@ const showBingoBox = (BingoIds: getBingoIdType[]) => {
   const handleClick = () => {
     console.log("押されたよ");
   };
-  return BingoIds.map((store, index) => (
+  return BingoIds.map((bingoId, index) => (
     <Button key={index} onClick={handleClick}>
-      <Box>{index}個目です。</Box>
+      <Box>{bingoId.statusCode}</Box>
     </Button>
   ));
 };
