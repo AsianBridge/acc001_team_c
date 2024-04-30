@@ -121,18 +121,25 @@ export const ReviewButton = () => {
   return <Button href="/Review">確定ボタン</Button>;
 };
 
-export const LikeButton = () => {
+export const LikeButton = ({
+  bingoId,
+  goodNum,
+}: {
+  bingoId: string;
+  goodNum: number;
+}) => {
   const [color, setColor] = useState("white");
   const [timerId, setTimerId] = useState<number | undefined>(undefined);
-  const [likeCounter, setLikeCounter] = useState<number>(0);
+  const [goodCounter, setGoodCounter] = useState<number>(0);
 
   const handleClick = () => {
     const ResetTimeout = () => {
       clearTimeout(timerId);
     };
 
-    const newTimerId = setTimeout(() => {
-      console.log("時間が経過しました。");
+    const newTimerId = setTimeout(async () => {
+      console.log("時間が経過しました");
+      console.log(await api.postGoodByBingoId(goodCounter + 1, bingoId));
     }, 2000);
     setTimerId(newTimerId);
 
@@ -142,7 +149,8 @@ export const LikeButton = () => {
 
     setTimeout(() => {
       setColor("white"); // 1秒後に白に戻す
-      setLikeCounter(likeCounter + 1);
+      setGoodCounter(goodCounter + 1);
+      console.log(goodCounter);
     }, 100);
   };
 
@@ -166,7 +174,7 @@ export const LikeButton = () => {
             ♥
           </span>
         </span>
-        <span>×{likeCounter}</span>
+        <span>×{goodNum + goodCounter}</span>
       </p>
     </header>
   );

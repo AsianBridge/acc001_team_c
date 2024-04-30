@@ -1,6 +1,7 @@
 import apiClient from "./apiClient";
 import {
   getBingoIdType,
+  getGoodType,
   getMyBingoIdType,
   getReviewType,
   Reviewer,
@@ -68,6 +69,16 @@ const getMyBingoByUserId = async (userId: string) => {
   return response.data;
 };
 
+const postGoodByBingoId = async (goodNum: number, bingoId: string) => {
+  const postData = {
+    httpMethod: "POST_GOOD",
+    good_number: goodNum,
+    bingoId: bingoId,
+  };
+  const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
+
 const getKeepBingoIdByUserId = async (userId: string) => {
   const postData = {
     httpMethod: "GET_KEEP_BINGO",
@@ -83,6 +94,15 @@ const getMakedBingoIdByUserId = async (storeId: string) => {
     storeId: storeId,
   };
   const response = await apiClient.post<string>("", postData);
+  return response.data;
+};
+
+const getGoodByBingoId = async (bingoId: string) => {
+  const postData = {
+    httpMethod: "GET_GOOD",
+    bingoId: bingoId,
+  };
+  const response = await apiClient.post<getGoodType>("", postData);
   return response.data;
 };
 
@@ -147,8 +167,10 @@ const api = {
   postKeepByUserId,
   getDoneBingoIdByUserId,
   getMyBingoByUserId,
+  postGoodByBingoId,
   getKeepBingoIdByUserId,
   getMakedBingoIdByUserId,
+  getGoodByBingoId,
   // postReview,
   // getStoreById,
   postMyBingo,

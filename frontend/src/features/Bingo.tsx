@@ -69,7 +69,8 @@ export const BingoOfHome: FC<{
   bingoInformation: BingoSquareModalProps[] | undefined;
   userId: string;
   bingoId: string;
-}> = ({ bingoInformation, userId, bingoId }) => {
+  goodNum: number;
+}> = ({ bingoInformation, userId, bingoId, goodNum }) => {
   const { userID } = useUserState();
 
   return (
@@ -99,7 +100,7 @@ export const BingoOfHome: FC<{
           }
         </Box>
         <Box>
-          <LikeButton />
+          <LikeButton bingoId={bingoId} goodNum={goodNum} />
           <KeepBingoButton
             userId={userID}
             bingoId={bingoId}

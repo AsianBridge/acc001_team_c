@@ -91,6 +91,11 @@ export interface getReviewType {
   body: getReviewProps;
 }
 
+export interface getGoodType {
+  statusCode: number;
+  body: number;
+}
+
 export interface getMyBingoIdsBodyType {
   picture1: string;
   picture2: string;
