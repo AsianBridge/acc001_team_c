@@ -55,7 +55,7 @@ export const SubmitBingoButton = ({
   }) => {
     const navigate = useNavigate();
     const PostMyBingo = async () => {
-      // await api.postMyBingo(userId,bingoId);
+      await api.postMyBingo(userId, bingoId);
       navigate("/");
     };
     return (
@@ -88,6 +88,21 @@ export const SubmitBingoButton = ({
       <Button onClick={handleClickOpen}>投稿する</Button>;
     </>
   );
+};
+
+export const KeepBingoButton = ({
+  userId,
+  bingoId,
+  contributorId,
+}: {
+  userId: string;
+  bingoId: string;
+  contributorId: string;
+}) => {
+  const handleClick = async () => {
+    console.log(await api.postKeepByUserId(userId, bingoId, contributorId));
+  };
+  return <Button onClick={handleClick}>保存</Button>;
 };
 
 export const SubmitReviewButton = ({
@@ -156,6 +171,7 @@ export const LikeButton = () => {
     </header>
   );
 };
+
 // export const ImageUploader = () => {
 //   const [base64Images, setBase64Images] = useState<string>();
 
