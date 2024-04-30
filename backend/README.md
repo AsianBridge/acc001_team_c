@@ -55,6 +55,7 @@
   - [POST_MYBINGO](#post_mybingo)
   - [POST_GOOD](#post_good)
   - [POST_PLAY](#post_play)
+  - [GET_GOOD](#get_good)
 - [レビュー関連](#レビュー関連)
   - [POST_REVIEW](#post_review)
   - [GET_REVIEW](#get_review)
@@ -305,7 +306,20 @@
 ```
 * 戻り値
   * 失敗　　Bingo not found
-  * 成功　　Successful　　
+  * 成功　　Successful
+
+### GET_GOOD  
+指定したbingo_idのいいねの数を取得する  
+* 引数
+```
+{  
+    "httpMethod": "GET_GOOD",  
+    "bingoId": "20240408045050"
+}
+```
+* 戻り値
+  * 失敗　　No Bingo
+  * 成功　　いいねの数(数値)
  
 * ## レビュー関連  
   
