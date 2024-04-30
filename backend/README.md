@@ -12,20 +12,29 @@
 ```
 
 ***json形式のビンゴの情報の形式***  
-戻り値がjson形式のビンゴ情報の場合は以下のような形で帰ってくる  
+戻り値がjson形式のビンゴ情報の場合は以下のような形で帰ってくる。  
 ```
-\"user_id\": \"kamide2\",  
-\"bingo_id\": 20240408051917.0  
-\"flag\": 4.0,
-\"pi_1\": \"undefine\",  
-\"pi_2\": \"undefine\",  
-\"pi_3\": \"undefine\",  
-\"pi_4\": \"undefine\",  
-\"pi_5\": \"undefine\",  
-\"pi_6\": \"undefine\",  
-\"pi_7\": \"undefine\",
-\"pi_8\": \"undefine\",  
-\"pi_9\": \"undefine\"
+'user_id': null,
+'bingo_id': null,
+'flag': null,
+'pi_1': null,
+'pi_2': null,
+'pi_3': null,
+'pi_4': null,
+'pi_5': null,
+'pi_6': null,
+'pi_7': null,
+'pi_8': null,
+'pi_9': null,
+'store_name_1': null,
+'store_name_2': null,
+'store_name_3': null,
+'store_name_4': null,
+'store_name_5': null,
+'store_name_6': null,
+'store_name_7': null,
+'store_name_8': null,
+'store_name_9': null
 ```
 
 ## 目次  
@@ -79,18 +88,14 @@
   * 成功　　登録したjson形式のアカウント情報   
 ```
 {  
-　"statusCode": 200,  
-　"body":  
-　　　"{  
-　　　\"birthday_year\": \"2005\",  
-　　　\"password\": \"kamikami\",  
-　　　\"user_id\": \"kamide\",  
-　　　\"birthday_day\": \"21\",  
-　　　\"residence\": \"\\u77f3\\u5ddd\\u770c\", 
-　　　\"birthday_month\": \"7\",  
-　　　\"mail_address\": \"kamide@gmail.com\"  
-　}"   
-}  
+    \"birthday_year\": \"2005\",  
+    \"password\": \"kamikami\",  
+    \"user_id\": \"kamide\",  
+    \"birthday_day\": \"21\",  
+    \"residence\": \"\\u77f3\\u5ddd\\u770c\", 
+    \"birthday_month\": \"7\",  
+    \"mail_address\": \"kamide@gmail.com\"  
+}
 ```  
 
 ### POST_AC  
@@ -340,18 +345,12 @@
   * 失敗  No Bingo  
   * 成功  json形式のレビュー(ビンゴが存在し、レビューがない場合はundefine)
 ```
-[  
- {  
-    "statusCode": 200,  
-    "body":  
-        {  
-            "star_atmosphere_2": "undefine",  
-            "star_cp_2": "undefine",  
-            "star_taste_2": "undefine",  
-            "review_2": "undefine"  
-     }  
- }  
-]
+{  
+    "star_atmosphere_2": null,  
+    "star_cp_2": null,  
+    "star_taste_2": null,  
+    "review_2": null  
+}
 ```
  
 ### POST_IMAGE  
@@ -370,13 +369,9 @@
   * 失敗　　Bingo not found  
   * 成功　　json形式で、imageUrlに画像へのurl、imageIdに画像のid
 ```
-{
-    "statusCode": 200,  
-    "body":  
-    "{  
-        \"imageUrl\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/94eecb68-26f0-4499-95bd-d5212b02bb52.jpg\",   
-        \"imageId\": \"94eecb68-26f0-4499-95bd-d5212b02bb52\"  
-    }"   
+{  
+    \"imageUrl\": \"https://acc001-team-c-image-bucket.s3.amazonaws.com/bingo-images/94eecb68-26f0-4499-95bd-d5212b02bb52.jpg\",   
+    \"imageId\": \"94eecb68-26f0-4499-95bd-d5212b02bb52\"  
 }
 ```
 
@@ -394,16 +389,12 @@
 * 戻り値  
   * 失敗　　No  Store  
   * 成功　　json形式のお店の情報
-```
+``` 
 {  
-    "statusCode": 200,  
-    "body": "  
-    {  
-        \"address\": \"\\u77f3\\u5ddd\\u770c\\u304b\\u307b\\u304f\\u5e02\\u9ad8\\u677e\\u4e0142\",  
-        \"id\": 0.0,  
-        \"name\": \"\\u3055\\u3076\\u308d\\u3046\\u3079\\u3044\\u9ad8\\u677e\\u672c\\u5e97\"  
-    }"   
-}
+    \"address\": \"\\u77f3\\u5ddd\\u770c\\u304b\\u307b\\u304f\\u5e02\\u9ad8\\u677e\\u4e0142\",  
+    \"id\": 0.0,  
+    \"name\": \"\\u3055\\u3076\\u308d\\u3046\\u3079\\u3044\\u9ad8\\u677e\\u672c\\u5e97\"  
+}   
 ```
 
 ### POST_STORE  
@@ -448,22 +439,19 @@
           good_number(いいねの数)がない場合もある
 ```
 {  
-    "statusCode": 200,  
-    "body":  {  
-        "bingo_id": "20240409072915",  
-        "maker_id": "kamide2",  
-        "good_number": "0",  
-        "store_id_1": "0",  
-        "store_id_2": "1",  
-        "store_id_3": "2",  
-        "store_id_4": "3",  
-        "store_id_5": "4",  
-        "store_id_6": "5",  
-        "store_id_7": "6",  
-        "store_id_8": "7",  
-        "store_id_9": "8"  
-    }  
-}
+    "bingo_id": "20240409072915",  
+    "maker_id": "kamide2",  
+    "good_number": "0",  
+    "store_id_1": "0",  
+    "store_id_2": "1",  
+    "store_id_3": "2",  
+    "store_id_4": "3",  
+    "store_id_5": "4",  
+    "store_id_6": "5",  
+    "store_id_7": "6",  
+    "store_id_8": "7",  
+    "store_id_9": "8"  
+}  
 ```
 
 * ## 総数などのデータ関連  
