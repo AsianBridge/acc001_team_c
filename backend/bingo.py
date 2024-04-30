@@ -127,13 +127,11 @@ def get_bingo(event, context):
     return reslut
 
 def post_keep(event, context):
-    # use the DynamoDB object to select our table
     table = dynamodb.Table('BINGOSTATE2')
     user_id = event['userId']
     bingo_id = int(event['bingoId'])
     contributor_id = event['contributor_id']
-    unique_id = str(uuid.uuid4())
-    
+
     response = table.query(
         KeyConditionExpression=Key('user_id').eq(contributor_id) & Key('bingo_id').eq(bingo_id)
     )
@@ -214,7 +212,6 @@ def get_maked_bingo(event, context):
             'body': json.dumps(a[i])
         }
     return result
-
     
 def get_done_bingo(event, context):
     user_id = event['userId']
@@ -250,7 +247,6 @@ def get_done_bingo(event, context):
             'body': json.dumps(a[i])
         }
     return result
-
 
 def get_keep_bingo(event, context):
     user_id = event['userId'] + '-s'
@@ -328,6 +324,48 @@ def post_bingo(event, context):
            }
     )
     
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Successful')
+    }
+    
+def post_play(event, context):
+    table = dynamodb.Table('BINGOSTATE2')
+    user_id = event['userId']
+    bingo_id = int(event['bingoId'])
+    contributor_id = event['contributor_id']
+
+    response = table.query(
+        KeyConditionExpression=Key('user_id').eq(contributor_id) & Key('bingo_id').eq(bingo_id)
+    )
+    
+    if not response['Items'] or response['Items'][0]['flag'] != 3:
+        return {
+            'statusCode': 404,
+            'body': json.dumps('Bingo not found')
+        }
+    
+    response = table.query(
+        KeyConditionExpression=Key('user_id').eq(user_id)
+    )
+    
+    if response['Items']:
+        for i in response['Items']:
+            if i['flag'] == 0:
+                #プレイ中のビンゴが既にあったら削除する
+                delete_response = table.delete_item(
+                    Key={
+                        'user_id': i['user_id'],
+                        'bingo_id': i['bingo_id']  # ソートキーも指定
+                    }
+                )
+    
+    response = table.put_item(
+        Item={
+            'user_id': user_id,
+            'bingo_id': bingo_id,
+            'flag': 0
+            })
     return {
         'statusCode': 200,
         'body': json.dumps('Successful')
