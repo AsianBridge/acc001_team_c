@@ -68,7 +68,7 @@ export type CropperModalProps = {
   minZoom: number;
 };
 
-export interface getDoneBingoIdType {
+export interface getBingoIdType {
   statusCode: number;
   body: { user_id: string; flag: string; bingo_id: number } | string;
 }

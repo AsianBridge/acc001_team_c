@@ -1,6 +1,6 @@
 import apiClient from "./apiClient";
 import {
-  getDoneBingoIdType,
+  getBingoIdType,
   getMyBingoIdType,
   getReviewType,
   Reviewer,
@@ -40,7 +40,7 @@ const getDoneBingoIdByUserId = async (userId: string) => {
     httpMethod: "GET_DONE_BINGO",
     userId: userId,
   };
-  const response = await apiClient.post<getDoneBingoIdType[]>("", postData);
+  const response = await apiClient.post<getBingoIdType[]>("", postData);
   return response.data;
 };
 
@@ -58,7 +58,7 @@ const getKeepBingoIdByUserId = async (storeId: string) => {
     httpMethod: "GET_KEEP_BINGO",
     storeId: storeId,
   };
-  const response = await apiClient.post<string>("", postData);
+  const response = await apiClient.post<getBingoIdType[]>("", postData);
   return response.data;
 };
 
