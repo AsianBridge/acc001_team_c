@@ -109,7 +109,8 @@ const MyAccount: NextPage = () => {
   const { userID, setUserID } = useUserState();
   const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
-  const imageUrl = "https://example.com/image.jpg"; // 画像のURLに置き換える
+
+  const imageUrl = "https://rentry.jp/wp-content/uploads/2024/01/smartphone_happy_tereru_man.jpg"; // 画像のURLに置き換える
 
   useEffect(() => {
     setUserID("kamide2");
@@ -148,53 +149,11 @@ const MyAccount: NextPage = () => {
           <p style={{ color: "black" }}>UserID: {userID}</p>
           <p style={{ color: "black" }}>📍Kanazawa</p>
           <p style={{ color: "black" }}>🔰BeInGo Beginner</p>
-        </Stack>
-        <Stack direction="row">
-          <p
-            style={{
-              position: "absolute",
-              top: "26vh",
-              left: "38vw",
-              color: "black",
-              fontSize: "0.6rem",
-              fontWeight: "bold",
-            }}
-          >
-            Keep BINGO
+          <p>
+            <span style={{ fontSize: '1.5em' }}>{keepBingoNumber}</span> 　Keep BINGO
           </p>
-          <p
-            style={{
-              position: "absolute",
-              top: "26vh",
-              left: "69vw",
-              color: "black",
-              fontSize: "0.6rem",
-              fontWeight: "bold",
-            }}
-          >
-            Finished BINGO
-          </p>
-          <p
-            style={{
-              position: "absolute",
-              top: "27vh",
-              left: "44vw",
-              color: "black",
-              fontSize: "2.0rem",
-            }}
-          >
-            {keepBingoNumber}
-          </p>
-          <p
-            style={{
-              position: "absolute",
-              top: "27vh",
-              left: "76vw",
-              color: "black",
-              fontSize: "2.0rem",
-            }}
-          >
-            {doneBingoNumber}
+          <p>
+            <span style={{ fontSize: '1.5em' }}>{doneBingoNumber}</span> 　Finished BINGO
           </p>
         </Stack>
         <Button
