@@ -119,19 +119,16 @@ export const BingoOfMyBingo: FC<{
 }> = ({ bingoInformation, userId, bingoId }) => {
   return (
     <>
-      <p
-        style={{
-          color: "black",
-          position: "absolute",
-          top: "10vh",
-          left: "33vw",
-          fontSize: "2.0rem",
-          fontWeight: "bold",
-        }}
-      >
+      <Stack spacing={2} sx={{ width: '100%', margin: 'auto', alignItems: 'center' }}>
+      <p style={{
+        color: "black",
+        fontSize: "2.0rem",
+        fontWeight: "bold",
+        textAlign: 'center' // 中央に配置
+      }}>
         My BINGO
       </p>
-      <Box sx={{ backgroundColor: "black"}}>
+      <Box sx={{ width: '100%', backgroundColor: "black" }}>
         <Bingo
           scene={"MyBingo"}
           bingoInformation={bingoInformation}
@@ -139,6 +136,7 @@ export const BingoOfMyBingo: FC<{
           bingoId={bingoId}
         />
       </Box>
+    </Stack>
       <Stack>
         {checkBingo(bingoInformation) && (
           <SubmitBingoButton userId={userId} bingoId={bingoId} />
