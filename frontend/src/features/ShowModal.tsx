@@ -58,12 +58,24 @@ export const BingoSquareShowModal = ({
 
   return (
     <>
-      <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: '32vw', background: '#c0c0c0' }}>
+      <Box
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "auto",
+          height: "32vw",
+          background: "#c0c0c0",
+        }}
+      >
         <Button onClick={handleOpen}>
           {src === undefined ? (
-            <div style={{ textAlign: 'center' }}> {/* 中央揃えを追加 */}
-              <p style={{ color: 'black', fontSize: '2vw', margin: '0 3vw' }}>
-                {storeName}へ<br />行こう
+            <div style={{ textAlign: "center" }}>
+              {" "}
+              {/* 中央揃えを追加 */}
+              <p style={{ color: "black", fontSize: "2vw", margin: "0 3vw" }}>
+                {storeName}へ<br />
+                行こう
               </p>
             </div>
           ) : (

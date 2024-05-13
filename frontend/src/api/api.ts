@@ -1,5 +1,6 @@
 import apiClient from "./apiClient";
 import {
+  getBingoInformationOfHomeType,
   getBingoInformationType,
   getGoodInformationType,
   getReviewType,
@@ -139,11 +140,15 @@ const postMyBingo = async (userId: string, bingoId: string) => {
   return response.data;
 };
 
-const getBingo = async () => {
+const getBingo = async (userID: string) => {
   const postData = {
     httpMethod: "GET_BINGO",
+    userId: userID,
   };
-  const response = await apiClient.post("", postData);
+  const response = await apiClient.post<getBingoInformationOfHomeType>(
+    "",
+    postData,
+  );
   return response.data;
 };
 
