@@ -2,38 +2,37 @@ import { Box, Button, Modal } from "@mui/material";
 import { useState } from "react";
 import { ShowImage } from "../components/ShowImage";
 import { ShowStoreReview } from "./StoreReview";
-import {
-  BingoSquareModalProps,
-  getReviewType,
-  Reviewer,
-  ReviewInformation,
-} from "../types";
 import { ShowCaption } from "../components/ShowText";
 import { ReviewButton } from "../components/Button";
 import { useAsync } from "react-use";
 import api from "../api/api";
-import { useUserState } from "../store/UserState";
+import {
+  BingoSquareModalProps,
+  getBingoInformationType,
+  getReviewType,
+  Reviewer,
+  ReviewInformation,
+} from "../types";
+import { BingoOfProfile } from "./Bingo";
 
 export const BingoSquareShowModal = ({
-  scene,
+  lockModal,
   src,
   storeName,
   userId,
   bingoId,
   storeNumber,
 }: {
-  scene: string;
+  lockModal: boolean;
 } & BingoSquareModalProps &
   Reviewer) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
-    (scene === "MyBingo" || src !== undefined) && setOpen(true);
+    (lockModal === false || src !== undefined) && setOpen(true);
   };
   const handleClose = () => setOpen(false);
   const [reviewInformation, setReviewInformation] =
     useState<ReviewInformation>();
-
-  const { setUserID } = useUserState();
   try {
     useAsync(async () => {
       if (src) {
@@ -42,8 +41,6 @@ export const BingoSquareShowModal = ({
           bingoId: bingoId,
           storeNumber: `${storeNumber + 1}`,
         };
-        setUserID("kamide2");
-
         const response: getReviewType = await api.getReview(Reviewer);
         const review: ReviewInformation = {
           caption: response.body.review ?? undefined,
@@ -100,6 +97,24 @@ export const BingoSquareShowModal = ({
             </>
           )}
         </Box>
+      </Modal>
+    </>
+  );
+};
+
+export const ShowBingoModal = ({
+  BingoInformation,
+}: {
+  BingoInformation: getBingoInformationType;
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Hello</Button>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <div>
+          <BingoOfProfile bingoInformation={BingoInformation} />
+        </div>
       </Modal>
     </>
   );

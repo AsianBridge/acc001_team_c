@@ -76,24 +76,43 @@ export interface getBingoIdType {
   body: { user_id: string; flag: string; bingo_id: number } | string;
 }
 
-export interface getMyBingoIdType {
-  statusCode: number;
-  body: string;
-}
-
-export interface getBingoType {
-  statusCode: number;
-  body: string;
-}
-
 export interface getReviewType {
   statusCode: number;
   body: getReviewProps;
 }
 
-export interface getGoodType {
-  statusCode: number;
+export interface getBingoInformationType {
+  body: string;
+  stateCode: number;
+}
+
+export interface getGoodInformationType {
   body: number;
+  stateCode: number;
+}
+
+export interface BingoInformationOfBodyType {
+  user_id: string;
+  bingo_id: number;
+  flag: number;
+  pi_1: string;
+  pi_2: string;
+  pi_3: string;
+  pi_4: string;
+  pi_5: string;
+  pi_6: string;
+  pi_7: string;
+  pi_8: string;
+  pi_9: string;
+  store_name_1: string;
+  store_name_2: string;
+  store_name_3: string;
+  store_name_4: string;
+  store_name_5: string;
+  store_name_6: string;
+  store_name_7: string;
+  store_name_8: string;
+  store_name_9: string;
 }
 
 export interface getMyBingoIdsBodyType {
@@ -106,10 +125,6 @@ export interface getMyBingoIdsBodyType {
   picture7: string;
   picture8: string;
   picture9: string;
-}
-
-export interface BingoInformation {
-  goodNumber: number;
 }
 
 export type ReviewInformation = {
