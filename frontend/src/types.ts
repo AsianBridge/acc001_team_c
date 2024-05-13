@@ -96,6 +96,33 @@ export interface getGoodType {
   body: number;
 }
 
+export interface getBingoOfMyAccountType {
+  body: {
+    user_id: string;
+    bingo_id: number;
+    flag: number;
+    pi_1: string;
+    pi_2: string;
+    pi_3: string;
+    pi_4: string;
+    pi_5: string;
+    pi_6: string;
+    pi_7: string;
+    pi_8: string;
+    pi_9: string;
+    store_name_1: string;
+    store_name_2: string;
+    store_name_3: string;
+    store_name_4: string;
+    store_name_5: string;
+    store_name_6: string;
+    store_name_7: string;
+    store_name_8: string;
+    store_name_9: string;
+  };
+  stateCode: number;
+}
+
 export interface getMyBingoIdsBodyType {
   picture1: string;
   picture2: string;
