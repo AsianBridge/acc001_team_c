@@ -58,22 +58,18 @@ export const BingoSquareShowModal = ({
 
   return (
     <>
-      <Box>
-        <div style={{ width: "auto", height: "32vw", background: "gray" }}>
-          {" "}
-          {/*本当はheight:autoにしたい.画像が正方形ならその方が都合いい*/}
-          <Button onClick={handleOpen}>
-            {src === undefined ? (
-              <Box>
-                <p style={{ color: "black", marginLeft: "3vw" }}>
-                  {storeName}へ<br></br>行こう
-                </p>
-              </Box>
-            ) : (
-              <ShowImage src={src} width="100%" height="auto" />
-            )}
-          </Button>
-        </div>
+      <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: '32vw', background: '#c0c0c0' }}>
+        <Button onClick={handleOpen}>
+          {src === undefined ? (
+            <div style={{ textAlign: 'center' }}> {/* 中央揃えを追加 */}
+              <p style={{ color: 'black', fontSize: '2vw', margin: '0 3vw' }}>
+                {storeName}へ<br />行こう
+              </p>
+            </div>
+          ) : (
+            <ShowImage src={src} width="100%" height="auto" />
+          )}
+        </Button>
       </Box>
       <Modal
         open={open}
@@ -90,7 +86,7 @@ export const BingoSquareShowModal = ({
           )}
           {src !== undefined && (
             <>
-              <ShowImage src={src} width="auto" height="auto" />
+              <ShowImage src={src} width="100vh" height="auto" />
               <h1>{storeName}</h1>
               <ShowStoreReview
                 taste={reviewInformation?.starTaste}

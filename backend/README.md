@@ -376,7 +376,7 @@
     "bingoId": "20240408045050",  
     "userId": "kamide",  
     "store_number": "3",  
-    “image”: “エンコードされた画像”,  
+    "image": "エンコードされた画像",  
 }
 ```
 * 戻り値  

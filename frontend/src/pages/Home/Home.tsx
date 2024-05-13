@@ -1,4 +1,4 @@
-import { ImageList, ImageListItem } from "@mui/material";
+import { Box, ImageList, ImageListItem } from "@mui/material";
 import { BingoOfHome } from "../../features/Bingo";
 import { BingoSquareModalProps } from "../../types";
 import api from "../../api/api";
