@@ -166,16 +166,17 @@
 * ## ビンゴ関連
 
 ### GET_BINGO  
-投稿されたビンゴからランダムにビンゴを取得する  
+投稿されたビンゴから、指定したuserId以外のランダムな投稿されたビンゴを取得する  
 * 引数
 ```
 {  
-    "httpMethod": "GET_BINGO"  
+    "httpMethod": "GET_BINGO",
+    "userId": "kamide"  
 }
 ```
 * 戻り値  
   * 失敗　　Bingo not found  
-  * 成功　　json形式のビンゴ情報
+  * 成功　　json形式のビンゴ情報の配列
  
 ### POST_BINGO  
 指定したmakerIdのユーザーが指定したお店のビンゴを登録する  
