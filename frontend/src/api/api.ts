@@ -1,5 +1,10 @@
 import apiClient from "./apiClient";
-import { getBingoInformationType, getGoodInformationType, getReviewType, Reviewer } from "../types";
+import {
+  getBingoInformationType,
+  getGoodInformationType,
+  getReviewType,
+  Reviewer,
+} from "../types";
 
 // まだAPIは完全に完成していないです。
 

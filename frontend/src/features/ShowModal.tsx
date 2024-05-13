@@ -6,7 +6,6 @@ import { ShowCaption } from "../components/ShowText";
 import { ReviewButton } from "../components/Button";
 import { useAsync } from "react-use";
 import api from "../api/api";
-import { useUserState } from "../store/UserState";
 import {
   BingoSquareModalProps,
   getBingoInformationType,
@@ -34,8 +33,6 @@ export const BingoSquareShowModal = ({
   const handleClose = () => setOpen(false);
   const [reviewInformation, setReviewInformation] =
     useState<ReviewInformation>();
-
-  const { setUserID } = useUserState();
   try {
     useAsync(async () => {
       if (src) {
@@ -44,8 +41,6 @@ export const BingoSquareShowModal = ({
           bingoId: bingoId,
           storeNumber: `${storeNumber + 1}`,
         };
-        setUserID("kamide2");
-
         const response: getReviewType = await api.getReview(Reviewer);
         const review: ReviewInformation = {
           caption: response.body.review ?? undefined,
