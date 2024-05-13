@@ -5,6 +5,7 @@ import api from "../../api/api";
 import { useState } from "react";
 import { useAsync } from "react-use";
 import { useUserState } from "../../store/UserState";
+import { NextPage } from "next";
 
 type bingoInformationArray = {
   userId: string;
@@ -17,6 +18,7 @@ const getBingoInformation = async (userID: string) => {
   const bingoInformation: bingoInformationArray[] = [];
   try {
     const getBingoResponse = await api.getBingo(userID);
+    console.log(getBingoResponse);
     if (getBingoResponse && getBingoResponse.body) {
       for (let j = 0; j < getBingoResponse.body.length; j++) {
         bingoSquares[j] = [];
@@ -45,7 +47,7 @@ const getBingoInformation = async (userID: string) => {
   }
 };
 
-const Home = () => {
+const Home: NextPage = () => {
   const [bingoSquares, setBingoSquares] = useState<BingoSquareModalProps[][]>();
   const [bingoInformation, setBingoInformation] =
     useState<bingoInformationArray[]>();
