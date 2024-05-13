@@ -131,7 +131,7 @@ export const BingoOfMyBingo: FC<{
       >
         My BINGO
       </p>
-      <Box sx={{ backgroundColor: "black"}}>
+      <Box sx={{ backgroundColor: "black" }}>
         <Bingo
           scene={"MyBingo"}
           bingoInformation={bingoInformation}

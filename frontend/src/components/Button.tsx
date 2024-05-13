@@ -138,7 +138,7 @@ export const LikeButton = ({
     };
 
     const newTimerId = setTimeout(async () => {
-    await api.postGoodByBingoId(goodCounter + 1, bingoId);
+      await api.postGoodByBingoId(goodCounter + 1, bingoId);
     }, 2000);
     setTimerId(newTimerId);
 
