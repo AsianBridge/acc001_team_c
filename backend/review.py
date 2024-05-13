@@ -102,6 +102,12 @@ def post_image(event, context):
         KeyConditionExpression=Key('user_id').eq(user_id) & Key('bingo_id').eq(bingo_id)
     )
     
+    if response['Items']:
+        return {
+            'statusCode': 404,
+            'body': json.dumps('No Bingo')
+        }
+    
     item = response['Items'][0]
     
     if 'pi_' + store_number in item and not item['pi_' + store_number] == '':
@@ -159,22 +165,22 @@ def get_review(event, context):
     if name in review_body:
         json_data["star_atmosphere"] = review_body[name]
     else:
-        json_data["star_atmosphere"] = "undefine"
+        json_data["star_atmosphere"] = None
     name = "star_cp_" + store_number
     if name in review_body:
         json_data["star_cp"] = review_body[name]
     else:
-        json_data["star_cp"] = "undefine"
+        json_data["star_cp"] = None
     name = "star_taste_" + store_number
     if name in review_body:
         json_data["star_taste"] = review_body[name]
     else:
-        json_data["star_taste"] = "undefine"
+        json_data["star_taste"] = None
     name = "review_" + store_number
     if name in review_body:
         json_data["review"] = review_body[name]
     else:
-        json_data["review"] = "undefine"
+        json_data["review"] = None
         
     reslut = {
         'statusCode': 200,
