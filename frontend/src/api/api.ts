@@ -1,5 +1,5 @@
 import apiClient from "./apiClient";
-import { getBingoInformationType, getReviewType, Reviewer } from "../types";
+import { getBingoInformationType, getGoodInformationType, getReviewType, Reviewer } from "../types";
 
 // まだAPIは完全に完成していないです。
 
@@ -102,7 +102,7 @@ const getGoodByBingoId = async (bingoId: string) => {
     httpMethod: "GET_GOOD",
     bingoId: bingoId,
   };
-  const response = await apiClient.post<number>("", postData);
+  const response = await apiClient.post<getGoodInformationType>("", postData);
   return response.data;
 };
 

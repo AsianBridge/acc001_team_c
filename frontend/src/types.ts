@@ -86,6 +86,11 @@ export interface getBingoInformationType {
   stateCode: number;
 }
 
+export interface getGoodInformationType {
+  body: number;
+  stateCode: number;
+}
+
 export interface BingoInformationOfBodyType {
   user_id: string;
   bingo_id: number;
