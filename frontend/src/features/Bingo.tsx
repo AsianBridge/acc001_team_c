@@ -174,17 +174,6 @@ export const BingoOfProfile: FC<{
   }
   return (
     <>
-      <Stack spacing={-3}>
-        <Box
-          sx={{
-            color: "black",
-            fontSize: "2rem",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Avatar />
-        </Box>
         <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
           {
             <Bingo
@@ -195,7 +184,6 @@ export const BingoOfProfile: FC<{
             />
           }
         </Box>
-      </Stack>
     </>
   );
 };
