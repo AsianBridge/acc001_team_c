@@ -102,7 +102,7 @@ def post_image(event, context):
         KeyConditionExpression=Key('user_id').eq(user_id) & Key('bingo_id').eq(bingo_id)
     )
     
-    if response['Items']:
+    if not response['Items']:
         return {
             'statusCode': 404,
             'body': json.dumps('No Bingo')
