@@ -1,4 +1,4 @@
-import { BingoSquareModalProps } from "../types";
+import { BingoSquareModalProps, getBingoInformationType } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Grid, Stack } from "@mui/material";
 import {
@@ -6,7 +6,7 @@ import {
   LikeButton,
   SubmitBingoButton,
 } from "../components/Button";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useUserState } from "../store/UserState";
 
 const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
@@ -36,12 +36,12 @@ const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
 };
 
 const Bingo = ({
-  scene,
+  lockModal,
   bingoInformation,
   userId,
   bingoId,
 }: {
-  scene: string;
+  lockModal: boolean;
   bingoInformation?: BingoSquareModalProps[];
   userId: string;
   bingoId: string;
@@ -52,7 +52,7 @@ const Bingo = ({
         bingoInformation.map((store, index) => (
           <Grid item xs={4} sm={4} key={index}>
             <BingoSquareShowModal
-              scene={scene}
+              lockModal={lockModal}
               storeName={store.storeName}
               src={store.src ?? undefined}
               userId={userId}
@@ -92,7 +92,7 @@ export const BingoOfHome: FC<{
         <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
           {
             <Bingo
-              scene={"Home"}
+              lockModal={true}
               bingoInformation={bingoInformation}
               userId={userId}
               bingoId={bingoId}
@@ -131,9 +131,9 @@ export const BingoOfMyBingo: FC<{
       >
         My BINGO
       </p>
-      <Box sx={{ backgroundColor: "black"}}>
+      <Box sx={{ backgroundColor: "black" }}>
         <Bingo
-          scene={"MyBingo"}
+          lockModal={false}
           bingoInformation={bingoInformation}
           userId={userId}
           bingoId={bingoId}
@@ -143,6 +143,58 @@ export const BingoOfMyBingo: FC<{
         {checkBingo(bingoInformation) && (
           <SubmitBingoButton userId={userId} bingoId={bingoId} />
         )}
+      </Stack>
+    </>
+  );
+};
+
+export const BingoOfProfile: FC<{
+  bingoInformation: getBingoInformationType;
+}> = ({ bingoInformation }) => {
+  const [userId, setUserId] = useState("");
+  const [bingoId, setBingoId] = useState("");
+
+  useEffect(() => {
+    if (bingoInformation) {
+      const bodyObject = JSON.parse(bingoInformation.body);
+      setUserId(bodyObject.user_id);
+      setBingoId(bodyObject.bingo_id);
+    }
+  }, [bingoInformation]);
+
+  const bingoSquares: BingoSquareModalProps[] = [];
+  if (bingoInformation) {
+    const bodyObject = JSON.parse(bingoInformation.body);
+    for (let i = 1; i <= 9; i++) {
+      bingoSquares.push({
+        src: bodyObject[`pi_${i}`],
+        storeName: bodyObject[`store_name_${i}`],
+      });
+    }
+  }
+  return (
+    <>
+      <Stack spacing={-3}>
+        <Box
+          sx={{
+            color: "black",
+            fontSize: "2rem",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Avatar />
+        </Box>
+        <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
+          {
+            <Bingo
+              lockModal={true}
+              bingoInformation={bingoSquares}
+              userId={userId}
+              bingoId={bingoId}
+            />
+          }
+        </Box>
       </Stack>
     </>
   );

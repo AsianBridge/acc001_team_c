@@ -26,7 +26,7 @@ const getBingoInformation = async () => {
           bingoSquares,
           userId: getBingoResponse.body[`user_id`],
           bingoId: getBingoResponse.body[`bingo_id`],
-          goodNum: getGoodResult.body,
+          goodNum: getGoodResult,
         };
     }
   } catch (e) {

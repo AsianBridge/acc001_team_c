@@ -1,20 +1,23 @@
-import { Stack, Box, Tab, Button } from "@mui/material";
+import { Stack, Box, Tab, Button, Grid } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import api from "../../api/api";
-import { getBingoIdType } from "../../types";
+import { getBingoInformationType } from "../../types";
 import { useUserState } from "../../store/UserState";
 import { NextPage } from "next";
+import { ShowBingoModal } from "../../features/ShowModal";
 
 const getKeepBingoInformation = async (
   userID: string,
-  setKeepBingoId: Dispatch<SetStateAction<getBingoIdType[] | undefined>>,
+  setKeepBingoId: Dispatch<
+    SetStateAction<getBingoInformationType[] | undefined>
+  >,
   setKeepBingoNumber: Dispatch<SetStateAction<number>>,
 ) => {
   try {
-    const responseDataArray: getBingoIdType[] =
+    const responseDataArray: getBingoInformationType[] =
       await api.getKeepBingoIdByUserId(userID);
 
     if (responseDataArray.length > 0) {
@@ -32,11 +35,13 @@ const getKeepBingoInformation = async (
 
 const getDoneBingoInformation = async (
   userID: string,
-  setDoneBingoId: Dispatch<SetStateAction<getBingoIdType[] | undefined>>,
+  setDoneBingoId: Dispatch<
+    SetStateAction<getBingoInformationType[] | undefined>
+  >,
   setDoneBingoNumber: Dispatch<SetStateAction<number>>,
 ) => {
   try {
-    const responseDataArray: getBingoIdType[] =
+    const responseDataArray: getBingoInformationType[] =
       await api.getDoneBingoIdByUserId(userID);
 
     if (responseDataArray.length > 0) {
@@ -64,8 +69,8 @@ const BingoTab = ({
   setDoneBingoNumber,
 }: BingoTabProps) => {
   const [value, setValue] = useState("1");
-  const [keepBingoId, setKeepBingoId] = useState<getBingoIdType[]>();
-  const [doneBingoId, setDoneBingoId] = useState<getBingoIdType[]>();
+  const [keepBingoId, setKeepBingoId] = useState<getBingoInformationType[]>();
+  const [doneBingoId, setDoneBingoId] = useState<getBingoInformationType[]>();
 
   useEffect(() => {
     getKeepBingoInformation(userID, setKeepBingoId, setKeepBingoNumber);
@@ -81,9 +86,24 @@ const BingoTab = ({
     <Box sx={{ width: "100%", typography: "body1" }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <Tab label="保存したBINGO" value="1" sx={{ width: 'calc(100% / 2)' }} />
-            <Tab label="投稿したBINGO" value="2" sx={{ width: 'calc(100% / 2)' }} />
+          <TabList
+            onChange={handleChange}
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <Tab
+              label="保存したBINGO"
+              value="1"
+              sx={{ width: "calc(100% / 2)" }}
+            />
+            <Tab
+              label="投稿したBINGO"
+              value="2"
+              sx={{ width: "calc(100% / 2)" }}
+            />
           </TabList>
         </Box>
         <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
@@ -138,7 +158,11 @@ const MyAccount: NextPage = () => {
             <img
               src={imageUrl}
               alt="No Image"
-              style={{ maxWidth: "100%", maxHeight: "100%", borderRadius: "50%" }}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                borderRadius: "50%",
+              }}
             />
           ) : (
             "No Image"
@@ -219,13 +243,11 @@ const MyAccount: NextPage = () => {
   );
 };
 
-const showBingoBox = (BingoIds: getBingoIdType[]) => {
-  const handleClick = () => {
-  };
-  return BingoIds.map((bingoId, index) => (
-    <Button key={index} onClick={handleClick}>
-      <Box>{bingoId.statusCode}</Box>
-    </Button>
+const showBingoBox = (BingoInformation: getBingoInformationType[]) => {
+  return BingoInformation.map((BingoInformation, index) => (
+    <Grid key={index}>
+      <ShowBingoModal BingoInformation={BingoInformation} />
+    </Grid>
   ));
 };
 
