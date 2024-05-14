@@ -92,45 +92,60 @@ def post_mybingo(event, context):
     
 def get_bingo(event, context):
     # BINGOテーブルを検索
-    bingo_table = dynamodb.Table('BINGOSTATE2')
+    table = dynamodb.Table('BINGOSTATE2')
+    user_id = event['userId']
+    number = 15;#取得するビンゴの数
     
-    response = bingo_table.scan(
-        FilterExpression=Attr('flag').eq(3)
+    response = table.query(
+        IndexName='flag-index',
+        KeyConditionExpression='flag = :flag',
+        FilterExpression='user_id <> :user_id',
+        ExpressionAttributeValues={
+            ':flag': 3,
+            ':user_id': user_id
+        }
     )
 
     items = response['Items']
-
+    
     if not items:
         return {
             'statusCode': 404,
             'body': json.dumps('Bingo not found')
         }
-    items = random.choice(items)
     
-    reslut = set_bingo_info_json()
+    items = [item for item in items if item['user_id'] != user_id]
+
+    selected_items = random.sample(items, min(len(items), number))
+
+    results = [""] * number
     
-    reslut = get_store_name(int(items['bingo_id']), reslut)
+    j = 0
+    for i in selected_items:
+        results[j] = set_bingo_info_json()
+        results[j] = get_store_name(int(i['bingo_id']), results[j])
+        if results[j] == -1:
+            return {
+                'statusCode': 404,
+                'body': json.dumps('No store or bingo')
+            }
+            
+        results[j] = info_json_add(results[j], i)
+        j = j + 1 
+    print('OK4')
     
-    if reslut == -1:
-        return {
-            'statusCode': 404,
-            'body': json.dumps('No store or bingo')
-        }
-    
-    reslut = info_json_add(reslut, items)
-    
-    reslut = {
+    result = {
         'statusCode': 200,
-        'body': reslut
+        'body': results
     }
     
-    return reslut
+    return result
 
 def post_keep(event, context):
     table = dynamodb.Table('BINGOSTATE2')
     user_id = event['userId']
     bingo_id = int(event['bingoId'])
-    contributor_id = event['contributor_id']
+    contributor_id = event['contributorId']
 
     response = table.query(
         KeyConditionExpression=Key('user_id').eq(contributor_id) & Key('bingo_id').eq(bingo_id)
@@ -141,15 +156,29 @@ def post_keep(event, context):
             'statusCode': 404,
             'body': json.dumps('Bingo not found')
         }
+        
+    response2 = table.query(
+        KeyConditionExpression=Key('user_id').eq(user_id + '-s') & Key('bingo_id').eq(bingo_id)
+    )
     
-    user_id = user_id + '-s'
+    if response2['Items']:
+        for i in response2['Items']:
+            if i['flag'] == 1:
+                return {
+                    'statusCode': 409,
+                    'body': json.dumps('Already kept')
+                }
+        
+    item = response['Items'][0]
+    if 'done_time' in item:
+        item['done_time'] = None
+    if 'done_time' in item:
+        item['posted_time'] = None
+    item['user_id'] = user_id + '-s'
+    item['flag'] = 1
     
-    response = table.put_item(
-        Item={
-            'user_id': user_id,
-            'bingo_id': bingo_id,
-            'flag': 1
-            })
+    table.put_item(Item=item)
+    
     return {
         'statusCode': 200,
         'body': json.dumps('Successful')
@@ -226,7 +255,7 @@ def get_done_bingo(event, context):
 
     items = response['Items']
     
-    done_bingos = [item for item in items if item.get('flag') == 4 or item.get('flag') == 3]
+    done_bingos = [item for item in items if item.get('done_time')]
     if not done_bingos:
         return {
             'statusCode': 404,
@@ -311,7 +340,7 @@ def post_bingo(event, context):
            Item={
                 'bingo_id': bingo_id,
                 'maker_id': event['makerId'],
-                'good_number': '0',
+                'good_number': 0,
                 'store_id_1': event['storeId_1'],
                 'store_id_2': event['storeId_2'],
                 'store_id_3': event['storeId_3'],
@@ -333,7 +362,7 @@ def post_play(event, context):
     table = dynamodb.Table('BINGOSTATE2')
     user_id = event['userId']
     bingo_id = int(event['bingoId'])
-    contributor_id = event['contributor_id']
+    contributor_id = event['contributorId']
 
     response = table.query(
         KeyConditionExpression=Key('user_id').eq(contributor_id) & Key('bingo_id').eq(bingo_id)
@@ -370,31 +399,49 @@ def post_play(event, context):
         'statusCode': 200,
         'body': json.dumps('Successful')
     }
-   
+    
+def get_good(event, context):
+    bingo_id = int(event['bingoId'])
+    table = dynamodb.Table('BINGO')
+    
+    response = table.query(
+        KeyConditionExpression=Key('bingo_id').eq(bingo_id)
+    )
+    
+    if not response['Items']:
+        return {
+            'statusCode': 404,
+            'body': josn.dumps('No Bingo')
+        }
+        
+    return {
+        'statusCode': 200,
+        'body': int(response['Items'][0]['good_number'])
+    }
 
 def set_bingo_info_json():
     x = {
-        'user_id' : "undefine",
-        'bingo_id' : "undefine",
-        'flag' : "undefine",
-        'pi_1' : "undefine",
-        'pi_2' : "undefine",
-        'pi_3' : "undefine",
-        'pi_4' : "undefine",
-        'pi_5' : "undefine",
-        'pi_6' : "undefine",
-        'pi_7' : "undefine",
-        'pi_8' : "undefine",
-        'pi_9' : "undefine",
-        'store_name_1' : "undefine",
-        'store_name_2' : "undefine",
-        'store_name_3' : "undefine",
-        'store_name_4' : "undefine",
-        'store_name_5' : "undefine",
-        'store_name_6' : "undefine",
-        'store_name_7' : "undefine",
-        'store_name_8' : "undefine",
-        'store_name_9' : "undefine"
+        'user_id': None,
+        'bingo_id': None,
+        'flag': None,
+        'pi_1': None,
+        'pi_2': None,
+        'pi_3': None,
+        'pi_4': None,
+        'pi_5': None,
+        'pi_6': None,
+        'pi_7': None,
+        'pi_8': None,
+        'pi_9': None,
+        'store_name_1': None,
+        'store_name_2': None,
+        'store_name_3': None,
+        'store_name_4': None,
+        'store_name_5': None,
+        'store_name_6': None,
+        'store_name_7': None,
+        'store_name_8': None,
+        'store_name_9': None
     }
     
     return x
@@ -410,21 +457,36 @@ def get_store_name(bingo_id, json_data):
     
     if not response['Items']:
         return -1
-    table = dynamodb.Table('STORE')
+    store_ids = [int(response['Items'][0]['store_id_' + str(i)]) for i in range(1, 10)]
+    print(store_ids)
+        
+    # リクエスト用のキーを作成
+    keys_to_get = [{'id': store_id} for store_id in store_ids] 
+    
+    print("Keys to Get:", keys_to_get)
+    # 一括取得
+    response = dynamodb.batch_get_item(
+        RequestItems={
+            'STORE': {
+                'Keys': keys_to_get
+            }
+        }
+    )
+    print(response)
+    if 'Responses' not in response or 'STORE' not in response['Responses']:
+        return -1
+        
+    store_info = {str(item['id']): item for item in response['Responses']['STORE']}
 
+    # 取得した店舗IDに基づいて json_data に店舗名を設定
     for i in range(1, 10):
-        name = "store_id_" + str(i)
-        store_id = int(response['Items'][0][name])
-        
-        response2 = table.query(
-            KeyConditionExpression=Key('id').eq(store_id)
-        )
-        
-        if not response2['Items']:
-            return -1
-        name = "store_name_" + str(i)
-        json_data[name] = response2['Items'][0]['name']
-
+        store_id = str(store_ids[i - 1])
+        name_key = "store_name_" + str(i)
+        store_data = store_info.get(str(store_id))
+        if store_data:
+            json_data[name_key] = store_data['name']
+        else:
+            json_data[name_key] = "Store name not found"
     return json_data
     
 def info_json_add(a, done_bingos):
