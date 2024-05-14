@@ -90,14 +90,12 @@ export const BingoOfHome: FC<{
           </p>
         </Box>
         <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
-          {
-            <Bingo
-              lockModal={true}
-              bingoInformation={bingoInformation}
-              userId={userId}
-              bingoId={bingoId}
-            />
-          }
+          <Bingo
+            lockModal={true}
+            bingoInformation={bingoInformation}
+            userId={userId}
+            bingoId={bingoId}
+          />
         </Box>
         <Box>
           <LikeButton bingoId={bingoId} goodNum={goodNum} />
