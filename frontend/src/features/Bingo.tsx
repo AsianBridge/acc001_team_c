@@ -119,24 +119,29 @@ export const BingoOfMyBingo: FC<{
 }> = ({ bingoInformation, userId, bingoId }) => {
   return (
     <>
-      <Stack spacing={2} sx={{ width: '100%', margin: 'auto', alignItems: 'center' }}>
-      <p style={{
-        color: "black",
-        fontSize: "2.0rem",
-        fontWeight: "bold",
-        textAlign: 'center' // 中央に配置
-      }}>
-        My BINGO
-      </p>
-      <Box sx={{ width: '100%', backgroundColor: "black" }}>
-        <Bingo
-          lockModal={false}
-          bingoInformation={bingoInformation}
-          userId={userId}
-          bingoId={bingoId}
-        />
-      </Box>
-    </Stack>
+      <Stack
+        spacing={2}
+        sx={{ width: "100%", margin: "auto", alignItems: "center" }}
+      >
+        <p
+          style={{
+            color: "black",
+            fontSize: "2.0rem",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          My BINGO
+        </p>
+        <Box sx={{ width: "100%", backgroundColor: "black" }}>
+          <Bingo
+            lockModal={false}
+            bingoInformation={bingoInformation}
+            userId={userId}
+            bingoId={bingoId}
+          />
+        </Box>
+      </Stack>
       <Stack>
         {checkBingo(bingoInformation) && (
           <SubmitBingoButton userId={userId} bingoId={bingoId} />
@@ -172,16 +177,16 @@ export const BingoOfProfile: FC<{
   }
   return (
     <>
-        <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
-          {
-            <Bingo
-              lockModal={true}
-              bingoInformation={bingoSquares}
-              userId={userId}
-              bingoId={bingoId}
-            />
-          }
-        </Box>
+      <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
+        {
+          <Bingo
+            lockModal={true}
+            bingoInformation={bingoSquares}
+            userId={userId}
+            bingoId={bingoId}
+          />
+        }
+      </Box>
     </>
   );
 };

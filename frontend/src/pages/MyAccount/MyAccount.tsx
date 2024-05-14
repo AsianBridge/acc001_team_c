@@ -130,7 +130,8 @@ const MyAccount: NextPage = () => {
   const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
 
-  const imageUrl = "https://rentry.jp/wp-content/uploads/2024/01/smartphone_happy_tereru_man.jpg"; // 画像のURLに置き換える
+  const imageUrl =
+    "https://rentry.jp/wp-content/uploads/2024/01/smartphone_happy_tereru_man.jpg"; // 画像のURLに置き換える
 
   useEffect(() => {
     setUserID("kamide2");
@@ -174,10 +175,12 @@ const MyAccount: NextPage = () => {
           <p style={{ color: "black" }}>📍Kanazawa</p>
           <p style={{ color: "black" }}>🔰BeInGo Beginner</p>
           <p>
-            <span style={{ fontSize: '1.5em' }}>{keepBingoNumber}</span> 　Keep BINGO
+            <span style={{ fontSize: "1.5em" }}>{keepBingoNumber}</span> 　Keep
+            BINGO
           </p>
           <p>
-            <span style={{ fontSize: '1.5em' }}>{doneBingoNumber}</span> 　Finished BINGO
+            <span style={{ fontSize: "1.5em" }}>{doneBingoNumber}</span>{" "}
+            　Finished BINGO
           </p>
         </Stack>
         <Button
