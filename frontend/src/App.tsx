@@ -3,7 +3,6 @@ import { Router } from "./router";
 import Header from "./features/Header";
 import { Amplify } from "aws-amplify";
 import config from "./amplifyconfiguration.json";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import Footer from "./features/Footer";
 
 Amplify.configure(config);
@@ -18,4 +17,4 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+export default App;
