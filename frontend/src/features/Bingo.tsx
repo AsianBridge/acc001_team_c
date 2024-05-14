@@ -1,209 +1,187 @@
-// import { useState } from "react";
-import { BingoSquareModalProps } from "../types";
+import { BingoSquareModalProps, getBingoInformationType } from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
-import { Box, Grid } from "@mui/material";
-// import { BingoSquareInformation } from "../types";
+import { Avatar, Box, Grid, Stack } from "@mui/material";
+import {
+  KeepBingoButton,
+  LikeButton,
+  SubmitBingoButton,
+} from "../components/Button";
+import { FC, useEffect, useState } from "react";
+import { useUserState } from "../store/UserState";
 
-const Square = ({
-  storeName,
-  src,
-  taste,
-  atmosphere,
-  costPerformance,
-}: BingoSquareModalProps) => {
-  return (
-    <BingoSquareShowModal
-      src={src}
-      storeName={storeName}
-      taste={taste}
-      atmosphere={atmosphere}
-      costPerformance={costPerformance}
-    />
-  );
+const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
+  const BingoLines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  if (bingoInformation) {
+    for (let i = 0; i < BingoLines.length; i++) {
+      const [a, b, c] = BingoLines[i];
+      if (
+        bingoInformation[a].src != undefined &&
+        bingoInformation[b].src != undefined &&
+        bingoInformation[c].src != undefined
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
 };
 
 const Bingo = ({
-  storeInformation,
+  lockModal,
+  bingoInformation,
+  userId,
+  bingoId,
 }: {
-  storeInformation: BingoSquareModalProps[];
+  lockModal: boolean;
+  bingoInformation?: BingoSquareModalProps[];
+  userId: string;
+  bingoId: string;
 }) => {
-  // const [bingoSquareInformationState, setBingoSquareInformationState] = useState<BingoSquareInformation[]>(Array(9).fill({ storeName: undefined, src: undefined }));
-
-  // const squareUpdate = (value: number, storeName: string, src: string) => {
-  //     const nextSquareInformationState = bingoSquareInformationState.slice();
-  //     nextSquareInformationState[value] = { storeName, src };
-
-  //     setBingoSquareInformationState(nextSquareInformationState);
-  // }
-
   return (
     <Grid container spacing={1}>
-      {storeInformation.map((store, index) => (
-        <Grid item xs={4} sm={4} key={index}>
-          <Square
-            storeName={store.storeName}
-            src={store.src}
-            taste={store.taste}
-            atmosphere={store.atmosphere}
-            costPerformance={store.costPerformance}
-          />
-        </Grid>
-      ))}
+      {bingoInformation &&
+        bingoInformation.map((store, index) => (
+          <Grid item xs={4} sm={4} key={index}>
+            <BingoSquareShowModal
+              lockModal={lockModal}
+              storeName={store.storeName}
+              src={store.src ?? undefined}
+              userId={userId}
+              bingoId={bingoId}
+              storeNumber={index as unknown as string}
+            />
+          </Grid>
+        ))}
     </Grid>
   );
 };
 
-export const BingoOfHome = () => {
-  const storeInformation: BingoSquareModalProps[] = [
-    {
-      storeName: "マック",
-      src: "https://pbs.twimg.com/profile_images/1726395545974112256/3bTbEpwe_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "一風堂",
-      src: "https://ec-ippudo.com/img/usr/top/stores/pc/ippudo.jpg",
-      taste: 5,
-      atmosphere: 5,
-      costPerformance: 3,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: undefined,
-      taste: undefined,
-      atmosphere: undefined,
-      costPerformance: undefined,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-  ];
-
-  const UserId = "User1";
+export const BingoOfHome: FC<{
+  bingoInformation: BingoSquareModalProps[] | undefined;
+  userId: string;
+  bingoId: string;
+  goodNum: number;
+}> = ({ bingoInformation, userId, bingoId, goodNum }) => {
+  const { userID } = useUserState();
 
   return (
     <>
-      <Box>
-        <h1>ID名:{UserId}</h1>
-      </Box>
-      <Box sx={{ backgroundColor: "#888888" }}>
-        <Bingo storeInformation={storeInformation} />
-      </Box>
+      <Stack spacing={-3}>
+        <Box
+          sx={{
+            color: "black",
+            fontSize: "2rem",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Avatar />
+          <p style={{ display: "inline-block", marginLeft: "10px" }}>
+            {userId}
+          </p>
+        </Box>
+        <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
+          {
+            <Bingo
+              lockModal={true}
+              bingoInformation={bingoInformation}
+              userId={userId}
+              bingoId={bingoId}
+            />
+          }
+        </Box>
+        <Box>
+          <LikeButton bingoId={bingoId} goodNum={goodNum} />
+          <KeepBingoButton
+            userId={userID}
+            bingoId={bingoId}
+            contributorId={userId}
+          />
+        </Box>
+      </Stack>
     </>
   );
 };
 
-export const BingoOfMyBingo = () => {
-  const storeInformation: BingoSquareModalProps[] = [
-    {
-      storeName: "マック",
-      src: "https://pbs.twimg.com/profile_images/1726395545974112256/3bTbEpwe_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "一風堂",
-      src: "https://ec-ippudo.com/img/usr/top/stores/pc/ippudo.jpg",
-      taste: 5,
-      atmosphere: 5,
-      costPerformance: 3,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: undefined,
-      taste: undefined,
-      atmosphere: undefined,
-      costPerformance: undefined,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-    {
-      storeName: "築地銀だこ",
-      src: "https://pbs.twimg.com/profile_images/1632537593777913857/v0yABIUT_400x400.jpg",
-      taste: 3,
-      atmosphere: 4,
-      costPerformance: 2,
-    },
-  ];
-
+export const BingoOfMyBingo: FC<{
+  bingoInformation: BingoSquareModalProps[] | undefined;
+  userId: string;
+  bingoId: string;
+}> = ({ bingoInformation, userId, bingoId }) => {
   return (
     <>
-      <Bingo storeInformation={storeInformation} />
+      <Stack spacing={2} sx={{ width: '100%', margin: 'auto', alignItems: 'center' }}>
+      <p style={{
+        color: "black",
+        fontSize: "2.0rem",
+        fontWeight: "bold",
+        textAlign: 'center' // 中央に配置
+      }}>
+        My BINGO
+      </p>
+      <Box sx={{ width: '100%', backgroundColor: "black" }}>
+        <Bingo
+          lockModal={false}
+          bingoInformation={bingoInformation}
+          userId={userId}
+          bingoId={bingoId}
+        />
+      </Box>
+    </Stack>
+      <Stack>
+        {checkBingo(bingoInformation) && (
+          <SubmitBingoButton userId={userId} bingoId={bingoId} />
+        )}
+      </Stack>
+    </>
+  );
+};
+
+export const BingoOfProfile: FC<{
+  bingoInformation: getBingoInformationType;
+}> = ({ bingoInformation }) => {
+  const [userId, setUserId] = useState("");
+  const [bingoId, setBingoId] = useState("");
+
+  useEffect(() => {
+    if (bingoInformation) {
+      const bodyObject = JSON.parse(bingoInformation.body);
+      setUserId(bodyObject.user_id);
+      setBingoId(bodyObject.bingo_id);
+    }
+  }, [bingoInformation]);
+
+  const bingoSquares: BingoSquareModalProps[] = [];
+  if (bingoInformation) {
+    const bodyObject = JSON.parse(bingoInformation.body);
+    for (let i = 1; i <= 9; i++) {
+      bingoSquares.push({
+        src: bodyObject[`pi_${i}`],
+        storeName: bodyObject[`store_name_${i}`],
+      });
+    }
+  }
+  return (
+    <>
+        <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
+          {
+            <Bingo
+              lockModal={true}
+              bingoInformation={bingoSquares}
+              userId={userId}
+              bingoId={bingoId}
+            />
+          }
+        </Box>
     </>
   );
 };

@@ -1,7 +1,5 @@
 {
-  "providers": [
-    "awscloudformation"
-  ],
+  "providers": ["awscloudformation"],
   "projectName": "acc001teamc",
   "version": "3.1",
   "frontend": "javascript",

@@ -12,7 +12,7 @@ export const ShowImage = (props: Props) => {
 export const HomeImage = () => {
   return (
     <ShowImage
-      src="https://loosedrawing.com/assets/illustrations/png/487.png"
+      src="https://img.icons8.com/?size=48&id=86527&format=png"
       width="50vw"
       height="50vh"
     />
@@ -22,7 +22,7 @@ export const HomeImage = () => {
 export const AccountImage = () => {
   return (
     <ShowImage
-      src="https://kotonohaworks.com/free-icons/wp-content/uploads/kkrn_icon_user_13.png"
+      src="https://cdn-icons-png.freepik.com/256/456/456212.png"
       width="50vw"
       height="50vh"
     />
@@ -32,9 +32,9 @@ export const AccountImage = () => {
 export const FooterBingoImage = () => {
   return (
     <ShowImage
-      src="https://tegakisozai.com/wp-content/uploads/2019/09/bingogame_green_55.png"
+      src="https://www.silhouette-illust.com/wp-content/uploads/2017/09/bingo_card_37352-300x300.jpg"
       width="50vw"
-      height="50vh"
+      height="56vh"
     />
   );
 };

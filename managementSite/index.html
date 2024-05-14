@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>管理用</title>
+</head>
+<body>
+    <div class="user_number_la">ユーザ総数</div>
+    <div id="user_number"></div>
+    <div class="posted_number_la">投稿ビンゴ総数</div>
+    <div id="posted_number"></div>
+    <div class="done_number_la">達成ビンゴ総数</div>
+    <div id="done_number"></div>
+    <div class="play_number_la">プレイ中ビンゴ総数</div>
+    <div id="play_number"></div>
+    <div class="keep_number_la">保存ビンゴ総数</div>
+    <div id="keep_number"></div>
+    <div class="glaph">
+        <canvas id="done_day"></canvas>
+        <input id="done_day_in" name="done_day_in">
+        <label for="done_day_in" class="done_day_la_f">範囲変更</label>
+        <label for="done_day_in" class="done_day_la_b">まで</label>
+        <button class="done_day_bu" onclick="change('Day', 'done')">変更</button>
+        <canvas id="done_month"></canvas>
+        <input id="done_month_in" name="done_month_in">
+        <label for="done_month_in" class="done_month_la_f">範囲変更</label>
+        <label for="done_month_in" class="done_month_la_b">まで</label>
+        <button class="done_month_bu" onclick="change('Month', 'done')">変更</button>
+        <canvas id="done_year"></canvas>
+        <input id="done_year_in" name="done_year_in">
+        <label for="done_year_in" class="done_year_la_f">範囲変更</label>
+        <label for="done_year_in" class="done_year_la_b">まで</label>
+        <button class="done_year_bu" onclick="change('Year', 'done')">変更</button>
+        <canvas id="posted_day"></canvas>
+        <input id="posted_day_in" name="posted_day_in">
+        <label for="posted_day_in" class="posted_day_la_f">範囲変更</label>
+        <label for="posted_day_in" class="posted_day_la_b">まで</label>
+        <button class="posted_day_bu" onclick="change('Day', 'posted')">変更</button>
+        <canvas id="posted_month"></canvas>
+        <input id="posted_month_in" name="posted_month_in">
+        <label for="posted_month_in" class="posted_month_la_f">範囲変更</label>
+        <label for="posted_month_in" class="posted_month_la_b">まで</label>
+        <button class="posted_month_bu" onclick="change('Month', 'posted')">変更</button>
+        <canvas id="posted_year"></canvas>
+        <input id="posted_year_in" name="posted_year_in">
+        <label for="posted_year_in" class="posted_year_la_f">範囲変更</label>
+        <label for="posted_year_in" class="posted_year_la_b">まで</label>
+        <button class="posted_year_bu" onclick="change('Year', 'posted')">変更</button>
+    </div>
+    <script src="index.js"></script>
+    <header>
+		BeInGo管理    
+        <span onclick="window.location.href='index.html'" class="home">HOME</span>
+        <span onclick="window.location.href='store.html'" class="store">店舗管理</span>
+        <span onclick="window.location.href='user.html'" class="user">ユーザ管理</span>
+	</header>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

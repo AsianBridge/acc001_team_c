@@ -1,57 +1,121 @@
 import { Box, Button, Modal } from "@mui/material";
-import React from "react";
+import { useState } from "react";
 import { ShowImage } from "../components/ShowImage";
-import { StoreEvaluation } from "./StoreEvaluation";
-import { BingoSquareModalProps } from "../types";
-import { ImageUploader } from "../components/Button";
+import { ShowStoreReview } from "./StoreReview";
+import { ShowCaption } from "../components/ShowText";
+import { ReviewButton } from "../components/Button";
+import { useAsync } from "react-use";
+import api from "../api/api";
+import {
+  BingoSquareModalProps,
+  getBingoInformationType,
+  getReviewType,
+  Reviewer,
+  ReviewInformation,
+} from "../types";
+import { BingoOfProfile } from "./Bingo";
 
 export const BingoSquareShowModal = ({
+  lockModal,
   src,
   storeName,
-  taste,
-  atmosphere,
-  costPerformance,
-}: BingoSquareModalProps) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const boxStyle = {
-    bgcolor: "background.paper",
+  userId,
+  bingoId,
+  storeNumber,
+}: {
+  lockModal: boolean;
+} & BingoSquareModalProps &
+  Reviewer) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    (lockModal === false || src !== undefined) && setOpen(true);
   };
+  const handleClose = () => setOpen(false);
+  const [reviewInformation, setReviewInformation] =
+    useState<ReviewInformation>();
+  try {
+    useAsync(async () => {
+      if (src) {
+        const Reviewer: Reviewer = {
+          userId: userId,
+          bingoId: bingoId,
+          storeNumber: `${storeNumber + 1}`,
+        };
+        const response: getReviewType = await api.getReview(Reviewer);
+        const review: ReviewInformation = {
+          caption: response.body.review ?? undefined,
+          starTaste: parseInt(response.body.star_taste),
+          starAtmosphere: parseInt(response.body.star_atmosphere),
+          starCP: parseInt(response.body.star_cp),
+        };
 
-    return (
-        <>
-            <Button onClick={handleOpen} >
-                {src === undefined ?
-                    <Box>
-                        <h3>{storeName}へ行こう</h3>
-                    </Box>
-                    :
-                    <ShowImage src={src} width="120vw" height="120vh" />
-                }
-            </Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={boxStyle}>
-                    {src === undefined ?
-                        <Box width="50vw" height="10vh">
-                            <h3>{storeName}へ行こう</h3>
-                            <ImageUploader/>
-                        </Box>
-                        :
-                        <>
-                            <ShowImage src={src} width="200vw" height="200vh"></ShowImage>
-                            <StoreEvaluation taste={taste} atmosphere={atmosphere} costPerformance={costPerformance} />
-                            <h1>{storeName}</h1>
-                        </>
-                    }
-                </Box>
-            </Modal>
-        </>
-    );
-}
+        setReviewInformation(review);
+      }
+    }, []);
+  } catch (e) {
+    console.error(e);
+  }
+
+  return (
+    <>
+      <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: '32vw', background: '#c0c0c0' }}>
+        <Button onClick={handleOpen}>
+          {src === undefined ? (
+            <div style={{ textAlign: 'center' }}> {/* 中央揃えを追加 */}
+              <p style={{ color: 'black', fontSize: '2vw', margin: '0 3vw' }}>
+                {storeName}へ<br />行こう
+              </p>
+            </div>
+          ) : (
+            <ShowImage src={src} width="100%" height="auto" />
+          )}
+        </Button>
+      </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ bgcolor: "background.paper" }}>
+          {src === undefined && (
+            <Box width="50vw" height="40vh">
+              <h3>{storeName}へ行こう</h3>
+              <ReviewButton />
+            </Box>
+          )}
+          {src !== undefined && (
+            <>
+              <ShowImage src={src} width="100vh" height="auto" />
+              <h1>{storeName}</h1>
+              <ShowStoreReview
+                taste={reviewInformation?.starTaste}
+                atmosphere={reviewInformation?.starAtmosphere}
+                costPerformance={reviewInformation?.starCP}
+              />
+              <ShowCaption caption={reviewInformation?.caption} />
+            </>
+          )}
+        </Box>
+      </Modal>
+    </>
+  );
+};
+
+export const ShowBingoModal = ({
+  BingoInformation,
+}: {
+  BingoInformation: getBingoInformationType;
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Hello</Button>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <div>
+          <BingoOfProfile bingoInformation={BingoInformation} />
+        </div>
+      </Modal>
+    </>
+  );
+};
