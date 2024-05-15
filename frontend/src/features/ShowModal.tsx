@@ -109,13 +109,24 @@ export const ShowBingoModal = ({
 }) => {
   const [open, setOpen] = useState(false);
   return (
-    <>
-      <Button onClick={() => setOpen(true)}>Hello</Button>
+    <div>
+      {/* ビンゴカードを縮小して表示するボタン */}
+      <button onClick={() => setOpen(true)} style={{
+        transform: 'scale(0.5)', // 50%に縮小
+        border: 'none',     // ボーダーなし
+        cursor: 'pointer',  // カーソルをポインターに
+        padding: 0,         // パディングなし
+        margin: 0,          // マージンなし
+      }}>
+        <BingoOfProfile bingoInformation={BingoInformation} />
+      </button>
+      
+      {/* モーダルウィンドウでビンゴカードを拡大して表示 */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div>
           <BingoOfProfile bingoInformation={BingoInformation} />
         </div>
       </Modal>
-    </>
+    </div>
   );
 };
