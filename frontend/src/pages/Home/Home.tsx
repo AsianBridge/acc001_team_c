@@ -18,7 +18,6 @@ const getBingoInformation = async (userID: string) => {
   const bingoInformation: bingoInformationArray[] = [];
   try {
     const getBingoResponse = await api.getBingo(userID);
-    console.log(getBingoResponse);
     if (getBingoResponse && getBingoResponse.body) {
       for (let j = 0; j < getBingoResponse.body.length; j++) {
         bingoSquares[j] = [];

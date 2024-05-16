@@ -1,26 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SetStoreReview } from "../../features/StoreReview";
 import { CaptionField } from "../../features/TextField";
 import { ShowImage } from "../../components/ShowImage";
 import { Stack } from "@mui/material";
 import { SubmitReviewButton } from "../../components/Button";
+import { useLocation } from "react-router-dom";
+import { ReviewInformation } from "../../types";
 
+interface response {
+  src: string;
+  bingoId: string;
+  userId: string;
+  storeNumber: number;
+}
 const Review = () => {
-  const [imageSrc] = useState(
-    "https://yt3.googleusercontent.com/ytc/AIdro_nLCSTJbAHIDI3z-KlBg4YEhIEFk6Pw9ICFx-3C=s900-c-k-c0x00ffffff-no-rj",
-  );
+  const location = useLocation();
+  const responseData: response = location.state;
+  const bodyObject = JSON.parse(responseData.src);
+  const [imageSrc] = useState(bodyObject.imageUrl);
   const [taste, setTaste] = useState(0);
   const [atmosphere, setAtmosphere] = useState(0);
   const [costPerformance, setCostPerformance] = useState(0);
   const [caption, setCaption] = useState("");
-
-  const isReviewComplete = () => {
-    if (taste != 0 && atmosphere != 0 && costPerformance != 0) {
-      return true;
-    }
-    return false;
+  const [isReviewComplete, setIsReviewComplete] = useState(false);
+  const reviewInformation: ReviewInformation = {
+    bingoId: responseData.bingoId,
+    userId: responseData.userId,
+    caption: caption,
+    starTaste: taste,
+    starAtmosphere: atmosphere,
+    starCP: costPerformance,
+    store_number: responseData.storeNumber,
   };
 
+  useEffect(() => {
+    if (taste != 0 && atmosphere != 0 && costPerformance != 0) {
+      setIsReviewComplete(true);
+    }
+  }, [taste, atmosphere, costPerformance]);
   return (
     <>
       <Stack style={{ marginTop: "10vh" }}>
@@ -38,7 +55,10 @@ const Review = () => {
         <CaptionField caption={caption} setCaption={setCaption} />
       </Stack>
       <Stack style={{ height: "60vh" }}>
-        <SubmitReviewButton isReviewComplete={isReviewComplete()} />
+        <SubmitReviewButton
+          isReviewComplete={isReviewComplete}
+          reviewInformation={reviewInformation}
+        />
       </Stack>
     </>
   );

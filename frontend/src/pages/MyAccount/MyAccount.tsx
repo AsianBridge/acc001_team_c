@@ -2,7 +2,13 @@ import { Stack, Box, Tab, Button, Grid } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import api from "../../api/api";
 import { getBingoInformationType } from "../../types";
 import { useUserState } from "../../store/UserState";
@@ -72,10 +78,17 @@ const BingoTab = ({
   const [keepBingoId, setKeepBingoId] = useState<getBingoInformationType[]>();
   const [doneBingoId, setDoneBingoId] = useState<getBingoInformationType[]>();
 
-  useEffect(() => {
+  const fetchKeepBingoInfo = useCallback(() => {
     getKeepBingoInformation(userID, setKeepBingoId, setKeepBingoNumber);
+  }, [userID, setKeepBingoId, setKeepBingoNumber]);
+  const fetchDoneBingoInfo = useCallback(() => {
     getDoneBingoInformation(userID, setDoneBingoId, setDoneBingoNumber);
-  }, [userID]);
+  }, [userID, setDoneBingoId, setDoneBingoNumber]);
+
+  useEffect(() => {
+    fetchKeepBingoInfo();
+    fetchDoneBingoInfo();
+  }, [fetchKeepBingoInfo, fetchDoneBingoInfo]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault();
@@ -126,16 +139,13 @@ const BingoTab = ({
 };
 
 const MyAccount: NextPage = () => {
-  const { userID, setUserID } = useUserState();
+  const { userID } = useUserState();
   const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
 
   const imageUrl =
     "https://rentry.jp/wp-content/uploads/2024/01/smartphone_happy_tereru_man.jpg"; // 画像のURLに置き換える
 
-  useEffect(() => {
-    setUserID("kamide2");
-  }, []);
   return (
     <Box height="90vh" width="100vw">
       <Stack
@@ -175,12 +185,12 @@ const MyAccount: NextPage = () => {
           <p style={{ color: "black" }}>📍Kanazawa</p>
           <p style={{ color: "black" }}>🔰BeInGo Beginner</p>
           <p>
-            <span style={{ fontSize: "1.5em" }}>{keepBingoNumber}</span> 　Keep
+            <span style={{ fontSize: "1.5em" }}>{keepBingoNumber}</span> Keep
             BINGO
           </p>
           <p>
             <span style={{ fontSize: "1.5em" }}>{doneBingoNumber}</span>{" "}
-            　Finished BINGO
+            Finished BINGO
           </p>
         </Stack>
         <Button

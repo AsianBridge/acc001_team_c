@@ -7,9 +7,17 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  Fragment,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { ReviewInformation } from "../types";
 
 export const HomeButton = () => {
   return (
@@ -107,18 +115,31 @@ export const KeepBingoButton = ({
 
 export const SubmitReviewButton = ({
   isReviewComplete,
+  reviewInformation,
 }: {
   isReviewComplete: boolean;
+  reviewInformation: ReviewInformation;
 }) => {
+  const [buttonState, setButtonState] = useState(false); //押された時にtrue
+  const navigate = useNavigate();
+  const postReview = useCallback(async () => {
+    if (buttonState) {
+      console.log(reviewInformation);
+      const result = await api.postReview(reviewInformation);
+      console.log(result);
+      setButtonState(false);
+      navigate("/MyBingo");
+    }
+  }, [buttonState, reviewInformation, navigate]);
+
+  useEffect(() => {
+    postReview();
+  }, [postReview]);
   return (
-    <Button href="/MyBingo" disabled={!isReviewComplete}>
+    <Button disabled={!isReviewComplete} onClick={() => setButtonState(true)}>
       投稿する
     </Button>
   );
-};
-
-export const ReviewButton = () => {
-  return <Button href="/Review">確定ボタン</Button>;
 };
 
 export const LikeButton = ({
@@ -177,48 +198,3 @@ export const LikeButton = ({
     </header>
   );
 };
-
-// export const ImageUploader = () => {
-//   const [base64Images, setBase64Images] = useState<string>();
-
-//   const handleInputFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const files = e.target.files;
-//     if (!files) {
-//       return;
-//     }
-
-//     const fileArray = Array.from(files);
-
-//     fileArray.forEach((file) => {
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         const result = reader.result;
-//         if (typeof result !== "string") {
-//           return;
-//         }
-//         setBase64Images((prevImages) => [...prevImages, result]);
-//       };
-//       reader.readAsDataURL(file);
-//     });
-//   };
-
-//   const handleImageClick = (index: number) => {
-//     setBase64Images((prev) => prev.filter((_, idx) => idx !== index));
-//   };
-
-//   return (
-//     <div className="relative border-2 border-red-200 bg-red-100 w-[600px] h-[600px] flex flex-col space-y-4">
-//       <input
-//         type="file"
-//         accept="image/jpeg, image/png"
-//         onChange={handleInputFile}
-//       />
-//       <div className="border-2 border-blue-300 bg-blue-200">
-//         <p>画像プレビュー</p>
-//         <div className="flex space-x-4 overflow-x-auto py-4">
-//           <CropDemo src={base64Images}/>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };

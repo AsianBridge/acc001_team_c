@@ -43,7 +43,7 @@ const MyBingo: NextPage = () => {
 
   useAsync(async () => {
     const result = await getBingoInformation(userID);
-    console.log(result);
+    // console.log(result);
     if (result) {
       const { bingoSquares, userId, bingoId } = result;
       setBingoInformation(bingoSquares);
