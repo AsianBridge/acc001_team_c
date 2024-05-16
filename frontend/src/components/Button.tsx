@@ -111,24 +111,24 @@ export const SubmitReviewButton = ({
   reviewInformation,
 }: {
   isReviewComplete: boolean;
-  reviewInformation:ReviewInformation
+  reviewInformation: ReviewInformation;
 }) => {
-  const [buttonState,setButtonState] = useState(false) //押された時にtrue
-  const navigate = useNavigate()
+  const [buttonState, setButtonState] = useState(false); //押された時にtrue
+  const navigate = useNavigate();
   useEffect(() => {
     const postReview = async () => {
       if (buttonState) {
-        console.log(reviewInformation)
+        console.log(reviewInformation);
         const result = await api.postReview(reviewInformation);
-        console.log(result)
+        console.log(result);
         setButtonState(false); // API呼び出し後、ボタン状態をリセット
-        navigate('/MyBingo')
+        navigate("/MyBingo");
       }
     };
     postReview();
   }, [buttonState]);
   return (
-    <Button disabled={!isReviewComplete} onClick={()=> setButtonState(true)}>
+    <Button disabled={!isReviewComplete} onClick={() => setButtonState(true)}>
       投稿する
     </Button>
   );

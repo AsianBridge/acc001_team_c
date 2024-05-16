@@ -182,11 +182,11 @@ const ImageCrop: React.FC<ImageCropProps> = ({
       );
 
       const reviewProps = {
-        src:response.body,
-        bingoId:bingoId,
-        userId:userId,
-        storeNumber:parseInt(storeNumber) + 1
-      }
+        src: response.body,
+        bingoId: bingoId,
+        userId: userId,
+        storeNumber: parseInt(storeNumber) + 1,
+      };
       navigate("/Review", { state: reviewProps });
     } catch (error) {
       console.log(error);
