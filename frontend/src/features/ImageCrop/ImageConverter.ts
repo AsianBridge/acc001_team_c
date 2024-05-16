@@ -4,6 +4,5 @@ export function convertImageToBase64(file: File): Promise<string> {
     reader.onloadend = () => resolve(reader.result as string);
     reader.onerror = reject;
     reader.readAsDataURL(file);
-    console.log("Converted image to Base64");
   });
 }

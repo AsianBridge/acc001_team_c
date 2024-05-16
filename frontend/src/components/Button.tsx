@@ -124,9 +124,7 @@ export const SubmitReviewButton = ({
   const navigate = useNavigate();
   const postReview = useCallback(async () => {
     if (buttonState) {
-      console.log(reviewInformation);
-      const result = await api.postReview(reviewInformation);
-      console.log(result);
+      await api.postReview(reviewInformation);
       setButtonState(false);
       navigate("/MyBingo");
     }

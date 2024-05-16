@@ -11,8 +11,6 @@ Amplify.configure(awsconfig);
 function Auth({ children }: { children: ReactNode }) {
   I18n.putVocabularies(translations);
   I18n.setLanguage("ja");
-  console.log(translations);
-
   I18n.putVocabularies({
     ja: {
       "Show password": "パスワードを表示",
