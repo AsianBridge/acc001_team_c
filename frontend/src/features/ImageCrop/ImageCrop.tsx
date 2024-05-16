@@ -209,7 +209,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
           />
         </div>
         <div>
-          <label htmlFor="rotate-input">回し: 　　</label>
+          <label htmlFor="rotate-input">回し: </label>
           <input
             id="rotate-input"
             type="number"

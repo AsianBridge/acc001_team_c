@@ -7,7 +7,14 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { AccountImage, FooterBingoImage, HomeImage } from "./ShowImage";
-import { Dispatch, Fragment, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  Fragment,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { ReviewInformation } from "../types";
@@ -115,18 +122,19 @@ export const SubmitReviewButton = ({
 }) => {
   const [buttonState, setButtonState] = useState(false); //押された時にtrue
   const navigate = useNavigate();
+  const postReview = useCallback(async () => {
+    if (buttonState) {
+      console.log(reviewInformation);
+      const result = await api.postReview(reviewInformation);
+      console.log(result);
+      setButtonState(false);
+      navigate("/MyBingo");
+    }
+  }, [buttonState, reviewInformation, navigate]);
+
   useEffect(() => {
-    const postReview = async () => {
-      if (buttonState) {
-        console.log(reviewInformation);
-        const result = await api.postReview(reviewInformation);
-        console.log(result);
-        setButtonState(false); // API呼び出し後、ボタン状態をリセット
-        navigate("/MyBingo");
-      }
-    };
     postReview();
-  }, [buttonState]);
+  }, [postReview]);
   return (
     <Button disabled={!isReviewComplete} onClick={() => setButtonState(true)}>
       投稿する
