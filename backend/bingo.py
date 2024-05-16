@@ -334,7 +334,8 @@ def post_bingo(event, context):
                     }
     
     now = datetime.now()
-    bingo_id = int(now.strftime('%Y%m%d%H%M%S%f')) 
+    bingo_id = now.strftime('%Y%m%d%H%M%S%f') 
+    bingo_id = int(bingo_id[2:-2])
     
     new_bingo = table.put_item(
            Item={
@@ -411,7 +412,7 @@ def get_good(event, context):
     if not response['Items']:
         return {
             'statusCode': 404,
-            'body': josn.dumps('No Bingo')
+            'body': json.dumps('No Bingo')
         }
         
     return {
