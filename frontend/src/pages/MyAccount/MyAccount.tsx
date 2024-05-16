@@ -126,16 +126,14 @@ const BingoTab = ({
 };
 
 const MyAccount: NextPage = () => {
-  const { userID, setUserID } = useUserState();
+  const { userID} = useUserState();
   const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
 
   const imageUrl =
     "https://rentry.jp/wp-content/uploads/2024/01/smartphone_happy_tereru_man.jpg"; // 画像のURLに置き換える
 
-  useEffect(() => {
-    setUserID("kamide2");
-  }, []);
+  
   return (
     <Box height="90vh" width="100vw">
       <Stack

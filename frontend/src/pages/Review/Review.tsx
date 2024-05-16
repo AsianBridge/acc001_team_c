@@ -8,10 +8,10 @@ import { useLocation } from "react-router-dom";
 import { ReviewInformation } from "../../types";
 
 interface response {
-  src:string,
-  bingoId:string,
-  userId:string
-  storeNumber:number
+  src: string;
+  bingoId: string;
+  userId: string;
+  storeNumber: number;
 }
 const Review = () => {
   const location = useLocation();
@@ -24,20 +24,20 @@ const Review = () => {
   const [caption, setCaption] = useState("");
   const [isReviewComplete, setIsReviewComplete] = useState(false);
   const reviewInformation: ReviewInformation = {
-    bingoId: responseData.bingoId,  
-    userId: responseData.userId,  
-    caption: caption,  
-  starTaste: taste,  
-    starAtmosphere: atmosphere,  
-    starCP: costPerformance,  
-    store_number: responseData.storeNumber
+    bingoId: responseData.bingoId,
+    userId: responseData.userId,
+    caption: caption,
+    starTaste: taste,
+    starAtmosphere: atmosphere,
+    starCP: costPerformance,
+    store_number: responseData.storeNumber,
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (taste != 0 && atmosphere != 0 && costPerformance != 0) {
-      setIsReviewComplete(true)
+      setIsReviewComplete(true);
     }
-},[taste,atmosphere,costPerformance]);
+  }, [taste, atmosphere, costPerformance]);
   return (
     <>
       <Stack style={{ marginTop: "10vh" }}>
@@ -55,7 +55,10 @@ const Review = () => {
         <CaptionField caption={caption} setCaption={setCaption} />
       </Stack>
       <Stack style={{ height: "60vh" }}>
-        <SubmitReviewButton isReviewComplete={isReviewComplete} reviewInformation={reviewInformation}/>
+        <SubmitReviewButton
+          isReviewComplete={isReviewComplete}
+          reviewInformation={reviewInformation}
+        />
       </Stack>
     </>
   );

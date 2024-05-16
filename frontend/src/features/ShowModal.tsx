@@ -49,7 +49,7 @@ export const BingoSquareShowModal = ({
           starTaste: parseInt(response.body.star_taste),
           starAtmosphere: parseInt(response.body.star_atmosphere),
           starCP: parseInt(response.body.star_cp),
-          store_number: parseInt(storeNumber) + 1
+          store_number: parseInt(storeNumber) + 1,
         };
 
         setReviewInformation(review);

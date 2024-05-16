@@ -116,13 +116,13 @@ const getGoodByBingoId = async (bingoId: string) => {
 const postReview = async (review: ReviewInformation) => {
   const postData = {
     httpMethod: "POST_REVIEW",
-    bingoId:review.bingoId,
-    userId:review.userId,
-    caption:review.caption,
+    bingoId: review.bingoId,
+    userId: review.userId,
+    caption: review.caption,
     starTaste: review.starTaste,
-    starAtmosphere:review.starAtmosphere,
-    starCP:review.starCP,  
-    store_number:review.store_number
+    starAtmosphere: review.starAtmosphere,
+    starCP: review.starCP,
+    store_number: review.store_number,
   };
   const response = await apiClient.post("", postData);
   return response.data;

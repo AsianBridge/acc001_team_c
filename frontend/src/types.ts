@@ -117,13 +117,13 @@ export interface getMyBingoIdsBodyType {
 }
 
 export type ReviewInformation = {
-  bingoId:string
-    userId:string
+  bingoId: string;
+  userId: string;
   caption: string;
   starTaste: number;
   starAtmosphere: number;
   starCP: number;
-  store_number:number  
+  store_number: number;
 };
 
 export type Reviewer = {
