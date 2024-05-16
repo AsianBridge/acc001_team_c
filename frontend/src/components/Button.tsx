@@ -161,7 +161,7 @@ export const LikeButton = ({
     const newTimerId = setTimeout(async () => {
       await api.postGoodByBingoId(goodCounter + 1, bingoId);
     }, 1000);
-    setTimerId(newTimerId);
+    setTimerId(newTimerId as unknown as number);
 
     setColor("red"); // 赤に設定
 
