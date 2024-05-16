@@ -140,7 +140,8 @@ export const ShowBingoModal = ({
           margin: 0, // マージンなし
         }}
       >
-        <BingoOfProfile bingoInformation={BingoInformation} />
+        {/* <BingoOfProfile bingoInformation={BingoInformation} /> */}
+        開きます
       </button>
 
       {/* モーダルウィンドウでビンゴカードを拡大して表示 */}
@@ -152,3 +153,4 @@ export const ShowBingoModal = ({
     </div>
   );
 };
+
