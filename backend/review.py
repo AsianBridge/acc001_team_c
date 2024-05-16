@@ -26,11 +26,13 @@ def post_review(event, context):
     star_cp = event['starCP']
     store_number = event['store_number']
     
-    if not (store_number == '1' or store_number == '2' or store_number == '3' or store_number == '4' or store_number == '5' or store_number == '6' or store_number == '7' or store_number == '8' or store_number == '9'):
+    if not (store_number == 1 or store_number == 2 or store_number == 3 or store_number == 4 or store_number == 5 or store_number == 6 or store_number == 7 or store_number == 8 or store_number == 9):
         return {
             'statusCode': 400,
             'body': json.dumps('Incorrect store_number')
         }
+        
+    store_number = str(store_number)
 
     # BINGOSTATEテーブルを取得
     bingo_state_table = dynamodb.Table('BINGOSTATE2')
@@ -155,7 +157,7 @@ def get_review(event, context):
     if not response['Items']:
         return {
             'statusCode': 404,
-            'body': json.dumps('No Bingo')
+            'body': json.dumps('No Bingo') 
         }
         
     json_data = {}
