@@ -3,7 +3,6 @@ import { useState } from "react";
 import { ShowImage } from "../components/ShowImage";
 import { ShowStoreReview } from "./StoreReview";
 import { ShowCaption } from "../components/ShowText";
-import { ReviewButton } from "../components/Button";
 import { useAsync } from "react-use";
 import api from "../api/api";
 import {
@@ -14,6 +13,7 @@ import {
   ReviewInformation,
 } from "../types";
 import { BingoOfProfile } from "./Bingo";
+import ImageCrop from "./ImageCrop/ImageCrop";
 
 export const BingoSquareShowModal = ({
   lockModal,
@@ -43,10 +43,13 @@ export const BingoSquareShowModal = ({
         };
         const response: getReviewType = await api.getReview(Reviewer);
         const review: ReviewInformation = {
+          userId: userId,
+          bingoId: bingoId,
           caption: response.body.review ?? undefined,
           starTaste: parseInt(response.body.star_taste),
           starAtmosphere: parseInt(response.body.star_atmosphere),
           starCP: parseInt(response.body.star_cp),
+          store_number: parseInt(storeNumber) + 1
         };
 
         setReviewInformation(review);
@@ -93,7 +96,11 @@ export const BingoSquareShowModal = ({
           {src === undefined && (
             <Box width="50vw" height="40vh">
               <h3>{storeName}へ行こう</h3>
-              <ReviewButton />
+              <ImageCrop
+                bingoId={String(bingoId)}
+                userId={userId}
+                storeNumber={String(storeNumber)}
+              />
             </Box>
           )}
           {src !== undefined && (
