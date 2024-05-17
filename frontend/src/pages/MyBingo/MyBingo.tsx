@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BingoOfMyBingo } from "../../features/Bingo";
 import { NextPage } from "next";
 import { BingoSquareModalProps, getBingoInformationType } from "../../types";
-import { useUserState } from "../../store/UserState";
+import { useUserState } from "../../store/stateManager";
 import { useAsync } from "react-use";
 import api from "../../api/api";
 
