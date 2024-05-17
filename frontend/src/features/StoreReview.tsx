@@ -8,12 +8,16 @@ export const ShowStoreReview = ({
 }: StoreViewProps) => {
   return (
     <Box>
-      <Typography component="legend">味</Typography>
-      <Rating name="read-only" value={taste} max={5} readOnly />
-      <Typography component="legend">お店の雰囲気</Typography>
-      <Rating name="read-only" value={atmosphere} max={5} readOnly />
-      <Typography component="legend">コスパ</Typography>
-      <Rating name="read-only" value={costPerformance} max={5} readOnly />
+      {taste && atmosphere && costPerformance && (
+        <>
+          <Typography component="legend">味</Typography>
+          <Rating name="read-only" value={taste} max={5} readOnly />
+          <Typography component="legend">お店の雰囲気</Typography>
+          <Rating name="read-only" value={atmosphere} max={5} readOnly />
+          <Typography component="legend">コスパ</Typography>
+          <Rating name="read-only" value={costPerformance} max={5} readOnly />
+        </>
+      )}
     </Box>
   );
 };

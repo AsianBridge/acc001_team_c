@@ -25,7 +25,6 @@ const getKeepBingoInformation = async (
   try {
     const responseDataArray: getBingoInformationType[] =
       await api.getKeepBingoIdByUserId(userID);
-
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
         setKeepBingoNumber(responseDataArray.length);

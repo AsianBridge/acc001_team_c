@@ -31,15 +31,24 @@ export const BingoSquareShowModal = ({
     (lockModal === false || src !== undefined) && setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  const [reviewInformation, setReviewInformation] =
-    useState<ReviewInformation>();
+  const [reviewInformation, setReviewInformation] = useState<ReviewInformation>(
+    {
+      userId: userId,
+      bingoId: bingoId,
+      caption: "",
+      starTaste: 0,
+      starAtmosphere: 0,
+      starCP: 0,
+      store_number: parseInt(storeNumber) + 1,
+    },
+  );
   try {
     useAsync(async () => {
       if (src) {
         const Reviewer: Reviewer = {
           userId: userId,
           bingoId: bingoId,
-          storeNumber: `${storeNumber + 1}`,
+          storeNumber: String(parseInt(storeNumber) + 1),
         };
         const response: getReviewType = await api.getReview(Reviewer);
         const review: ReviewInformation = {
@@ -54,7 +63,7 @@ export const BingoSquareShowModal = ({
 
         setReviewInformation(review);
       }
-    }, []);
+    }, [open]);
   } catch (e) {
     console.error(e);
   }

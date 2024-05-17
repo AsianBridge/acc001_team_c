@@ -57,7 +57,7 @@ const Bingo = ({
               src={store.src ?? undefined}
               userId={userId}
               bingoId={bingoId}
-              storeNumber={index as unknown as string}
+              storeNumber={String(index)}
             />
           </Grid>
         ))}
