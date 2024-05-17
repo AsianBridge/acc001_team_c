@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BingoOfMyBingo } from "../../features/Bingo";
 import { NextPage } from "next";
 import { BingoSquareModalProps, getBingoInformationType } from "../../types";
-import { useUserState } from "../../store/UserState";
+import { useUserState } from "../../store/stateManager";
 import { useAsync } from "react-use";
 import api from "../../api/api";
 
@@ -43,7 +43,6 @@ const MyBingo: NextPage = () => {
 
   useAsync(async () => {
     const result = await getBingoInformation(userID);
-    // console.log(result);
     if (result) {
       const { bingoSquares, userId, bingoId } = result;
       setBingoInformation(bingoSquares);

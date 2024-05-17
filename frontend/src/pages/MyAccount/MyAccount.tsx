@@ -11,7 +11,7 @@ import {
 } from "react";
 import api from "../../api/api";
 import { getBingoInformationType } from "../../types";
-import { useUserState } from "../../store/UserState";
+import { useUserState } from "../../store/stateManager";
 import { NextPage } from "next";
 import { ShowBingoModal } from "../../features/ShowModal";
 

@@ -124,9 +124,7 @@ export const SubmitReviewButton = ({
   const navigate = useNavigate();
   const postReview = useCallback(async () => {
     if (buttonState) {
-      console.log(reviewInformation);
-      const result = await api.postReview(reviewInformation);
-      console.log(result);
+      await api.postReview(reviewInformation);
       setButtonState(false);
       navigate("/MyBingo");
     }
@@ -161,7 +159,7 @@ export const LikeButton = ({
     const newTimerId = setTimeout(async () => {
       await api.postGoodByBingoId(goodCounter + 1, bingoId);
     }, 1000);
-    setTimerId(newTimerId);
+    setTimerId(newTimerId as unknown as number);
 
     setColor("red"); // 赤に設定
 

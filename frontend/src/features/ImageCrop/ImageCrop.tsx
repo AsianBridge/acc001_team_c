@@ -189,7 +189,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
       };
       navigate("/Review", { state: reviewProps });
     } catch (error) {
-      console.log(error);
+      console.error("Error PostReview:", error);
     }
   }
 

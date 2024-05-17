@@ -4,7 +4,7 @@ import { BingoSquareModalProps } from "../../types";
 import api from "../../api/api";
 import { useState } from "react";
 import { useAsync } from "react-use";
-import { useUserState } from "../../store/UserState";
+import { useUserState } from "../../store/stateManager";
 import { NextPage } from "next";
 
 type bingoInformationArray = {
