@@ -14,8 +14,6 @@
 }
 
 :root button {
-  background-color: #de6f14;
-  color: #fcfbfb;
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 0.15rem;
@@ -78,7 +76,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #c8ecf0;
+  background-color: #f3f5f9;
 }
 
 h1 {
