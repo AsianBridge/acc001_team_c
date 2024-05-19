@@ -7,7 +7,7 @@ import {
   SubmitBingoButton,
 } from "../components/Button";
 import { FC, useEffect, useState } from "react";
-import { useUserState } from "../store/UserState";
+import { useUserState } from "../store/stateManager";
 
 const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
   const BingoLines = [
@@ -57,7 +57,7 @@ const Bingo = ({
               src={store.src ?? undefined}
               userId={userId}
               bingoId={bingoId}
-              storeNumber={index as unknown as string}
+              storeNumber={String(index)}
             />
           </Grid>
         ))}

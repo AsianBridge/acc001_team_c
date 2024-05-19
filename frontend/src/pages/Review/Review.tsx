@@ -6,6 +6,7 @@ import { Stack } from "@mui/material";
 import { SubmitReviewButton } from "../../components/Button";
 import { useLocation } from "react-router-dom";
 import { ReviewInformation } from "../../types";
+import { NextPage } from "next";
 
 interface response {
   src: string;
@@ -13,7 +14,7 @@ interface response {
   userId: string;
   storeNumber: number;
 }
-const Review = () => {
+const Review: NextPage = () => {
   const location = useLocation();
   const responseData: response = location.state;
   const bodyObject = JSON.parse(responseData.src);

@@ -11,9 +11,11 @@ import {
 } from "react";
 import api from "../../api/api";
 import { getBingoInformationType } from "../../types";
-import { useUserState } from "../../store/UserState";
+import { useUserState } from "../../store/stateManager";
 import { NextPage } from "next";
 import { ShowBingoModal } from "../../features/ShowModal";
+import { signOut } from "aws-amplify/auth";
+import { useNavigate } from "react-router-dom";
 
 const getKeepBingoInformation = async (
   userID: string,
@@ -25,7 +27,6 @@ const getKeepBingoInformation = async (
   try {
     const responseDataArray: getBingoInformationType[] =
       await api.getKeepBingoIdByUserId(userID);
-
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
         setKeepBingoNumber(responseDataArray.length);
@@ -142,9 +143,19 @@ const MyAccount: NextPage = () => {
   const { userID } = useUserState();
   const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
+  const navigate = useNavigate();
 
   const imageUrl =
     "https://rentry.jp/wp-content/uploads/2024/01/smartphone_happy_tereru_man.jpg"; // 画像のURLに置き換える
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate("/");
+    } catch (error) {
+      console.log("Error signing out: ", error);
+    }
+  };
 
   return (
     <Box height="90vh" width="100vw">
@@ -197,7 +208,7 @@ const MyAccount: NextPage = () => {
           style={{
             position: "absolute",
             top: "10vh",
-            left: "74vw",
+            left: "60vw",
             color: "black",
             fontWeight: "bold",
             fontSize: "1.4rem",
@@ -205,6 +216,7 @@ const MyAccount: NextPage = () => {
         >
           編集
         </Button>
+        <Button onClick={handleSignOut}>サインアウト</Button>
       </Stack>
       <BingoTab
         userID={userID}

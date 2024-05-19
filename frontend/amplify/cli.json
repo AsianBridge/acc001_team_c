@@ -23,7 +23,7 @@
       "enablexcodeintegration": true
     },
     "auth": {
-      "enablecaseinsensitivity": true,
+      "enablecaseinsensitivity": false,
       "useinclusiveterminology": true,
       "breakcirculardependency": true,
       "forcealiasattributes": false,

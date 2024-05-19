@@ -4,7 +4,7 @@ import MyAccount from "./pages/MyAccount/MyAccount";
 import MyBingo from "./pages/MyBingo/MyBingo";
 import Review from "./pages/Review/Review";
 
-export const Router = () => {
+const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -14,3 +14,5 @@ export const Router = () => {
     </Routes>
   );
 };
+
+export default Router;
