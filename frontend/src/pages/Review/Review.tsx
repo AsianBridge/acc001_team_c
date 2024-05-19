@@ -14,7 +14,7 @@ interface response {
   userId: string;
   storeNumber: number;
 }
-const Review:NextPage = () => {
+const Review: NextPage = () => {
   const location = useLocation();
   const responseData: response = location.state;
   const bodyObject = JSON.parse(responseData.src);

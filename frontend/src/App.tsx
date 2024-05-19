@@ -1,18 +1,18 @@
-import { Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Header from "./features/Header";
 import Footer from "./features/Footer";
 import Router from "./router";
 // import { withAuthenticator } from "@aws-amplify/ui-react";
-import './amplify/configureAmplify';
+import "./amplify/configureAmplify";
 
-const App = ()=>  {
+const App = () => {
   return (
-    <Routes>
+    <BrowserRouter>
       <Header />
       <Router />
       <Footer />
-    </Routes>
+    </BrowserRouter>
   );
-}
+};
 
-export default (App);
+export default App;

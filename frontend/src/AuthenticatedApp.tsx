@@ -1,6 +1,6 @@
 import App from "./App";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import './amplify/configureAmplify';
+import "./amplify/configureAmplify";
 
 const AuthenticatedApp = withAuthenticator(App);
 
