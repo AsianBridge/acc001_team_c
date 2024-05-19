@@ -1,9 +1,8 @@
 import { Box, Button, Modal } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShowImage } from "../components/ShowImage";
 import { ShowStoreReview } from "./StoreReview";
 import { ShowCaption } from "../components/ShowText";
-import { useAsync } from "react-use";
 import api from "../api/api";
 import {
   BingoSquareModalProps,
@@ -12,8 +11,8 @@ import {
   Reviewer,
   ReviewInformation,
 } from "../types";
-import { BingoOfProfile } from "./Bingo";
 import ImageCrop from "./ImageCrop/ImageCrop";
+import { BingoOfProfile } from "./Bingo";
 
 export const BingoSquareShowModal = ({
   lockModal,
@@ -27,46 +26,54 @@ export const BingoSquareShowModal = ({
 } & BingoSquareModalProps &
   Reviewer) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    (lockModal === false || src !== undefined) && setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
   const [reviewInformation, setReviewInformation] = useState<ReviewInformation>(
     {
       userId: userId,
       bingoId: bingoId,
       caption: "",
-      starTaste: 0,
-      starAtmosphere: 0,
-      starCP: 0,
+      starTaste: undefined,
+      starAtmosphere: undefined,
+      starCP: undefined,
       store_number: parseInt(storeNumber) + 1,
     },
   );
-  try {
-    useAsync(async () => {
-      if (src) {
-        const Reviewer: Reviewer = {
+
+  const handleOpen = () => {
+    if (lockModal === false || src !== undefined) {
+      setOpen(true);
+    }
+  };
+
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const fetchReview = async () => {
+      try {
+        const reviewer: Reviewer = {
           userId: userId,
           bingoId: bingoId,
           storeNumber: String(parseInt(storeNumber) + 1),
         };
-        const response: getReviewType = await api.getReview(Reviewer);
+        const response: getReviewType = await api.getReview(reviewer);
         const review: ReviewInformation = {
           userId: userId,
           bingoId: bingoId,
-          caption: response.body.review ?? undefined,
+          caption: response.body.review ?? "",
           starTaste: parseInt(response.body.star_taste),
           starAtmosphere: parseInt(response.body.star_atmosphere),
           starCP: parseInt(response.body.star_cp),
           store_number: parseInt(storeNumber) + 1,
         };
-
         setReviewInformation(review);
+      } catch (e) {
+        console.error(e);
       }
-    }, [open]);
-  } catch (e) {
-    console.error(e);
-  }
+    };
+
+    if (open) {
+      fetchReview();
+    }
+  }, [open, userId, bingoId, storeNumber]);
 
   return (
     <>
@@ -83,8 +90,6 @@ export const BingoSquareShowModal = ({
         <Button onClick={handleOpen}>
           {src === undefined ? (
             <div style={{ textAlign: "center" }}>
-              {" "}
-              {/* 中央揃えを追加 */}
               <p style={{ color: "black", fontSize: "2vw", margin: "0 3vw" }}>
                 {storeName}へ<br />
                 行こう
@@ -117,9 +122,9 @@ export const BingoSquareShowModal = ({
               <ShowImage src={src} width="100vh" height="auto" />
               <h1>{storeName}</h1>
               <ShowStoreReview
-                taste={reviewInformation?.starTaste}
-                atmosphere={reviewInformation?.starAtmosphere}
-                costPerformance={reviewInformation?.starCP}
+                taste={reviewInformation.starTaste}
+                atmosphere={reviewInformation.starAtmosphere}
+                costPerformance={reviewInformation.starCP}
               />
               <ShowCaption caption={reviewInformation?.caption} />
             </>
@@ -138,22 +143,19 @@ export const ShowBingoModal = ({
   const [open, setOpen] = useState(false);
   return (
     <div>
-      {/* ビンゴカードを縮小して表示するボタン */}
       <button
         onClick={() => setOpen(true)}
         style={{
-          transform: "scale(0.5)", // 50%に縮小
-          border: "none", // ボーダーなし
-          cursor: "pointer", // カーソルをポインターに
-          padding: 0, // パディングなし
-          margin: 0, // マージンなし
+          transform: "scale(0.5)",
+          border: "none",
+          cursor: "pointer",
+          padding: 0,
+          margin: 0,
         }}
       >
-        {/* <BingoOfProfile bingoInformation={BingoInformation} /> */}
         開きます
       </button>
 
-      {/* モーダルウィンドウでビンゴカードを拡大して表示 */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div>
           <BingoOfProfile bingoInformation={BingoInformation} />

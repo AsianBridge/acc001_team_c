@@ -1,9 +1,8 @@
-import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <AppBar
       component="header"

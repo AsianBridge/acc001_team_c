@@ -120,9 +120,9 @@ export type ReviewInformation = {
   bingoId: string;
   userId: string;
   caption: string;
-  starTaste: number;
-  starAtmosphere: number;
-  starCP: number;
+  starTaste?: number;
+  starAtmosphere?: number;
+  starCP?: number;
   store_number: number;
 };
 
