@@ -3,7 +3,7 @@ import Header from "./features/Header";
 import Footer from "./features/Footer";
 import Router from "./router";
 // import { withAuthenticator } from "@aws-amplify/ui-react";
-import "./amplify/configureAmplify";
+import "../amplify/configureAmplify";
 
 const App = () => {
   return (
