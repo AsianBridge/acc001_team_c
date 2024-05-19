@@ -64,7 +64,7 @@ export const SubmitBingoButton = ({
     const navigate = useNavigate();
     const PostMyBingo = async () => {
       await api.postMyBingo(userId, bingoId);
-      navigate("/");
+      navigate("/MyAccount");
     };
     return (
       <Fragment>
