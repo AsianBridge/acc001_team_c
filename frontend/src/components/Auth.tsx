@@ -6,6 +6,10 @@
 // import { translations } from "@aws-amplify/ui-react";
 // import { I18n } from "aws-amplify/utils";
 
+// import { useEffect } from "react";
+// import { useAuthState } from "../store/stateManager";
+// import { getCurrentUser } from "aws-amplify/auth";
+
 // Amplify.configure(awsconfig);
 
 // function Auth({ children }: { children: ReactNode }) {
@@ -21,3 +25,21 @@
 // }
 
 // export default Auth;
+
+// export const AuthStatus = () => {
+//   const { setAuthState } = useAuthState();
+
+//   const fetchAuthState = async () => {
+//     try {
+//       const user = await getCurrentUser();
+//       setAuthState(user);
+//     } catch (error) {
+//       console.error("Error fetching user: ", error);
+//       setAuthState(undefined);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchAuthState();
+//   }, [fetchAuthState]);
+// };

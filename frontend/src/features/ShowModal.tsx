@@ -151,13 +151,13 @@ export const ShowBingoModal = ({
           cursor: "pointer", // カーソルをポインターに
           padding: 0, // パディングなし
           margin: 0, // マージンなし
-          display: 'inline-block', // 適切なレイアウトのため
-          border: 'none', // 枠線なし（必要に応じて追加）
+          display: "inline-block", // 適切なレイアウトのため
+          border: "none", // 枠線なし（必要に応じて追加）
         }}
       >
         <BingoOfProfile bingoInformation={BingoInformation} />
       </div>
-      
+
       {/* モーダルウィンドウでビンゴカードを拡大して表示 */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div>

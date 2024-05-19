@@ -1,3 +1,4 @@
+import { AuthUser } from "@aws-amplify/auth";
 import { Dispatch, SetStateAction } from "react";
 import { Area, MediaSize } from "react-easy-crop";
 
@@ -35,6 +36,11 @@ export type BingoSquareModalProps = {
 export type UserState = {
   userID: string;
   setUserID: (newID: string) => void;
+};
+
+export type AuthState = {
+  authState?: AuthUser;
+  setAuthState: (newAuthState?: AuthUser) => void;
 };
 
 export type BingoState = {
