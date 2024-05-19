@@ -44,6 +44,7 @@
   - [CONFIRMATION_ID](#confirmation_id)
   - [UPDATE_AC](#update_ac)
   - [DELETE_AC](#delete_ac)
+  - [POST_INITIAL_AC](#post_initial_ac)
 - [ビンゴ関連](#ビンゴ関連)
   - [GET_BINGO](#get_bingo)
   - [POST_BINGO](#post_bingo)
@@ -162,6 +163,19 @@
 * 戻り値
   * 成功　　All accounts successfully deleted
   * 失敗　　Failed to delete account
+ 
+### POST_INITIAL_AC  
+指定した、メールアドレスと、パスワードの初期アカウントを作る。  
+* 引数
+```
+{
+    "httpMethod": "POST_INITIAL_AC",  
+    "mail_address": "kuwabara@gmail.com",  
+    "password": "kuwabara"
+}
+```
+* 戻り値
+  * 成功　　作成した初期アカウントid
 
 * ## ビンゴ関連
 
