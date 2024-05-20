@@ -115,6 +115,21 @@ const getGoodByBingoId = async (bingoId: string) => {
   return response.data;
 };
 
+const postPlayBingo = async (
+  userId: string,
+  bingoId: string,
+  contributorId: string,
+) => {
+  const postData = {
+    httpMethod: "POST_PLAY",
+    userId: userId,
+    bingoId: bingoId,
+    contributorId: contributorId,
+  };
+  const response = await apiClient.post("", postData);
+  return response;
+};
+
 const postReview = async (review: ReviewInformation) => {
   const postData = {
     httpMethod: "POST_REVIEW",
@@ -207,6 +222,7 @@ const api = {
   getKeepBingoIdByUserId,
   getMadeBingoIdByUserId,
   getGoodByBingoId,
+  postPlayBingo,
   postReview,
   sendImageToServer,
   // getStoreById,

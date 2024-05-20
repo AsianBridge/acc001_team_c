@@ -196,3 +196,46 @@ export const LikeButton = ({
     </header>
   );
 };
+
+export const PlayBingoButton = ({
+  userID,
+  bingoId,
+  ContributorId,
+}: {
+  userID: string;
+  bingoId: string;
+  ContributorId: string;
+}) => {
+  const [open, setOpen] = useState(false);
+
+  const fetchPlayingBingo = useCallback(async () => {
+    const myBingoStatus = await api.getMyBingoByUserId(userID);
+    if (myBingoStatus.body === '"No Bingo"') {
+      await api.postPlayBingo(userID, bingoId, ContributorId);
+    } else {
+      setOpen(true);
+    }
+  }, [ContributorId, bingoId, userID]);
+
+  return (
+    <>
+      <Button onClick={() => fetchPlayingBingo()}>このビンゴをPLAYする</Button>
+      <Fragment>
+        <Dialog
+          open={open}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              別のビンゴをプレイ中です
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>かしこまり</Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    </>
+  );
+};
