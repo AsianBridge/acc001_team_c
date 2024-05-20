@@ -4,6 +4,7 @@ import { Avatar, Box, Grid, Stack } from "@mui/material";
 import {
   KeepBingoButton,
   LikeButton,
+  PlayBingoButton,
   SubmitBingoButton,
 } from "../components/Button";
 import { FC, useEffect, useState } from "react";
@@ -97,14 +98,21 @@ export const BingoOfHome: FC<{
             userId={userId}
             bingoId={bingoId}
           />
-        </Box>
-        <Box>
           <LikeButton bingoId={bingoId} goodNum={goodNum} />
           {authState && (
             <KeepBingoButton
               userId={userID}
               bingoId={bingoId}
               contributorId={userId}
+            />
+          )}
+        </Box>
+        <Box>
+          {authState && (
+            <PlayBingoButton
+              userID={userID}
+              bingoId={bingoId}
+              ContributorId={userId}
             />
           )}
         </Box>

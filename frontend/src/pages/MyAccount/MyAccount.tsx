@@ -81,12 +81,12 @@ const BingoTab = ({
   const [doneBingoId, setDoneBingoId] = useState<getBingoInformationType[]>();
 
   const fetchKeepBingoInfo = useCallback(() => {
-    if(userID !== "Guest")
-    getKeepBingoInformation(userID, setKeepBingoId, setKeepBingoNumber);
+    if (userID !== "Guest")
+      getKeepBingoInformation(userID, setKeepBingoId, setKeepBingoNumber);
   }, [userID, setKeepBingoId, setKeepBingoNumber]);
   const fetchDoneBingoInfo = useCallback(() => {
-    if(userID !== "Guest")
-    getDoneBingoInformation(userID, setDoneBingoId, setDoneBingoNumber);
+    if (userID !== "Guest")
+      getDoneBingoInformation(userID, setDoneBingoId, setDoneBingoNumber);
   }, [userID, setDoneBingoId, setDoneBingoNumber]);
 
   useEffect(() => {
