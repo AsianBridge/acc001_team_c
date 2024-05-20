@@ -1,3 +1,4 @@
+import { AuthUser } from "@aws-amplify/auth";
 import { Dispatch, SetStateAction } from "react";
 import { Area, MediaSize } from "react-easy-crop";
 
@@ -35,6 +36,11 @@ export type BingoSquareModalProps = {
 export type UserState = {
   userID: string;
   setUserID: (newID: string) => void;
+};
+
+export type AuthState = {
+  authState?: AuthUser;
+  setAuthState: (newAuthState?: AuthUser) => void;
 };
 
 export type BingoState = {
@@ -137,4 +143,19 @@ export type getReviewProps = {
   star_atmosphere: string;
   star_cp: string;
   star_taste: string;
+};
+
+export type postACProps = {
+  birthday_day: string;
+  birthday_month: string;
+  birthday_year: string;
+  mail_address: string;
+  password: string;
+  residence: string;
+  userId: string;
+};
+
+export type getACConfirmationId = {
+  body: string;
+  statusCode: number;
 };

@@ -2,10 +2,12 @@ import { ImageList, ImageListItem } from "@mui/material";
 import { BingoOfHome } from "../../features/Bingo";
 import { BingoSquareModalProps } from "../../types";
 import api from "../../api/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAsync } from "react-use";
-import { useUserState } from "../../store/stateManager";
+import { useAuthState, useUserState } from "../../store/stateManager";
 import { NextPage } from "next";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 
 type bingoInformationArray = {
   userId: string;
@@ -50,7 +52,35 @@ const Home: NextPage = () => {
   const [bingoSquares, setBingoSquares] = useState<BingoSquareModalProps[][]>();
   const [bingoInformation, setBingoInformation] =
     useState<bingoInformationArray[]>();
-  const { userID } = useUserState();
+  const { setUserID, userID } = useUserState();
+  const { authState, setAuthState } = useAuthState();
+  const { user } = useAuthenticator((context) => [context.user]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAuthState = async () => {
+      if (user) {
+        setAuthState(user);
+        try {
+          const result = await api.confirmationIdByUserId(user.userId);
+          if (result.body === '"You can use this id"') {
+            navigate("/SignUpForm");
+          } else {
+            if (authState) {
+              setUserID(authState.userId);
+            }
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        setAuthState(undefined);
+        setUserID("Guest");
+      }
+    };
+    fetchAuthState();
+    console.log(userID);
+  }, [user, authState]);
 
   useAsync(async () => {
     const result = await getBingoInformation(userID);

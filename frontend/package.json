@@ -13,14 +13,13 @@
     "prepare": "cd .. && husky install frontend/.husky"
   },
   "dependencies": {
-    "@aws-amplify/auth": "^6.3.2",
     "@aws-amplify/ui-react": "^6.1.6",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.14",
     "@mui/lab": "^5.0.0-alpha.169",
     "@mui/material": "^5.15.14",
-    "aws-amplify": "^6.3.2",
+    "aws-amplify": "^6.0.26",
     "axios": "^1.6.8",
     "next": "^14.2.2",
     "npm": "^10.5.0",

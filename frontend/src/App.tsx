@@ -7,13 +7,13 @@ import { Authenticator } from "@aws-amplify/ui-react";
 
 const App = () => {
   return (
-    <Authenticator>
+    <Authenticator.Provider>
       <BrowserRouter>
         <Header />
         <Router />
         <Footer />
       </BrowserRouter>
-    </Authenticator>
+    </Authenticator.Provider>
   );
 };
 

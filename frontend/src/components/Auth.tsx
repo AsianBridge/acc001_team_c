@@ -6,6 +6,8 @@
 // import { translations } from "@aws-amplify/ui-react";
 // import { I18n } from "aws-amplify/utils";
 
+// import { useAuthenticator } from "@aws-amplify/ui-react";
+
 // Amplify.configure(awsconfig);
 
 // function Auth({ children }: { children: ReactNode }) {
@@ -21,3 +23,12 @@
 // }
 
 // export default Auth;
+
+// export const AuthStatus = () => {
+//     try {
+//       const { user } = useAuthenticator(context => [context.user]);
+//       return user
+//     } catch (error) {
+//       return undefined
+//     }
+// };
