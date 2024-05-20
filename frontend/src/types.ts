@@ -144,3 +144,18 @@ export type getReviewProps = {
   star_cp: string;
   star_taste: string;
 };
+
+export type postACProps = {
+  birthday_day: string;
+  birthday_month: string;
+  birthday_year: string;
+  mail_address: string;
+  password: string;
+  residence: string;
+  userId: string;
+};
+
+export type getACConfirmationId = {
+  body: string;
+  statusCode: number;
+};

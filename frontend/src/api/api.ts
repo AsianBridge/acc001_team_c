@@ -1,9 +1,11 @@
 import apiClient from "./apiClient";
 import {
+  getACConfirmationId,
   getBingoInformationOfHomeType,
   getBingoInformationType,
   getGoodInformationType,
   getReviewType,
+  postACProps,
   Reviewer,
   ReviewInformation,
 } from "../types";
@@ -19,10 +21,10 @@ const getACByUserId = async (storeId: string) => {
   return response.data;
 };
 
-const postACByUserAC = async (storeId: string[]) => {
+const postACByUserAC = async (postAC: postACProps) => {
   const postData = {
     httpMethod: "POST_AC",
-    storeId: storeId,
+    ...postAC,
   };
   const response = await apiClient.post<string[]>("", postData);
   return response.data;
@@ -33,7 +35,7 @@ const confirmationIdByUserId = async (userId: string) => {
     httpMethod: "CONFIRMATION_ID",
     userId: userId,
   };
-  const response = await apiClient.post<string>("", postData);
+  const response = await apiClient.post<getACConfirmationId>("", postData);
   return response.data;
 };
 

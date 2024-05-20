@@ -4,6 +4,7 @@ import MyAccount from "./pages/MyAccount/MyAccount";
 import MyBingo from "./pages/MyBingo/MyBingo";
 import Review from "./pages/Review/Review";
 import { Authenticator } from "@aws-amplify/ui-react";
+import SignUpForm from "./pages/SignUpForm/SignUpForm";
 
 const Router = () => {
   return (
@@ -34,6 +35,7 @@ const Router = () => {
             </Authenticator>
           }
         />
+        <Route path="/SignUpForm" element={<SignUpForm />} />
       </Routes>
     </>
   );
