@@ -331,7 +331,7 @@
     "httpMethod": "POST_PLAY",  
     "userId": "kamide",  
     "bingoId": "20240408045050",  
-    "contributor_id": "kamide2"  
+    "contributorId": "kamide2"  
 }
 ```
 * 戻り値
