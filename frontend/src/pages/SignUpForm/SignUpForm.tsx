@@ -40,13 +40,9 @@ const SignUpForm = () => {
       <Typography variant="h6">Sign Up</Typography>
       <TextField
         label="Birthday Day"
-        type="number"
         value={birthdayDay}
         onChange={(e) => {
           setBirthdayDay(e.target.value);
-        }}
-        InputLabelProps={{
-          shrink: true,
         }}
         margin="normal"
         required

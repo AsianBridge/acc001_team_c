@@ -81,9 +81,11 @@ const BingoTab = ({
   const [doneBingoId, setDoneBingoId] = useState<getBingoInformationType[]>();
 
   const fetchKeepBingoInfo = useCallback(() => {
+    if(userID !== "Guest")
     getKeepBingoInformation(userID, setKeepBingoId, setKeepBingoNumber);
   }, [userID, setKeepBingoId, setKeepBingoNumber]);
   const fetchDoneBingoInfo = useCallback(() => {
+    if(userID !== "Guest")
     getDoneBingoInformation(userID, setDoneBingoId, setDoneBingoNumber);
   }, [userID, setDoneBingoId, setDoneBingoNumber]);
 
@@ -183,7 +185,7 @@ const MyAccount: NextPage = () => {
     };
     fetchAuthState();
     console.log(userID);
-  }, [user, authState]);
+  }, [navigate, setAuthState, setUserID, userID, authState, user]);
 
   return (
     <Box height="90vh" width="100vw">
