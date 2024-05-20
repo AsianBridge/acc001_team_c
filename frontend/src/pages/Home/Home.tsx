@@ -80,7 +80,7 @@ const Home: NextPage = () => {
     };
     fetchAuthState();
     console.log(userID);
-  }, [user, authState]);
+  }, [navigate, setAuthState, setUserID, userID, authState, user]);
 
   useAsync(async () => {
     const result = await getBingoInformation(userID);
