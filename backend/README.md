@@ -54,6 +54,7 @@
   - [GET_MAKED_BINGO](#get_maked_bingo)
   - [GET_MYBINGO](#get_mybingo)
   - [POST_MYBINGO](#post_mybingo)
+  - [MAKE_PLAYING_BINGO](#make_playing_bingo)
   - [POST_GOOD](#post_good)
   - [POST_PLAY](#post_play)
   - [GET_GOOD](#get_good)
@@ -278,6 +279,20 @@
 }
 ```
 * 戻り値  
+  * 成功　　json形式のビンゴ情報
+  * 失敗　　No Bingo
+ 
+### MAKE_PLAYING_BINGO  
+指定したuserIdのプレイ中のビンゴを作る  
+* 引数
+```
+{  
+    "httpMethod": "MAKE_PLAYING_BINGO",  
+    "userId": "saito"  
+}
+```
+* 戻り値
+  * 失敗　　Already exists
   * 成功　　json形式のビンゴ情報
 
 ### POST_MYBINGO  
