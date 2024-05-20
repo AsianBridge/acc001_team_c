@@ -11,11 +11,12 @@ import {
 } from "react";
 import api from "../../api/api";
 import { getBingoInformationType } from "../../types";
-import { useUserState } from "../../store/stateManager";
+import { useAuthState, useUserState } from "../../store/stateManager";
 import { NextPage } from "next";
 import { ShowBingoModal } from "../../features/ShowModal";
 import { signOut } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const getKeepBingoInformation = async (
   userID: string,
@@ -140,10 +141,12 @@ const BingoTab = ({
 };
 
 const MyAccount: NextPage = () => {
-  const { userID } = useUserState();
+  const { userID, setUserID } = useUserState();
+  const { authState, setAuthState } = useAuthState();
   const [keepBingoNumber, setKeepBingoNumber] = useState<number>(0);
   const [doneBingoNumber, setDoneBingoNumber] = useState<number>(0);
   const navigate = useNavigate();
+  const { user } = useAuthenticator((context) => [context.user]);
 
   const imageUrl =
     "https://rentry.jp/wp-content/uploads/2024/01/smartphone_happy_tereru_man.jpg"; // 画像のURLに置き換える
@@ -156,6 +159,31 @@ const MyAccount: NextPage = () => {
       console.log("Error signing out: ", error);
     }
   };
+
+  useEffect(() => {
+    const fetchAuthState = async () => {
+      if (user) {
+        setAuthState(user);
+        try {
+          const result = await api.confirmationIdByUserId(user.userId);
+          if (result.body === '"You can use this id"') {
+            navigate("/SignUpForm");
+          } else {
+            if (authState) {
+              setUserID(authState.userId);
+            }
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        setAuthState(undefined);
+        setUserID("Guest");
+      }
+    };
+    fetchAuthState();
+    console.log(userID);
+  }, [user, authState]);
 
   return (
     <Box height="90vh" width="100vw">

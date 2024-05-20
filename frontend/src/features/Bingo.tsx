@@ -7,7 +7,7 @@ import {
   SubmitBingoButton,
 } from "../components/Button";
 import { FC, useEffect, useState } from "react";
-import { useUserState } from "../store/stateManager";
+import { useAuthState, useUserState } from "../store/stateManager";
 
 const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
   const BingoLines = [
@@ -72,6 +72,7 @@ export const BingoOfHome: FC<{
   goodNum: number;
 }> = ({ bingoInformation, userId, bingoId, goodNum }) => {
   const { userID } = useUserState();
+  const { authState } = useAuthState();
 
   return (
     <>
@@ -99,11 +100,13 @@ export const BingoOfHome: FC<{
         </Box>
         <Box>
           <LikeButton bingoId={bingoId} goodNum={goodNum} />
-          <KeepBingoButton
-            userId={userID}
-            bingoId={bingoId}
-            contributorId={userId}
-          />
+          {authState && (
+            <KeepBingoButton
+              userId={userID}
+              bingoId={bingoId}
+              contributorId={userId}
+            />
+          )}
         </Box>
       </Stack>
     </>
