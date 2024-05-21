@@ -1,16 +1,34 @@
 import apiClient from "./apiClient";
 import {
-  getACConfirmationId,
-  getBingoInformationOfHomeType,
   getBingoInformationType,
-  getGoodInformationType,
   getReviewType,
   postACProps,
   Reviewer,
   ReviewInformation,
 } from "../types";
 
-// まだAPIは完全に完成していないです。
+interface getGoodInformationType {
+  body: number;
+  stateCode: number;
+}
+
+interface getBingoInformationOfHomeType {
+  body: BingoInformationOfBodyType[];
+  stateCode: number;
+}
+
+interface BingoInformationOfBodyType {
+  user_id: string;
+  bingo_id: number;
+  flag: number;
+  [key: `pi_${number}`]: string;
+  [key: `store_name_${number}`]: string;
+}
+
+type getACConfirmationId = {
+  body: string;
+  statusCode: number;
+};
 
 const getACByUserId = async (storeId: string) => {
   const postData = {
@@ -162,15 +180,6 @@ const sendImageToServer = async (
   return response.data;
 };
 
-// const getStoreById = async (storeId: string) => {
-//   const postData = {
-//     httpMethod: "GET_STORE",
-//     storeId: storeId,
-//   };
-//   const response = await apiClient.post<string>("", postData);
-//   return response.data;
-// };
-
 const postMyBingo = async (userId: string, bingoId: string) => {
   const postData = {
     httpMethod: "POST_MYBINGO",
@@ -225,7 +234,6 @@ const api = {
   postPlayBingo,
   postReview,
   sendImageToServer,
-  // getStoreById,
   postMyBingo,
   getBingo,
   getStoreIdByBingoId,

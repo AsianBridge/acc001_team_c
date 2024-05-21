@@ -79,7 +79,6 @@ const Home: NextPage = () => {
       }
     };
     fetchAuthState();
-    console.log(userID);
   }, [navigate, setAuthState, setUserID, userID, authState, user]);
 
   useAsync(async () => {

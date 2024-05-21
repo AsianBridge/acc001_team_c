@@ -62,6 +62,7 @@ export const SubmitBingoButton = ({
     setOpen: Dispatch<SetStateAction<boolean>>;
   }) => {
     const navigate = useNavigate();
+
     const PostMyBingo = async () => {
       await api.postMyBingo(userId, bingoId);
       navigate("/MyAccount");
@@ -161,12 +162,12 @@ export const LikeButton = ({
     }, 1000);
     setTimerId(newTimerId as unknown as number);
 
-    setColor("red"); // 赤に設定
+    setColor("red");
 
     ResetTimeout();
 
     setTimeout(() => {
-      setColor("white"); // 1秒後に白に戻す
+      setColor("white");
       setGoodCounter(goodCounter + 1);
     }, 100);
   };
@@ -206,23 +207,49 @@ export const PlayBingoButton = ({
   bingoId: string;
   ContributorId: string;
 }) => {
-  const [open, setOpen] = useState(false);
+  const [cannotPlayOpen, setCannotPlayOpen] = useState(false);
+  const [canPlayOpen, setCanPlayOpen] = useState(false);
+  const navigate = useNavigate();
 
   const fetchPlayingBingo = useCallback(async () => {
     const myBingoStatus = await api.getMyBingoByUserId(userID);
     if (myBingoStatus.body === '"No Bingo"') {
-      await api.postPlayBingo(userID, bingoId, ContributorId);
+      setCanPlayOpen(true);
     } else {
-      setOpen(true);
+      setCannotPlayOpen(true);
     }
-  }, [ContributorId, bingoId, userID]);
+  }, [userID]);
+
+  const postPlayBingo = async () => {
+    await api.postPlayBingo(userID, bingoId, ContributorId);
+    setCanPlayOpen(false);
+    navigate("/MyBingo");
+  };
 
   return (
     <>
       <Button onClick={() => fetchPlayingBingo()}>このビンゴをPLAYする</Button>
       <Fragment>
         <Dialog
-          open={open}
+          open={canPlayOpen}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogTitle id="alert-dialog-title">{"最終確認"}</DialogTitle>
+            <DialogContentText id="alert-dialog-description">
+              このビンゴをプレイしますか？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setCanPlayOpen(false)}>いいえ</Button>
+            <Button onClick={postPlayBingo}>はい</Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+      <Fragment>
+        <Dialog
+          open={cannotPlayOpen}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -232,7 +259,7 @@ export const PlayBingoButton = ({
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpen(false)}>かしこまり</Button>
+            <Button onClick={() => setCannotPlayOpen(false)}>かしこまり</Button>
           </DialogActions>
         </Dialog>
       </Fragment>
