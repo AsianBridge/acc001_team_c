@@ -162,12 +162,12 @@ export const LikeButton = ({
     }, 1000);
     setTimerId(newTimerId as unknown as number);
 
-    setColor("red"); // 赤に設定
+    setColor("red");
 
     ResetTimeout();
 
     setTimeout(() => {
-      setColor("white"); // 1秒後に白に戻す
+      setColor("white");
       setGoodCounter(goodCounter + 1);
     }, 100);
   };

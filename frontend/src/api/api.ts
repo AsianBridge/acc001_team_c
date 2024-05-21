@@ -30,8 +30,6 @@ type getACConfirmationId = {
   statusCode: number;
 };
 
-// まだAPIは完全に完成していないです。
-
 const getACByUserId = async (storeId: string) => {
   const postData = {
     httpMethod: "GET_AC",
@@ -182,15 +180,6 @@ const sendImageToServer = async (
   return response.data;
 };
 
-// const getStoreById = async (storeId: string) => {
-//   const postData = {
-//     httpMethod: "GET_STORE",
-//     storeId: storeId,
-//   };
-//   const response = await apiClient.post<string>("", postData);
-//   return response.data;
-// };
-
 const postMyBingo = async (userId: string, bingoId: string) => {
   const postData = {
     httpMethod: "POST_MYBINGO",
@@ -245,7 +234,6 @@ const api = {
   postPlayBingo,
   postReview,
   sendImageToServer,
-  // getStoreById,
   postMyBingo,
   getBingo,
   getStoreIdByBingoId,
