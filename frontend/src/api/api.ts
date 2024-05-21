@@ -1,14 +1,34 @@
 import apiClient from "./apiClient";
 import {
-  getACConfirmationId,
-  getBingoInformationOfHomeType,
   getBingoInformationType,
-  getGoodInformationType,
   getReviewType,
   postACProps,
   Reviewer,
   ReviewInformation,
 } from "../types";
+
+interface getGoodInformationType {
+  body: number;
+  stateCode: number;
+}
+
+interface getBingoInformationOfHomeType {
+  body: BingoInformationOfBodyType[];
+  stateCode: number;
+}
+
+interface BingoInformationOfBodyType {
+  user_id: string;
+  bingo_id: number;
+  flag: number;
+  [key: `pi_${number}`]: string;
+  [key: `store_name_${number}`]: string;
+}
+
+type getACConfirmationId = {
+  body: string;
+  statusCode: number;
+};
 
 // まだAPIは完全に完成していないです。
 

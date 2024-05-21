@@ -184,7 +184,6 @@ const MyAccount: NextPage = () => {
       }
     };
     fetchAuthState();
-    console.log(userID);
   }, [navigate, setAuthState, setUserID, userID, authState, user]);
 
   return (

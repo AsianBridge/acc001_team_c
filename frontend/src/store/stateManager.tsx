@@ -1,7 +1,16 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { AuthState, UserState } from "../types";
 import { AuthUser } from "@aws-amplify/auth";
+
+type UserState = {
+  userID: string;
+  setUserID: (newID: string) => void;
+};
+
+type AuthState = {
+  authState?: AuthUser;
+  setAuthState: (newAuthState?: AuthUser) => void;
+};
 
 export const useUserState = create<UserState>()(
   persist<UserState>(
