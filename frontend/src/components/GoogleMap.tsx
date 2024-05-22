@@ -105,7 +105,7 @@ const GoogleMapComponent = ({ storeId }: GoogleMapComponentProps) => {
       .catch((error) => {
         console.error("Error loading Google Maps API: ", error);
       });
-  }, [apiKey]);
+  }, []);
 
   if (loadError) {
     return <div>Error loading maps</div>;
