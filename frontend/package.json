@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.15.14",
     "@mui/lab": "^5.0.0-alpha.169",
     "@mui/material": "^5.15.14",
+    "@react-google-maps/api": "^2.19.3",
     "aws-amplify": "^6.0.26",
     "axios": "^1.6.8",
     "next": "^14.2.2",

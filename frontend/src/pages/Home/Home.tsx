@@ -1,6 +1,6 @@
 import { ImageList, ImageListItem } from "@mui/material";
 import { BingoOfHome } from "../../features/Bingo";
-import { BingoSquareModalProps } from "../../types";
+import { BingoSquareModalProps, bingoStoreIds } from "../../types";
 import api from "../../api/api";
 import { useEffect, useState } from "react";
 import { useAsync } from "react-use";
@@ -18,6 +18,7 @@ type bingoInformationArray = {
 const getBingoInformation = async (userID: string) => {
   const bingoSquares: BingoSquareModalProps[][] = [];
   const bingoInformation: bingoInformationArray[] = [];
+  const bingoStoreIds: bingoStoreIds[] = [];
   try {
     const getBingoResponse = await api.getBingo(userID);
     if (getBingoResponse && getBingoResponse.body) {
@@ -37,10 +38,15 @@ const getBingoInformation = async (userID: string) => {
           bingoId: String(getBingoResponse.body[j][`bingo_id`]),
           goodNum: getGoodResult.body,
         });
+        const getBingoStoreIds = await api.getStoreIdByBingoId(
+          String(getBingoResponse.body[j][`bingo_id`]),
+        );
+        bingoStoreIds.push(getBingoStoreIds.body);
       }
       return {
         bingoSquares,
         bingoInformation,
+        bingoStoreIds,
       };
     }
   } catch (e) {
@@ -52,6 +58,7 @@ const Home: NextPage = () => {
   const [bingoSquares, setBingoSquares] = useState<BingoSquareModalProps[][]>();
   const [bingoInformation, setBingoInformation] =
     useState<bingoInformationArray[]>();
+  const [bingoStoreIds, setBingoStoreIds] = useState<bingoStoreIds[]>();
   const { setUserID, userID } = useUserState();
   const { authState, setAuthState } = useAuthState();
   const { user } = useAuthenticator((context) => [context.user]);
@@ -84,16 +91,20 @@ const Home: NextPage = () => {
   useAsync(async () => {
     const result = await getBingoInformation(userID);
     if (result) {
-      const { bingoSquares, bingoInformation } = result;
+      const { bingoSquares, bingoInformation, bingoStoreIds } = result;
       setBingoSquares(bingoSquares);
       setBingoInformation(bingoInformation);
+      setBingoStoreIds(bingoStoreIds);
     }
   }, []);
 
   return (
     <>
       <ImageList sx={{ width: "100vw", height: "90vh" }} cols={1}>
-        {bingoSquares && bingoInformation && bingoSquares.length > 0 ? (
+        {bingoSquares &&
+        bingoInformation &&
+        bingoSquares.length > 0 &&
+        bingoStoreIds ? (
           bingoSquares.map((bingoSquare, index) => (
             <ImageListItem key={index}>
               <BingoOfHome
@@ -101,6 +112,7 @@ const Home: NextPage = () => {
                 userId={bingoInformation[index].userId}
                 bingoId={bingoInformation[index].bingoId}
                 goodNum={bingoInformation[index].goodNum}
+                bingoStoreIds={bingoStoreIds[index]}
               />
             </ImageListItem>
           ))

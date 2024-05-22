@@ -1,5 +1,6 @@
-import apiClient from "./apiClient";
+import { apiClient, googleMapsApiClient } from "./apiClient";
 import {
+  bingoStoreIds,
   getBingoInformationType,
   getReviewType,
   postACProps,
@@ -27,6 +28,20 @@ interface BingoInformationOfBodyType {
 
 type getACConfirmationId = {
   body: string;
+  statusCode: number;
+};
+
+type bingoStoreIdArray = {
+  body: bingoStoreIds;
+  statusCode: number;
+};
+
+type getStoreType = {
+  body: {
+    address: string;
+    id: number;
+    name: string;
+  };
   statusCode: number;
 };
 
@@ -124,6 +139,15 @@ const getMadeBingoIdByUserId = async (storeId: string) => {
   return response.data;
 };
 
+const getStoreByStoreId = async (storeId: string) => {
+  const postData = {
+    httpMethod: "GET_STORE",
+    storeId: storeId,
+  };
+  const response = await apiClient.post<getStoreType>("", postData);
+  return response.data;
+};
+
 const getGoodByBingoId = async (bingoId: string) => {
   const postData = {
     httpMethod: "GET_GOOD",
@@ -205,9 +229,9 @@ const getBingo = async (userID: string) => {
 const getStoreIdByBingoId = async (bingoId: string) => {
   const postData = {
     httpMethod: "GET_STORE_ID",
-    storeId: bingoId,
+    bingoId: bingoId,
   };
-  const response = await apiClient.post<string>("", postData);
+  const response = await apiClient.post<bingoStoreIdArray>("", postData);
   return response.data;
 };
 
@@ -217,6 +241,15 @@ const getReview = async (Reviewer: Reviewer) => {
     ...Reviewer,
   };
   const response = await apiClient.post<getReviewType>("", postData);
+  return response.data;
+};
+
+const getStoreByAddress = async (address: string) => {
+  const response = await googleMapsApiClient.get(`/geocode/json`, {
+    params: {
+      address: address,
+    },
+  });
   return response.data;
 };
 
@@ -231,6 +264,7 @@ const api = {
   getKeepBingoIdByUserId,
   getMadeBingoIdByUserId,
   getGoodByBingoId,
+  getStoreByStoreId,
   postPlayBingo,
   postReview,
   sendImageToServer,
@@ -238,6 +272,7 @@ const api = {
   getBingo,
   getStoreIdByBingoId,
   getReview,
+  getStoreByAddress,
 };
 
 export default api;

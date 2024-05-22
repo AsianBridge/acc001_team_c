@@ -18,47 +18,45 @@ import { signOut } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
-const getKeepBingoInformation = async (
-  userID: string,
-  setKeepBingoId: Dispatch<
-    SetStateAction<getBingoInformationType[] | undefined>
-  >,
-  setKeepBingoNumber: Dispatch<SetStateAction<number>>,
-) => {
+const getKeepBingoInformation = async (userID: string) => {
   try {
     const responseDataArray: getBingoInformationType[] =
       await api.getKeepBingoIdByUserId(userID);
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
-        setKeepBingoNumber(responseDataArray.length);
-        setKeepBingoId(responseDataArray);
+        return {
+          keepBingoNumber: responseDataArray.length,
+          keepBingoId: responseDataArray,
+        };
       }
     } else {
-      setKeepBingoNumber(0);
+      return {
+        keepBingoNumber: 0,
+        keepBingoId: undefined,
+      };
     }
   } catch (error) {
     console.error("Error fetching DoneBingoId:", error);
   }
 };
 
-const getDoneBingoInformation = async (
-  userID: string,
-  setDoneBingoId: Dispatch<
-    SetStateAction<getBingoInformationType[] | undefined>
-  >,
-  setDoneBingoNumber: Dispatch<SetStateAction<number>>,
-) => {
+const getDoneBingoInformation = async (userID: string) => {
   try {
     const responseDataArray: getBingoInformationType[] =
       await api.getDoneBingoIdByUserId(userID);
 
     if (responseDataArray.length > 0) {
       if (typeof responseDataArray[0].body !== "object") {
-        setDoneBingoNumber(responseDataArray.length);
-        setDoneBingoId(responseDataArray);
+        return {
+          doneBingoNumber: responseDataArray.length,
+          doneBingoId: responseDataArray,
+        };
       }
     } else {
-      setDoneBingoNumber(0);
+      return {
+        doneBingoNumber: 0,
+        doneBingoId: undefined,
+      };
     }
   } catch (error) {
     console.error("Error fetching DoneBingoId:", error);
@@ -80,14 +78,27 @@ const BingoTab = ({
   const [keepBingoId, setKeepBingoId] = useState<getBingoInformationType[]>();
   const [doneBingoId, setDoneBingoId] = useState<getBingoInformationType[]>();
 
-  const fetchKeepBingoInfo = useCallback(() => {
-    if (userID !== "Guest")
-      getKeepBingoInformation(userID, setKeepBingoId, setKeepBingoNumber);
-  }, [userID, setKeepBingoId, setKeepBingoNumber]);
-  const fetchDoneBingoInfo = useCallback(() => {
-    if (userID !== "Guest")
-      getDoneBingoInformation(userID, setDoneBingoId, setDoneBingoNumber);
-  }, [userID, setDoneBingoId, setDoneBingoNumber]);
+  const fetchKeepBingoInfo = useCallback(async () => {
+    if (userID !== "Guest") {
+      const result = await getKeepBingoInformation(userID);
+      if (result) {
+        const { keepBingoNumber, keepBingoId } = result;
+        setKeepBingoNumber(keepBingoNumber);
+        setKeepBingoId(keepBingoId);
+      }
+    }
+  }, [userID, setKeepBingoNumber, setKeepBingoId]);
+
+  const fetchDoneBingoInfo = useCallback(async () => {
+    if (userID !== "Guest") {
+      const result = await getDoneBingoInformation(userID);
+      if (result) {
+        const { doneBingoNumber, doneBingoId } = result;
+        setDoneBingoNumber(doneBingoNumber);
+        setDoneBingoId(doneBingoId);
+      }
+    }
+  }, [userID, setDoneBingoNumber, setDoneBingoId]);
 
   useEffect(() => {
     fetchKeepBingoInfo();

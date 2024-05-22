@@ -1,4 +1,8 @@
-import { BingoSquareModalProps, getBingoInformationType } from "../types";
+import {
+  BingoSquareModalProps,
+  bingoStoreIds,
+  getBingoInformationType,
+} from "../types";
 import { BingoSquareShowModal } from "./ShowModal";
 import { Avatar, Box, Grid, Stack } from "@mui/material";
 import {
@@ -9,6 +13,7 @@ import {
 } from "../components/Button";
 import { FC, useEffect, useState } from "react";
 import { useAuthState, useUserState } from "../store/stateManager";
+import api from "../api/api";
 
 const checkBingo = (bingoInformation: BingoSquareModalProps[] | undefined) => {
   const BingoLines = [
@@ -41,15 +46,18 @@ const Bingo = ({
   bingoInformation,
   userId,
   bingoId,
+  bingoStoreIds,
 }: {
   lockModal: boolean;
   bingoInformation?: BingoSquareModalProps[];
   userId: string;
   bingoId: string;
+  bingoStoreIds: bingoStoreIds;
 }) => {
   return (
     <Grid container spacing={1}>
       {bingoInformation &&
+        bingoStoreIds &&
         bingoInformation.map((store, index) => (
           <Grid item xs={4} sm={4} key={index}>
             <BingoSquareShowModal
@@ -59,6 +67,7 @@ const Bingo = ({
               userId={userId}
               bingoId={bingoId}
               storeNumber={String(index)}
+              storeId={bingoStoreIds[`store_id_${index + 1}`]}
             />
           </Grid>
         ))}
@@ -71,7 +80,8 @@ export const BingoOfHome: FC<{
   userId: string;
   bingoId: string;
   goodNum: number;
-}> = ({ bingoInformation, userId, bingoId, goodNum }) => {
+  bingoStoreIds: bingoStoreIds;
+}> = ({ bingoInformation, userId, bingoId, goodNum, bingoStoreIds }) => {
   const { userID } = useUserState();
   const { authState } = useAuthState();
 
@@ -97,6 +107,7 @@ export const BingoOfHome: FC<{
             bingoInformation={bingoInformation}
             userId={userId}
             bingoId={bingoId}
+            bingoStoreIds={bingoStoreIds}
           />
           <LikeButton bingoId={bingoId} goodNum={goodNum} />
           {authState && (
@@ -125,7 +136,8 @@ export const BingoOfMyBingo: FC<{
   bingoInformation: BingoSquareModalProps[] | undefined;
   userId: string;
   bingoId: string;
-}> = ({ bingoInformation, userId, bingoId }) => {
+  bingoStoreIds: bingoStoreIds;
+}> = ({ bingoInformation, userId, bingoId, bingoStoreIds }) => {
   return (
     <>
       <Stack
@@ -148,6 +160,7 @@ export const BingoOfMyBingo: FC<{
             bingoInformation={bingoInformation}
             userId={userId}
             bingoId={bingoId}
+            bingoStoreIds={bingoStoreIds}
           />
         </Box>
       </Stack>
@@ -165,36 +178,48 @@ export const BingoOfProfile: FC<{
 }> = ({ bingoInformation }) => {
   const [userId, setUserId] = useState("");
   const [bingoId, setBingoId] = useState("");
+  const [bingoSquares, setBingoSquares] = useState<BingoSquareModalProps[]>([]);
+  const [bingoStoreIds, setBingoStoreIds] = useState<bingoStoreIds>();
 
   useEffect(() => {
+    const getStoreId = async (bingoId: string) => {
+      try {
+        const getBingoStoreIds = await api.getStoreIdByBingoId(bingoId);
+        setBingoStoreIds(getBingoStoreIds.body);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
     if (bingoInformation) {
       const bodyObject = JSON.parse(bingoInformation.body);
       setUserId(bodyObject.user_id);
       setBingoId(bodyObject.bingo_id);
+
+      const squares: BingoSquareModalProps[] = [];
+      for (let i = 1; i <= 9; i++) {
+        squares.push({
+          src: bodyObject[`pi_${i}`],
+          storeName: bodyObject[`store_name_${i}`],
+        });
+      }
+      setBingoSquares(squares);
+      getStoreId(bodyObject.bingo_id);
     }
   }, [bingoInformation]);
 
-  const bingoSquares: BingoSquareModalProps[] = [];
-  if (bingoInformation) {
-    const bodyObject = JSON.parse(bingoInformation.body);
-    for (let i = 1; i <= 9; i++) {
-      bingoSquares.push({
-        src: bodyObject[`pi_${i}`],
-        storeName: bodyObject[`store_name_${i}`],
-      });
-    }
-  }
   return (
     <>
       <Box sx={{ backgroundColor: "black", width: "100vw", height: "auto" }}>
-        {
+        {bingoStoreIds && (
           <Bingo
             lockModal={true}
             bingoInformation={bingoSquares}
             userId={userId}
             bingoId={bingoId}
+            bingoStoreIds={bingoStoreIds}
           />
-        }
+        )}
       </Box>
     </>
   );

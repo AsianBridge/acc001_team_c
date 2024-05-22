@@ -63,3 +63,19 @@ export type postACProps = {
   residence: string;
   userId: string;
 };
+
+export type bingoStoreIds = {
+  bingo_id: string;
+  good_number: number;
+  maker_id: string;
+  [key: `store_id_${number}`]: string;
+  // store_id_1: string;
+  // store_id_2: string;
+  // store_id_3: string;
+  // store_id_4: string;
+  // store_id_5: string;
+  // store_id_6: string;
+  // store_id_7: string;
+  // store_id_8: string;
+  // store_id_9: string;
+};
