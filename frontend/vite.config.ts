@@ -13,4 +13,7 @@ export default defineConfig({
       external: ["react-dom/client"],
     },
   },
+  optimizeDeps: {
+    include: ["@mui/material", "@mui/lab", "@aws-amplify/ui-react"],
+  },
 });
