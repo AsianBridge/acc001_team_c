@@ -111,45 +111,47 @@ const BingoTab = ({
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList
-            onChange={handleChange}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Tab
-              label="保存したBINGO"
-              value="1"
-              sx={{ width: "calc(100% / 2)" }}
-            />
-            <Tab
-              label="投稿したBINGO"
-              value="2"
-              sx={{ width: "calc(100% / 2)" }}
-            />
-          </TabList>
-        </Box>
-        <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
-          {keepBingoId === undefined ? (
-            <Box>保存したBINGOはありません</Box>
-          ) : (
-            <Box>{showBingoBox(keepBingoId)}</Box>
-          )}
-        </TabPanel>
-        <TabPanel value="2" style={{ color: "black", textAlign: "center" }}>
-          {doneBingoId === undefined ? (
-            <Box>投稿したBINGOはありません</Box>
-          ) : (
-            <Box>{showBingoBox(doneBingoId)}</Box>
-          )}
-        </TabPanel>
-      </TabContext>
+    <Box sx={{ width: "100%", typography: "body1", overflowX: "hidden" }}>
+  <TabContext value={value}>
+    <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100%", overflowX: "hidden" }}>
+      <TabList
+        onChange={handleChange}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
+          maxWidth: "100%",
+        }}
+      >
+        <Tab
+          label="保存したBINGO"
+          value="1"
+          sx={{ width: "calc(100% / 2)" }}
+        />
+        <Tab
+          label="投稿したBINGO"
+          value="2"
+          sx={{ width: "calc(100% / 2)" }}
+        />
+      </TabList>
     </Box>
+    <TabPanel value="1" style={{ color: "black", textAlign: "center" }}>
+      {keepBingoId === undefined ? (
+        <Box>保存したBINGOはありません</Box>
+      ) : (
+        <Box>{showBingoBox(keepBingoId)}</Box>
+      )}
+    </TabPanel>
+    <TabPanel value="2" style={{ color: "black", textAlign: "center" }}>
+      {doneBingoId === undefined ? (
+        <Box>投稿したBINGOはありません</Box>
+      ) : (
+        <Box>{showBingoBox(doneBingoId)}</Box>
+      )}
+    </TabPanel>
+  </TabContext>
+</Box>
+
   );
 };
 
@@ -198,7 +200,7 @@ const MyAccount: NextPage = () => {
   }, [navigate, setAuthState, setUserID, userID, authState, user]);
 
   return (
-    <Box height="90vh" width="100vw">
+    <Box height="90vh" width="100vw" >
       <Stack
         direction="row"
         spacing={2}
@@ -215,6 +217,7 @@ const MyAccount: NextPage = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexShrink: 0,
           }}
         >
           {imageUrl ? (
@@ -245,18 +248,16 @@ const MyAccount: NextPage = () => {
           </p>
         </Stack>
         <Button
-          style={{
-            position: "absolute",
-            top: "10vh",
-            left: "60vw",
-            color: "black",
-            fontWeight: "bold",
-            fontSize: "1.4rem",
+          onClick={handleSignOut}
+          sx={{
+            border: "1px solid black",
+            fontSize: "0.875rem",
+            borderRadius: "4px",
+            maxWidth: "auto",
           }}
         >
-          編集
+          サインアウト
         </Button>
-        <Button onClick={handleSignOut}>サインアウト</Button>
       </Stack>
       <BingoTab
         userID={userID}
