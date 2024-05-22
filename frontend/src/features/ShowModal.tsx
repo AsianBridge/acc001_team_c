@@ -112,6 +112,7 @@ export const BingoSquareShowModal = ({
         <Box sx={{ bgcolor: "background.paper" }}>
           {src === undefined && (
             <Box width="50vw" height="40vh">
+              <Button onClick={handleClose}>閉じる</Button>
               <h3>{storeName}へ行こう</h3>
               <ImageCrop
                 bingoId={String(bingoId)}
@@ -124,6 +125,7 @@ export const BingoSquareShowModal = ({
           {src !== undefined && (
             <>
               <ShowImage src={src} width="100vh" height="auto" />
+              <Button onClick={handleClose}>閉じる</Button>
               <h1>{storeName}</h1>
               <GoogleMapComponent storeId={storeId} />
               <ShowStoreReview
