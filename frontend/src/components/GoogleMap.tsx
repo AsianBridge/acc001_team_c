@@ -20,69 +20,33 @@ type GoogleMapComponentProps = {
 const GoogleMapComponent = ({ storeId }: GoogleMapComponentProps) => {
   const [location, setLocation] = useState(center);
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [marker, setMarker] =
-    useState<google.maps.marker.AdvancedMarkerElement | null>(null);
+  const [marker, setMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string,
   });
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
 
-  useEffect(() => {
-    const loader = new Loader({
-      apiKey: apiKey,
-      version: "weekly",
-    });
-
-    loader.load().then(async () => {
-      const { Map } = (await google.maps.importLibrary(
-        "maps",
-      )) as google.maps.MapsLibrary;
-      const { AdvancedMarkerElement } = (await google.maps.importLibrary(
-        "marker",
-      )) as google.maps.MarkerLibrary;
-
-      const mapInstance = new Map(
-        document.getElementById("map") as HTMLElement,
-        {
-          center: location,
-          zoom: 15,
-          mapId: "DEMO_MAP_ID", // Map ID is required for advanced markers.
-        },
-      );
-      setMap(mapInstance);
-
-      const markerInstance = new AdvancedMarkerElement({
-        map: mapInstance,
-        position: location,
-        title: "Location",
-      });
-      setMarker(markerInstance);
-    });
-  }, [apiKey, location]);
-
+  // Store location fetching
   useEffect(() => {
     const getLocation = async () => {
       try {
         if (storeId) {
           const getStoreResponse = await api.getStoreByStoreId(storeId);
           if (getStoreResponse.body && getStoreResponse.body.address) {
-            const data = await api.getStoreByAddress(
-              getStoreResponse.body.address,
-            );
+            const data = await api.getStoreByAddress(getStoreResponse.body.address);
             if (data.results.length > 0) {
-              const location = data.results[0].geometry.location;
-              setLocation(location);
+              const newLocation = data.results[0].geometry.location;
+              setLocation(newLocation);
               if (map) {
-                map.setCenter(location);
+                map.setCenter(newLocation);
                 if (marker) {
-                  marker.position = location;
+                  marker.position = newLocation;
                 } else {
-                  const newMarker =
-                    new google.maps.marker.AdvancedMarkerElement({
-                      map: map,
-                      position: location,
-                      title: "Location",
-                    });
+                  const newMarker = new google.maps.marker.AdvancedMarkerElement({
+                    map: map,
+                    position: newLocation,
+                    title: "Location",
+                  });
                   setMarker(newMarker);
                 }
               }
@@ -95,6 +59,35 @@ const GoogleMapComponent = ({ storeId }: GoogleMapComponentProps) => {
     };
     getLocation();
   }, [storeId, map, marker]);
+
+  // Google Maps API initialization
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: apiKey,
+      version: "weekly",
+    });
+
+    loader.importLibrary('maps').then(async () => {
+      const { Map } = (await google.maps.importLibrary("maps")) as google.maps.MapsLibrary;
+      const { AdvancedMarkerElement } = (await google.maps.importLibrary("marker")) as google.maps.MarkerLibrary;
+
+      const mapInstance = new Map(document.getElementById("map") as HTMLElement, {
+        center: location,
+        zoom: 15,
+        mapId: "DEMO_MAP_ID",
+      });
+      setMap(mapInstance);
+
+      const markerInstance = new AdvancedMarkerElement({
+        map: mapInstance,
+        position: location,
+        title: "Location",
+      });
+      setMarker(markerInstance);
+    }).catch(error => {
+      console.error("Error loading Google Maps API: ", error);
+    });
+  }, [apiKey]);
 
   if (loadError) {
     return <div>Error loading maps</div>;
