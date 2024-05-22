@@ -2,6 +2,7 @@ import { useJsApiLoader } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { Loader } from "@googlemaps/js-api-loader";
+import { Typography } from "@mui/material";
 
 const containerStyle = {
   width: "50vw",
@@ -19,6 +20,7 @@ type GoogleMapComponentProps = {
 
 const GoogleMapComponent = ({ storeId }: GoogleMapComponentProps) => {
   const [location, setLocation] = useState(center);
+  const [address, setAddress] = useState("");
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [marker, setMarker] =
     useState<google.maps.marker.AdvancedMarkerElement | null>(null);
@@ -34,6 +36,7 @@ const GoogleMapComponent = ({ storeId }: GoogleMapComponentProps) => {
         if (storeId) {
           const getStoreResponse = await api.getStoreByStoreId(storeId);
           if (getStoreResponse.body && getStoreResponse.body.address) {
+            setAddress(getStoreResponse.body.address);
             const data = await api.getStoreByAddress(
               getStoreResponse.body.address,
             );
@@ -109,7 +112,10 @@ const GoogleMapComponent = ({ storeId }: GoogleMapComponentProps) => {
   }
 
   return isLoaded ? (
-    <div id="map" style={containerStyle}></div>
+    <>
+      <Typography>住所:&ensp;{address}</Typography>
+      <div id="map" style={containerStyle}></div>
+    </>
   ) : (
     <div>Loading...</div>
   );
