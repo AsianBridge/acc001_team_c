@@ -57,6 +57,7 @@ const Bingo = ({
   return (
     <Grid container spacing={1}>
       {bingoInformation &&
+        bingoStoreIds &&
         bingoInformation.map((store, index) => (
           <Grid item xs={4} sm={4} key={index}>
             <BingoSquareShowModal
