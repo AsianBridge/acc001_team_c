@@ -1,7 +1,8 @@
 import axios from "axios";
 const baseURL = import.meta.env.VITE_BACKEND_ENDPOINT;
+const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: baseURL,
   timeout: 30000,
   headers: {
@@ -18,4 +19,21 @@ apiClient.interceptors.request.use(
   },
 );
 
-export default apiClient;
+export const googleMapsApiClient = axios.create({
+  baseURL: "https://maps.googleapis.com/maps/api",
+  timeout: 30000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+googleMapsApiClient.interceptors.request.use(
+  (config) => {
+    config.params = config.params || {};
+    config.params["key"] = googleMapsApiKey;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);

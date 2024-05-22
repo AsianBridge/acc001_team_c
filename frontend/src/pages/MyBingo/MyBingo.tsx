@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { BingoOfMyBingo } from "../../features/Bingo";
 import { NextPage } from "next";
-import { BingoSquareModalProps, getBingoInformationType } from "../../types";
+import {
+  BingoSquareModalProps,
+  bingoStoreIds,
+  getBingoInformationType,
+} from "../../types";
 import { useUserState } from "../../store/stateManager";
 import { useAsync } from "react-use";
 import api from "../../api/api";
@@ -44,6 +48,7 @@ const MyBingo: NextPage = () => {
   const [userId, setUserId] = useState("");
   const [bingoId, setBingoId] = useState("");
   const [bingoStatus, setBingoStatus] = useState(true);
+  const [bingoStoreIds, setBingoStoreIds] = useState<bingoStoreIds>();
 
   useAsync(async () => {
     const result = await getBingoInformation(userID);
@@ -55,16 +60,19 @@ const MyBingo: NextPage = () => {
         setBingoInformation(bingoSquares);
         setUserId(userId);
         setBingoId(bingoId);
+        const response = await api.getStoreIdByBingoId(bingoId);
+        setBingoStoreIds(response.body);
       }
     }
   }, []);
   return (
     <>
-      {bingoStatus ? (
+      {bingoStatus && bingoStoreIds ? (
         <BingoOfMyBingo
           bingoInformation={bingoInformation}
           userId={userId}
           bingoId={bingoId}
+          bingoStoreIds={bingoStoreIds}
         />
       ) : (
         <Typography style={{ color: "black" }}>

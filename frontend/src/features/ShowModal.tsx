@@ -13,6 +13,7 @@ import {
 } from "../types";
 import ImageCrop from "./ImageCrop/ImageCrop";
 import { BingoOfProfile } from "./Bingo";
+import GoogleMapComponent from "../components/GoogleMap";
 
 export const BingoSquareShowModal = ({
   lockModal,
@@ -21,8 +22,10 @@ export const BingoSquareShowModal = ({
   userId,
   bingoId,
   storeNumber,
+  storeId,
 }: {
   lockModal: boolean;
+  storeId: string;
 } & BingoSquareModalProps &
   Reviewer) => {
   const [open, setOpen] = useState(false);
@@ -115,12 +118,14 @@ export const BingoSquareShowModal = ({
                 userId={userId}
                 storeNumber={String(storeNumber)}
               />
+              <GoogleMapComponent storeId={storeId} />
             </Box>
           )}
           {src !== undefined && (
             <>
               <ShowImage src={src} width="100vh" height="auto" />
               <h1>{storeName}</h1>
+              <GoogleMapComponent storeId={storeId} />
               <ShowStoreReview
                 taste={reviewInformation.starTaste}
                 atmosphere={reviewInformation.starAtmosphere}
