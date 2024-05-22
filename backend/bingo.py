@@ -16,8 +16,6 @@ dynamodb = boto3.resource('dynamodb')
 def get_mybingo(event, context):
    user_id = event['userId']
    
-   json_data = set_bingo_info_json()
-   
    # BINGOSTATEテーブルを検索
    bingo_state_table = dynamodb.Table('BINGOSTATE2')
    response = bingo_state_table.query(
@@ -28,31 +26,16 @@ def get_mybingo(event, context):
    
    # flagが0のitemがない場合は新しいBINGOを作成
    if not any(item['flag'] == 0 for item in response['Items']):
-       bingo_items = bingo_state_table.scan()['Items']
-       bingo_id = random.sample(bingo_items, 1)
-       bingo_id = int(bingo_id[0]['bingo_id'])
-       body = {
-           'user_id': user_id,
-           'bingo_id': bingo_id,
-           'flag': 0
+       return {
+           'statusCode': 404,
+           'body': json.dumps('No Bingo')
        }
-     
-       new_bingo = bingo_state_table.put_item(
-           Item=body
-       )
-       json_data = set_bingo_info_json()
-       json_data = get_store_name(bingo_id, json_data)
-       json_data = info_json_add(json_data, body)
-       
-       reslut = {
-            'statusCode': 200,
-            'body': json_data
-       }
-       return reslut
        
    mybingo = [item for item in items if item.get('flag') == 0]
    
    bingo_id = int(mybingo[0]['bingo_id'])
+   
+   json_data = set_bingo_info_json()
    
    json_data = get_store_name(bingo_id, json_data)
    
@@ -63,6 +46,42 @@ def get_mybingo(event, context):
             'body': json.dumps(a)
    }
    return result
+   
+def make_playing_bingo(event, context):
+    user_id = event['userId']
+    bingo_state_table = dynamodb.Table('BINGOSTATE2')
+    
+    response = bingo_state_table.query(
+       KeyConditionExpression=Key('user_id').eq(user_id)
+    )
+    
+    if any(item['flag'] == 0 for item in response['Items']):
+        return {
+            'statusCode': 409,
+            'body': json.dumps('Already exists')
+        }
+    bingo_items = bingo_state_table.scan()['Items']
+    bingo_id = random.sample(bingo_items, 1)
+    bingo_id = int(bingo_id[0]['bingo_id'])
+    body = {
+        'user_id': user_id,
+        'bingo_id': bingo_id,
+        'flag': 0
+    }
+     
+    new_bingo = bingo_state_table.put_item(
+        Item=body
+    )
+    json_data = set_bingo_info_json()
+    json_data = get_store_name(bingo_id, json_data)
+    json_data = info_json_add(json_data, body)
+       
+    reslut = {
+        'statusCode': 200,
+        'body': json_data
+    }
+    
+    return reslut
    
 def post_mybingo(event, context):
     # use the DynamoDB object to select our table
