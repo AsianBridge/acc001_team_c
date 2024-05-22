@@ -13,22 +13,8 @@ import time
 # create a DynamoDB object using the AWS SDK
 dynamodb = boto3.resource('dynamodb')
 
-def post_initial_account(event, context):
-    table = dynamodb.Table('ACCOUNT')
-    user_id = str(uuid.uuid4())
-    
-    response = table.put_item(
-        Item={
-            'mail_address': event['mail_address'],
-            'password': event['password'],
-            'user_id': user_id
-            })
-    return {
-        'statusCode': 200,
-        'body': json.dumps(user_id)
-    }
-
 def post_account(event, context):
+    # use the DynamoDB object to select our table
     table = dynamodb.Table('ACCOUNT')
     
     response = table.put_item(
@@ -95,6 +81,7 @@ def confirmation_id(event, context):
 def update_acount(event, context):
     # use the DynamoDB object to select our table
     table = dynamodb.Table('ACCOUNT')
+    table_name = 'ACCOUNT'
     user_id = event['userId']
 
     response = table.query(
@@ -130,35 +117,6 @@ def update_acount(event, context):
         )
     
     table.put_item(Item=item)
-    
-    if 'new_userId' in event:
-        table = dynamodb.Table('BINGOSTATE2')
-        response = table.query(
-            KeyConditionExpression=Key('user_id').eq(user_id)
-        )
-        
-        if response['Items']:
-            for i in response['Items']:
-                tem = i;
-                tem['user_id'] = event['new_userId']
-                table.put_item(Item=tem)
-                response = table.delete_item(
-                    Key={
-                        'bingo_id': tem['bingo_id'],
-                        'user_id': user_id,
-                    }
-                )
-
-        table = dynamodb.Table('BINGO')
-        response = table.scan(
-            FilterExpression=Attr('maker_id').eq(user_id)
-        )
-
-        if response['Items']:
-            for i in response['Items']:
-                tem = i;
-                tem['maker_id'] = event['new_userId']
-                table.put_item(Item=tem)
     
     return {
         'statusCode': 200,

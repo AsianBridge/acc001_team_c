@@ -93,15 +93,6 @@ def lambda_handler(event, context):
     elif http_method == "POST_PLAY":
         #ビンゴをプレイ中にする
         return bingo.post_play(event, context)
-    elif http_method == "GET_GOOD":
-        #いいねの数を取得する
-        return bingo.get_good(event, context)
-    elif http_method == "POST_INITIAL_AC":
-        #いいねの数を取得する
-        return account.post_initial_account(event, context)
-    elif http_method == "MAKE_PLAYING_BINGO":
-        #プレイ中のビンゴを作る
-        return bingo.make_playing_bingo(event, context)
     else: 
         return {
             "statusCode": 405,
