@@ -1,5 +1,10 @@
 import { TextField } from "@mui/material";
-import { CaptionProps } from "../types";
+import { Dispatch, SetStateAction } from "react";
+
+type CaptionProps = {
+  caption: string;
+  setCaption: Dispatch<SetStateAction<string>>;
+};
 
 export const CaptionField = ({ caption, setCaption }: CaptionProps) => {
   return (

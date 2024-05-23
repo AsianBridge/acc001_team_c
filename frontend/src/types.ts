@@ -69,13 +69,19 @@ export type bingoStoreIds = {
   good_number: number;
   maker_id: string;
   [key: `store_id_${number}`]: string;
-  // store_id_1: string;
-  // store_id_2: string;
-  // store_id_3: string;
-  // store_id_4: string;
-  // store_id_5: string;
-  // store_id_6: string;
-  // store_id_7: string;
-  // store_id_8: string;
-  // store_id_9: string;
+};
+
+export type postBingoProps = {
+  makerId: string;
+  [key: `storeId_${number}`]: string;
+};
+
+export type storeNames = {
+  [key: `storeName_${number}`]: string;
+};
+
+export type searchStoreResponse = {
+  address: string;
+  id: number;
+  name: string;
 };

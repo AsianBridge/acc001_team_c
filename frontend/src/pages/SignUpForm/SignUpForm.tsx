@@ -4,8 +4,9 @@ import api from "../../api/api";
 import { postACProps } from "../../types";
 import { useAuthState, useUserState } from "../../store/stateManager";
 import { useNavigate } from "react-router-dom";
+import { NextPage } from "next";
 
-const SignUpForm = () => {
+const SignUpForm: NextPage = () => {
   const [birthdayDay, setBirthdayDay] = useState("");
   const [birthdayMonth, setBirthdayMonth] = useState("");
   const [birthdayYear, setBirthdayYear] = useState("");

@@ -46,13 +46,13 @@
   display: none;
 }
 
-:root fieldset {
+/* :root fieldset {
   display: flex;
   align-items: center;
   background-color: #fff;
   padding: 5vh;
   margin-top: 0.4vh;
-}
+} */
 
 :root
   button.amplify-button.amplify-field-group__control.amplify-field__show-password {

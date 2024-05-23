@@ -174,3 +174,54 @@ export const ShowBingoModal = ({
     </div>
   );
 };
+
+export const CreatingBingoSquareShowModal = ({
+  storeName,
+  storeId,
+}: {
+  storeName: string;
+  storeId: string;
+}) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    if (storeName && storeId) setOpen(true);
+  };
+
+  return (
+    <>
+      <Box
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "auto",
+          height: "32vw",
+          background: "#c0c0c0",
+        }}
+      >
+        <Button onClick={handleOpen}>
+          <p
+            style={{
+              color: "black",
+              fontSize: "2vw",
+              textAlign: "center",
+              margin: "0 3vw",
+            }}
+          >
+            {storeName}
+          </p>
+        </Button>
+      </Box>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Box sx={{ bgcolor: "background.paper" }}>
+          <Box width="50vw" height="40vh" style={{ position: "relative" }}>
+            <Button onClick={() => setOpen(false)}>閉じる</Button>
+            <h3>{storeName}</h3>
+            <GoogleMapComponent storeId={storeId} />
+          </Box>
+        </Box>
+      </Modal>
+    </>
+  );
+};

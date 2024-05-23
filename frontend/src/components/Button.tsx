@@ -17,7 +17,7 @@ import {
 } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
-import { ReviewInformation } from "../types";
+import { postBingoProps, ReviewInformation } from "../types";
 
 export const HomeButton = () => {
   return (
@@ -260,6 +260,46 @@ export const PlayBingoButton = ({
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setCannotPlayOpen(false)}>かしこまり</Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    </>
+  );
+};
+
+export const PostBingoButton = ({
+  postBingoProps,
+}: {
+  postBingoProps: postBingoProps;
+}) => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const navigate = useNavigate();
+  const postBingo = useCallback(async () => {
+    try {
+      const result = await api.postBingo(postBingoProps);
+      if (result.body === "Successful") navigate("/MyAccount");
+    } catch (e) {
+      console.error(e);
+    }
+  }, [navigate, postBingoProps]);
+  return (
+    <>
+      <Button onClick={() => setOpenDialog(true)}>登録する</Button>
+      <Fragment>
+        <Dialog
+          open={openDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogTitle id="alert-dialog-title">{"最終確認"}</DialogTitle>
+            <DialogContentText id="alert-dialog-description">
+              このビンゴを登録しますか？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenDialog(false)}>いいえ</Button>
+            <Button onClick={postBingo}>はい</Button>
           </DialogActions>
         </Dialog>
       </Fragment>
