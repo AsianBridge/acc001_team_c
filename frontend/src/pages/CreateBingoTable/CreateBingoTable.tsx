@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PostBingoButton } from "../../components/Button";
 import { NextPage } from "next";
 import { postBingoProps, storeNames } from "../../types";
 import { CreatingBingo } from "../../features/Bingo";
+import { useUserState } from "../../store/stateManager";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const CreateBingoTable: NextPage = () => {
+  const { userID } = useUserState();
+  const [checkFill, setCheckFill] = useState(false);
+  const navigate = useNavigate();
   const [createBingoProps, setCreateBingoProps] = useState<postBingoProps>({
-    makerId: "",
+    makerId: userID,
     storeId_1: "",
     storeId_2: "",
     storeId_3: "",
@@ -39,7 +45,6 @@ const CreateBingoTable: NextPage = () => {
       [`storeId_${storeNum}`]: storeId,
     };
     setCreateBingoProps(updatedBingoProps);
-    console.log(updatedBingoProps);
 
     const updatedStoreNameProps = {
       ...storeNameProps,
@@ -48,8 +53,20 @@ const CreateBingoTable: NextPage = () => {
     setStoreNameProps(updatedStoreNameProps);
   };
 
+  useEffect(() => {
+    const checkFill = () => {
+      for (let i = 1; i <= 9; i++)
+        if (createBingoProps[`storeId_${i}`] === "") {
+          return false;
+        }
+      return true;
+    };
+    setCheckFill(checkFill());
+  }, [createBingoProps]);
+
   return (
     <>
+      <Button onClick={() => navigate("/MyBingo")}>戻る</Button>
       {createBingoProps && storeNameProps && (
         <CreatingBingo
           createBingoProps={createBingoProps}
@@ -57,9 +74,7 @@ const CreateBingoTable: NextPage = () => {
           setNewStore={setNewStore}
         />
       )}
-      {createBingoProps && (
-        <PostBingoButton postBingoProps={createBingoProps} />
-      )}
+      {checkFill && <PostBingoButton postBingoProps={createBingoProps} />}
     </>
   );
 };

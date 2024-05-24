@@ -370,7 +370,9 @@ export const CreatingBingo: FC<{
           </Select>
         </FormControl>
         {!searchResult && <Button onClick={searchStore}>検索</Button>}
-        {searchResult && <Button onClick={addStore}>追加する</Button>}
+        {selectStore && selectStoreNum && (
+          <Button onClick={addStore}>追加する</Button>
+        )}
       </Box>
       <Grid container spacing={1}>
         {squareProps &&

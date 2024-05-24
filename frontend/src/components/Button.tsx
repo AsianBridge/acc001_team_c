@@ -273,11 +273,16 @@ export const PostBingoButton = ({
   postBingoProps: postBingoProps;
 }) => {
   const [openDialog, setOpenDialog] = useState(false);
+  const [openAlertDialog, setOpenAlertDialog] = useState(false);
   const navigate = useNavigate();
   const postBingo = useCallback(async () => {
     try {
       const result = await api.postBingo(postBingoProps);
-      if (result.body === "Successful") navigate("/MyAccount");
+      if (result.body === '"Successful"') navigate("/MyAccount");
+      else {
+        setOpenDialog(false);
+        setOpenAlertDialog(true);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -300,6 +305,23 @@ export const PostBingoButton = ({
           <DialogActions>
             <Button onClick={() => setOpenDialog(false)}>いいえ</Button>
             <Button onClick={postBingo}>はい</Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+      <Fragment>
+        <Dialog
+          open={openAlertDialog}
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              すでにこのビンゴは登録されています
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenAlertDialog(false)}>
+              かしこまり
+            </Button>
           </DialogActions>
         </Dialog>
       </Fragment>
