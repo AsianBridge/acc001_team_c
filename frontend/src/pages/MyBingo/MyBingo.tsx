@@ -9,7 +9,8 @@ import {
 import { useUserState } from "../../store/stateManager";
 import { useAsync } from "react-use";
 import api from "../../api/api";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const getBingoInformation = async (userID: string) => {
   try {
@@ -49,7 +50,7 @@ const MyBingo: NextPage = () => {
   const [bingoId, setBingoId] = useState("");
   const [bingoStatus, setBingoStatus] = useState(true);
   const [bingoStoreIds, setBingoStoreIds] = useState<bingoStoreIds>();
-
+  const navigate = useNavigate();
   useAsync(async () => {
     const result = await getBingoInformation(userID);
     if (result == "No Bingo") {
@@ -79,6 +80,7 @@ const MyBingo: NextPage = () => {
           ホームでBINGOを選択してこよう!!
         </Typography>
       )}
+      <Button onClick={() => navigate("/CreateBingoTable")}>Bingoを作る</Button>
     </>
   );
 };

@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router-dom";
+import { Authenticator } from "@aws-amplify/ui-react";
 import Home from "./pages/Home/Home";
 import MyAccount from "./pages/MyAccount/MyAccount";
 import MyBingo from "./pages/MyBingo/MyBingo";
 import Review from "./pages/Review/Review";
-import { Authenticator } from "@aws-amplify/ui-react";
+import CreateBingoTable from "./pages/CreateBingoTable/CreateBingoTable";
 import SignUpForm from "./pages/SignUpForm/SignUpForm";
 
 const Router = () => {
@@ -32,6 +33,14 @@ const Router = () => {
           element={
             <Authenticator>
               <Review />
+            </Authenticator>
+          }
+        />
+        <Route
+          path="/CreateBingoTable"
+          element={
+            <Authenticator>
+              <CreateBingoTable />
             </Authenticator>
           }
         />

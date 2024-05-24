@@ -4,8 +4,10 @@ import {
   getBingoInformationType,
   getReviewType,
   postACProps,
+  postBingoProps,
   Reviewer,
   ReviewInformation,
+  searchStoreResponse,
 } from "../types";
 
 interface getGoodInformationType {
@@ -45,6 +47,16 @@ type getStoreType = {
   statusCode: number;
 };
 
+type postBingoType = {
+  body: string;
+  statusCode: number;
+};
+
+type searchStoreType = {
+  body: searchStoreResponse[] | string;
+  statusCode: number;
+};
+
 const getACByUserId = async (storeId: string) => {
   const postData = {
     httpMethod: "GET_AC",
@@ -69,6 +81,15 @@ const confirmationIdByUserId = async (userId: string) => {
     userId: userId,
   };
   const response = await apiClient.post<getACConfirmationId>("", postData);
+  return response.data;
+};
+
+const postBingo = async (postBingoProps: postBingoProps) => {
+  const postData = {
+    httpMethod: "POST_BINGO",
+    ...postBingoProps,
+  };
+  const response = await apiClient.post<postBingoType>("", postData);
   return response.data;
 };
 
@@ -244,6 +265,15 @@ const getReview = async (Reviewer: Reviewer) => {
   return response.data;
 };
 
+const searchStore = async (storeName: string) => {
+  const postData = {
+    httpMethod: "SEARCH_STORE",
+    name: storeName,
+  };
+  const response = await apiClient.post<searchStoreType>("", postData);
+  return response.data;
+};
+
 const getStoreByAddress = async (address: string) => {
   const response = await googleMapsApiClient.get(`/geocode/json`, {
     params: {
@@ -257,6 +287,7 @@ const api = {
   getACByUserId,
   postACByUserAC,
   confirmationIdByUserId,
+  postBingo,
   postKeepByUserId,
   getDoneBingoIdByUserId,
   getMyBingoByUserId,
@@ -272,6 +303,7 @@ const api = {
   getBingo,
   getStoreIdByBingoId,
   getReview,
+  searchStore,
   getStoreByAddress,
 };
 

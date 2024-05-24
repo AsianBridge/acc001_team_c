@@ -2,16 +2,34 @@ import {
   BingoSquareModalProps,
   bingoStoreIds,
   getBingoInformationType,
+  postBingoProps,
+  searchStoreResponse,
+  storeNames,
 } from "../types";
-import { BingoSquareShowModal } from "./ShowModal";
-import { Avatar, Box, Grid, Stack } from "@mui/material";
+import {
+  BingoSquareShowModal,
+  CreatingBingoSquareShowModal,
+} from "./ShowModal";
+import {
+  Avatar,
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  TextField,
+} from "@mui/material";
 import {
   KeepBingoButton,
   LikeButton,
   PlayBingoButton,
   SubmitBingoButton,
 } from "../components/Button";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useAuthState, useUserState } from "../store/stateManager";
 import api from "../api/api";
 
@@ -221,6 +239,152 @@ export const BingoOfProfile: FC<{
           />
         )}
       </Box>
+    </>
+  );
+};
+
+export const CreatingBingo: FC<{
+  createBingoProps: postBingoProps;
+  storeNames: storeNames;
+  setNewStore: (storeName: string, storeId: string, storeNum: number) => void;
+}> = ({ createBingoProps, storeNames, setNewStore }) => {
+  const [squareProps, setSquaresProps] = useState<SquareProps[]>([]);
+  type SquareProps = {
+    storeName: string;
+    storeId: string;
+  };
+
+  const [formValue, setFormValue] = useState<string>("");
+  const [openFormStoreNum, setOpenFormStoreNum] = useState(false);
+  const [openFormStoreName, setOpenFormStoreName] = useState(false);
+  const [selectStoreNum, setSelectStoreNum] = useState<number | null>(null);
+  const [selectStore, setSelectStore] = useState<searchStoreResponse | null>(
+    null,
+  );
+  const [searchResult, setSearchResult] = useState<searchStoreResponse[]>();
+  useEffect(() => {
+    const squares: SquareProps[] = [];
+    for (let i = 1; i <= 9; i++) {
+      if (storeNames && createBingoProps) {
+        squares.push({
+          storeName: storeNames[`storeName_${i}`],
+          storeId: createBingoProps[`storeId_${i}`],
+        });
+      }
+    }
+    setSquaresProps(squares);
+  }, [storeNames, createBingoProps]);
+
+  const searchStore = useCallback(async () => {
+    if (formValue) {
+      const response = await api.searchStore(formValue);
+      console.log(response);
+      if (typeof response.body !== "string") {
+        setSearchResult(response.body);
+        setOpenFormStoreName(true);
+      }
+    }
+  }, [formValue]);
+
+  const addStore = () => {
+    if (selectStore && selectStoreNum)
+      setNewStore(selectStore.name, String(selectStore.id), selectStoreNum);
+    setSelectStoreNum(null);
+    setSelectStore(null);
+    setSearchResult(undefined);
+    setFormValue("");
+  };
+
+  const handleChangeOfNum = (event: SelectChangeEvent<number | null>) => {
+    setSelectStoreNum(event.target.value as number | null);
+  };
+
+  const handleChangeOfStore = (event: SelectChangeEvent<unknown>) => {
+    const selectedStore = searchResult?.find(
+      (store) => store.id === (event.target.value as number),
+    );
+    setSelectStore(selectedStore || null);
+    console.log(selectStore);
+  };
+  return (
+    <>
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        {!searchResult ? (
+          <TextField
+            id="outlined-search"
+            label="検索"
+            value={formValue}
+            type="search"
+            margin="normal"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFormValue(event.target.value);
+            }}
+          />
+        ) : (
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-controlled-open-select-label">
+              検索結果
+            </InputLabel>
+            <Select
+              labelId="demo-controlled-open-select-label"
+              id="demo-controlled-open-select"
+              open={openFormStoreName}
+              onClose={() => setOpenFormStoreName(false)}
+              onOpen={() => setOpenFormStoreName(true)}
+              value={selectStore?.id || ""}
+              label="StoreName"
+              onChange={handleChangeOfStore}
+            >
+              {searchResult.map((store, index) => (
+                <MenuItem key={index} value={store.id}>
+                  {store.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-controlled-open-select-label">番号</InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={openFormStoreNum}
+            onClose={() => setOpenFormStoreNum(false)}
+            onOpen={() => setOpenFormStoreNum(true)}
+            value={selectStoreNum || ""}
+            label="StoreNumber"
+            onChange={handleChangeOfNum}
+          >
+            {[...Array(9)].map((_, i) => (
+              <MenuItem key={i + 1} value={i + 1}>
+                {i + 1}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        {!searchResult && <Button onClick={searchStore}>検索</Button>}
+        {selectStore && selectStoreNum && (
+          <Button onClick={addStore}>追加する</Button>
+        )}
+      </Box>
+      <Grid container spacing={1}>
+        {squareProps &&
+          squareProps.map((store, index) => (
+            <Grid item xs={4} sm={4} key={index}>
+              <CreatingBingoSquareShowModal
+                storeName={store.storeName}
+                storeId={store.storeId}
+              />
+            </Grid>
+          ))}
+      </Grid>
     </>
   );
 };
