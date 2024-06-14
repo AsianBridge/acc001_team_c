@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 import { Authenticator } from "@aws-amplify/ui-react";
 import Home from "./pages/Home/Home";
 import MyAccount from "./pages/MyAccount/MyAccount";
@@ -9,8 +9,7 @@ import SignUpForm from "./pages/SignUpForm/SignUpForm";
 
 const Router = () => {
   return (
-    <>
-      <Routes>
+    <Routes>
         <Route path="/" element={<Home />} />
         <Route
           path="/MyAccount"
@@ -45,8 +44,7 @@ const Router = () => {
           }
         />
         <Route path="/SignUpForm" element={<SignUpForm />} />
-      </Routes>
-    </>
+        </Routes>
   );
 };
 
