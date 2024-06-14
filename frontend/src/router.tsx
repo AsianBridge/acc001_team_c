@@ -9,44 +9,42 @@ import SignUpForm from "./pages/SignUpForm/SignUpForm";
 
 const Router = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/MyAccount"
-          element={
-            <Authenticator>
-              <MyAccount />
-            </Authenticator>
-          }
-        />
-        <Route
-          path="/MyBingo"
-          element={
-            <Authenticator>
-              <MyBingo />
-            </Authenticator>
-          }
-        />
-        <Route
-          path="/Review"
-          element={
-            <Authenticator>
-              <Review />
-            </Authenticator>
-          }
-        />
-        <Route
-          path="/CreateBingoTable"
-          element={
-            <Authenticator>
-              <CreateBingoTable />
-            </Authenticator>
-          }
-        />
-        <Route path="/SignUpForm" element={<SignUpForm />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/MyAccount"
+        element={
+          <Authenticator>
+            <MyAccount />
+          </Authenticator>
+        }
+      />
+      <Route
+        path="/MyBingo"
+        element={
+          <Authenticator>
+            <MyBingo />
+          </Authenticator>
+        }
+      />
+      <Route
+        path="/Review"
+        element={
+          <Authenticator>
+            <Review />
+          </Authenticator>
+        }
+      />
+      <Route
+        path="/CreateBingoTable"
+        element={
+          <Authenticator>
+            <CreateBingoTable />
+          </Authenticator>
+        }
+      />
+      <Route path="/SignUpForm" element={<SignUpForm />} />
+    </Routes>
   );
 };
 
