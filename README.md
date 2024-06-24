@@ -1,6 +1,8 @@
 # acc001_team_c
 Asian Challenge Cup第1回（2024/03/25〜2024/03/27開催） チームC用のリポジトリです。
 
+作品：https://main.d3n4nfp50nnw9a.amplifyapp.com/
+
 React + Python + AWS App
 
 # フロントエンド
